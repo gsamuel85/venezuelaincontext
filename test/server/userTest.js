@@ -4,19 +4,20 @@ var assert = require("assert");
 var mongoose = require("mongoose");
 var User = require("../../models/user");
 
-var db;
 var TEST_DB_URL = "mongodb://localhost:27017/test";
 
 describe('User', function() {
     before (function(done) {
-        db = mongoose.connect(TEST_DB_URL);
+        mongoose.connect(TEST_DB_URL);
         done();
     });
     
     beforeEach(function(done) {
         var user = new User({
             username: 'test@example.com',
-            password: 'password'
+            password: 'password',
+            firstName: 'John',
+            lastName: 'Smith'
         });
         
         user.save(function(error) {
@@ -30,6 +31,7 @@ describe('User', function() {
         User.findOne({ username: 'test@example.com' }, function(err, user) {
             assert(!err, 'no error retrieving user');
             assert.equal(user.username, 'test@example.com');
+            assert.equal(user.firstName, 'John');
             done();
         });
     });
@@ -38,5 +40,10 @@ describe('User', function() {
         User.remove({}, function() {
             done();
         });
+     });
+     
+     after(function closeDB(done) {
+         mongoose.connection.close();
+         done();
      });
 });

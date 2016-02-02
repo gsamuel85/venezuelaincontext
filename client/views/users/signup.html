@@ -11,7 +11,7 @@
         <h1>Sign Up</h1>
         <p class="lead">{{msg}}</p>
         
-        <hr>
+        <hr />
         
         {{#flash}}
         <div class="flash">
@@ -21,8 +21,16 @@
         
         <form action="signup" method="POST">
             <label>
+                First Name
+                <input type="text" name="firstName" required />
+            </label>
+            <label>
+                Last Name
+                <input type="text" name="lastName" required />
+            </label>
+            <label>
                 E-mail
-                <input type="email" name="email" />
+                <input type="email" name="username" />
             </label>
             <label>
                 Password
@@ -32,7 +40,7 @@
             <button type="submit">Sign up</button>
         </form>
         
-        <hr>
+        <hr />
         
         <p>Already have an account? <a href="login">Log in</a></p>
         
