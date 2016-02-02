@@ -10,7 +10,8 @@ module.exports = function(grunt) {
             srcdir: 'client',
             commondir: 'common',
             distdir: 'public',
-            serverdir: 'server'
+            serverdir: 'server',
+            configdir: 'config'
         },
 
 
@@ -79,7 +80,7 @@ module.exports = function(grunt) {
                 options: {
                     'node': true
                 },
-                src: ["server.js", "<%= app.serverdir %>/**/*.js"]
+                src: ["server.js", "<%= app.serverdir %>/**/*.js", "<%= app.configdir %>/**/*.js"]
             },
             tests: {
                 options: {
@@ -173,14 +174,10 @@ module.exports = function(grunt) {
                 tasks: ['jshint:client', 'mochaTest:client']
             },
             serverjs: {
-                files: ["server.js", "<%= app.serverdir %>/**/*.js"],
+                files: ["server.js", "<%= app.serverdir %>/**/*.js", "<%= app.configdir %>/**/*.js"],
                 tasks: ['jshint:server', 'mochaTest:server']
             },
             commonjs: {
-                files: ["<%= app.commondir %>/**/*.js"],
-                tasks: ['jshint:common', 'mochaTest:common']
-            },
-            commonjsx: {
                 files: ["<%= app.commondir %>/**/*.js"],
                 tasks: ['jshint:common', 'mochaTest:common']
             },

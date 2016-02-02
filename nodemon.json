@@ -1,0 +1,9 @@
+{
+    "verbose": true,
+    "ignore": [
+        ".c9/",
+        ".git/",
+        "node_modules/",
+        "data",
+    ]
+}

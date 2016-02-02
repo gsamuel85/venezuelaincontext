@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Venezuela in Context - Signup</title>
+        
+        <link rel="stylesheet" href="/css/style.min.css" type="text/css" />
+    </head>
+    <body>
+        <h1>Sign Up</h1>
+        <p class="lead">{{msg}}</p>
+        
+        <hr>
+        
+        {{#flash}}
+        <div class="flash">
+            <p>{{flash.msg}}</p>
+        </div>
+        {{/flash}}
+        
+        <form action="signup" method="POST">
+            <label>
+                E-mail
+                <input type="email" name="email" />
+            </label>
+            <label>
+                Password
+                <input type="password" name="password" />
+            </label>
+            
+            <button type="submit">Sign up</button>
+        </form>
+        
+        <hr>
+        
+        <p>Already have an account? <a href="login">Log in</a></p>
+        
+        <script type="text/javascript" src="/js/bundle.js"></script>
+    </body>
+</html>
