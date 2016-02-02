@@ -11,7 +11,9 @@ router.get('/signup', function(req, res) {
 
 router.post('/signup', function(req, res) {
     User.register(new User({
-            username: req.body.username
+            username: req.body.username,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName
         }), req.body.password, 
         function(err, user) {
             if (err) {
@@ -40,7 +42,10 @@ router.get('/logout', function(req, res) {
 });
 
 router.get('/profile', function(req, res) {
-    res.render("users/profile.html", {msg: "Hello there!", user: req.user});
+    User.findOne({ username: req.user.username }, function(err, foundUser) {
+        var user = err ? null : foundUser;
+        res.render("users/profile.html", {msg: "Hello there!", user: user});
+    });
 });
 
 
