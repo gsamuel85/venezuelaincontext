@@ -1,33 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Venezuela in Context - Login</title>
-        
-        <link rel="stylesheet" href="/css/style.min.css" type="text/css" />
-    </head>
-    <body>
-        <h1>Profile</h1>
-        <p class="lead">{{msg}}</p>
-        
-        <hr />
-        
-        {{#user}}
-            <p>Welcome, {{user.firstName}}</p>
-            <p><a href="logout">Log out</a></p>
-        {{/user}}
-        
-        {{^user}}
-            <p>Please <a href="login">log in</a> to see your profile</p>
-            <p>Don't have an account? <a href="signup">Sign up!</a></p>
-        {{/user}}
-            
-        
-        <hr />
-        
-        
-        
-        <script type="text/javascript" src="/js/bundle.js"></script>
-    </body>
-</html>
+
+<h1>Profile</h1>
+<p class="lead">{{msg}}</p>
+
+<hr />
+
+{{#user}}
+    <p>Welcome, {{user.firstName}}</p>
+    <p><a href="logout">Log out</a></p>
+{{/user}}
+
+{{^user}}
+    <p>Please <a href="login">log in</a> to see your profile</p>
+    <p>Don't have an account? <a href="signup">Sign up!</a></p>
+{{/user}}
+    
+
+<hr />

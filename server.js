@@ -52,19 +52,23 @@ passport.deserializeUser(User.deserializeUser());
 var DB_URL = "mongodb://localhost:27017/vic";
 mongoose.connect(DB_URL);
 
+
+// Set up Hogan templating engine
+app.set('view engine', 'html');
+app.set('views', path.join(__dirname, '/client/views'));
+app.set('layout', 'layout');
+app.enable('view cache');
+app.engine('html', require("hogan-express"));
+
 // Users server module
 var users = require("./server/users");
-app.use('/user', users);
-
-
-
-// Set up Hogan templating engine via Consolidate
-app.engine('html', require("consolidate").hogan);
-app.set('views', path.join(__dirname, '/client/views'));
+app.use(users);
 
 // Serve home page and static content
 app.get('/', function(req, res) {
-    res.render('index.html', {msg: "Hello, World!"});
+    res.render('home.html', { 
+        msg: "Hello, World!"
+    });
 });
 app.use(express.static(path.join(__dirname + '/public')));
 app.use(express.static(path.join(__dirname + '/client')));

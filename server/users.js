@@ -38,10 +38,12 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 
 router.get('/logout', function(req, res) {
     req.logout();
-    res.redirect('login');
+    res.redirect('/');
 });
 
 router.get('/profile', function(req, res) {
+    // TODO: add authentication middleware
+    
     User.findOne({ username: req.user.username }, function(err, foundUser) {
         var user = err ? null : foundUser;
         res.render("users/profile.html", {msg: "Hello there!", user: user});
