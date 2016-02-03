@@ -9,15 +9,6 @@ var helmet = require("helmet");
 
 var mongoose = require("mongoose");
 
-var bunyan = require("bunyan");
-var log = bunyan.createLogger({
-    name: 'ViC server',
-    serializers: {
-        req: bunyan.stdSerializers.req,
-        res: bunyan.stdSerializers.res
-    }
-});
-
 
 /**
  * Set up Express application
@@ -59,6 +50,12 @@ app.set('views', path.join(__dirname, '/client/views'));
 app.set('layout', 'layout');
 app.enable('view cache');
 app.engine('html', require("hogan-express"));
+
+
+
+// Videos server module
+var videos = require("./server/videos");
+app.use('/video', videos);
 
 // Users server module
 var users = require("./server/users");

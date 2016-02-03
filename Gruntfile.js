@@ -144,12 +144,22 @@ module.exports = function(grunt) {
         /****************
          * TESTING TASKS *
          *****************/
+        jasmine: {
+            client: {
+                src: 'client/js/**/*.js',
+                options: {
+                    specs: "test/client/*.js",
+                    vendor: [
+                        'node_modules/angular/angular.js',
+                        'node_modules/angular-mocks/angular-mocks.js'
+                        // Add vendor code if necessary
+                    ]
+                }
+            }
+        },
         mochaTest: {
             options: {
                 // TODO: add coverage reports
-            },
-            client: {
-                src: ['test/<%= app.srcdir%>/**/*.js']
             },
             common: {
                 src: ['test/<%= app.commondir%>/**/*.js']
@@ -171,7 +181,7 @@ module.exports = function(grunt) {
             },
             clientjs: {
                 files: ['<%= app.srcdir %>/js/**/*.js'],
-                tasks: ['jshint:client', 'mochaTest:client']
+                tasks: ['jshint:client', 'jasmine:client']
             },
             serverjs: {
                 files: ["server.js", "<%= app.serverdir %>/**/*.js", "<%= app.configdir %>/**/*.js"],
@@ -181,8 +191,12 @@ module.exports = function(grunt) {
                 files: ["<%= app.commondir %>/**/*.js"],
                 tasks: ['jshint:common', 'mochaTest:common']
             },
+            client_tests: {
+                files: ['test/<%= app.srcdir%>/**/*.js'],
+                tasks: ['jasmine:client']
+            },
             tests: {
-                files: ["test/**/*.js"],
+                files: ['test/<%= app.commondir%>/**/*.js', 'test/<%= app.serverdir%>/**/*.js'],
                 tasks: ['jshint:tests', 'mochaTest']
             },
             browserify: {
@@ -203,7 +217,7 @@ module.exports = function(grunt) {
     
     grunt.registerTask('css', ['scsslint', 'sass', 'cssmin']);
 
-    grunt.registerTask('default', ['htmlhint', 'jshint', 'mochaTest', 'jsonlint', 'css']);
+    grunt.registerTask('default', ['htmlhint', 'jshint', 'jasmine', 'mochaTest', 'jsonlint', 'css']);
 
     // TODO: Nodemon
     // TODO: Production files: minification, transfer to dist

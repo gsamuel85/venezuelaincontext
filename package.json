@@ -5,6 +5,7 @@
   "main": "server.js",
   "private": true,
   "author": "Guy Samuel | Capit Mobile",
+  "repository": "https://github.com/gsamuel85/venezuelaincontext.git",
   "license": "ISC",
   "dependencies": {
     "angular": "^1.4.9",
@@ -29,6 +30,7 @@
     "grunt": "^0.4.5",
     "grunt-browserify": "^4.0.1",
     "grunt-contrib-cssmin": "^0.14.0",
+    "grunt-contrib-jasmine": "^1.0.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-htmlhint": "^0.9.12",
     "grunt-jsonlint": "^1.0.7",
