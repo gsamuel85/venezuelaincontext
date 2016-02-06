@@ -1,0 +1,31 @@
+<div ng-controller="VideoEditCtrl" class="form">
+    <form ng-submit="submitVideo">
+        <label>
+            ID:
+            <input type="number" name="id" ng-model="video._id" ng-disabled="!newVideo" />
+        </label>
+        <label>
+            Title:
+            <input type="text" name="title" ng-model="video.title" />
+        </label>
+        <label>
+            Description:
+            <input type="textarea" name="description" ng-model="video.description" />
+        </label>
+        <label>
+            YouTube Embed URL:
+            <input type="text" name="video_url" ng-model="video.video_url" />
+        </label>
+        
+        <input type="button" ng-click="loadInitVideo()" value="Reset" />
+        <input type="submit" ng-click="submitVideo()" value="Submit" />
+    </form>
+</div>
+
+
+{{#yield-scripts}}
+    <script type="text/javascript" src="/js/bundle.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="/js/videoEditCtrl.js" defer></script>
+    <script type="text/javascript">{{{videoData}}}</script>
+{{/yield-scripts}}

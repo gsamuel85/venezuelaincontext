@@ -1,10 +1,16 @@
 <div ng-controller="VideoCtrl">
     <h1>{{video.title}}</h1>
-    <p class="lead">{{video.description}}</p>
+    <p class="lead">{{{video.description}}}</p>
     <p ng-bind="aMsg"></p>
+    
+    <hr />
+    
+    <div id="video-main"></div>
+    
 </div>
 
 {{#yield-scripts}}
+    <script type="text/javascript" src="/js/popcorn-complete.min.js"></script>
     <script type="text/javascript" src="/js/bundle.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
     <script type="text/javascript" src="/js/videoCtrl.js" defer></script>

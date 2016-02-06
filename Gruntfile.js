@@ -151,7 +151,8 @@ module.exports = function(grunt) {
                     specs: "test/client/*.js",
                     vendor: [
                         'node_modules/angular/angular.js',
-                        'node_modules/angular-mocks/angular-mocks.js'
+                        'node_modules/angular-mocks/angular-mocks.js',
+                        'public/js/popcorn-complete.min.js'
                         // Add vendor code if necessary
                     ]
                 }

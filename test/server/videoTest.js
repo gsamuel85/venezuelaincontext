@@ -7,7 +7,7 @@ var Video = require("../../models/video");
 var TEST_DB_URL = "mongodb://localhost:27017/test";
 
 describe('Video', function() {
-    var id = 0;
+    var id = 100;
     
     before (function(done) {
         mongoose.connect(TEST_DB_URL);
@@ -16,6 +16,7 @@ describe('Video', function() {
     
     beforeEach(function(done) {
         var video = new Video({
+            _id: id,
             title: 'Test Video',
             video_url: 'https://www.youtube.com/embed/9a_W7ckQ7AY',
             description: 'This is a description',
