@@ -1,13 +1,21 @@
 'use strict';
 
+// App modules
 var express = require("express");
-var path = require("path");
-
 var cookieParser = require("cookie-parser");
 var bodyParser= require("body-parser");
 var helmet = require("helmet");
+var path = require("path");
 
+
+// DB + User modules
 var mongoose = require("mongoose");
+var session = require("express-session");
+var MongoStore = require('connect-mongo')(session);
+var passport = require("passport");
+var User = require('./models/user');
+var LocalStrategy = require("passport-local").Strategy;
+
 
 
 /**
@@ -19,37 +27,39 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(cookieParser());        // Cookies for user sessions
 
-app.use(require("express-session")({
-    secret: "venezuela",        // TODO: store in environment
-    resave: false,
-    saveUninitialized: false
-}));
 
-/**
- * Passport + Users config
- */
-var passport = require("passport");
-app.use(passport.initialize());
-app.use(passport.session());
-
-var User = require('./models/user');
-var LocalStrategy = require("passport-local").Strategy;
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-
-
-// Connect to database
-var DB_URL = "mongodb://localhost:27017/vic";
-mongoose.connect(DB_URL);
-
-
-// Set up Hogan templating engine
+// VIEWS: Hogan templating engine
 app.set('view engine', 'html');
 app.set('views', path.join(__dirname, '/client/views'));
 app.set('layout', 'layout');
 app.enable('view cache');
 app.engine('html', require("hogan-express"));
+
+
+
+/**
+ * USERS: Passport + Sessions
+ */
+ 
+ // Connect to database
+var DB_URL = "mongodb://localhost:27017/vic";       // TODO: Replace with config file
+mongoose.connect(DB_URL);
+ 
+// Session - place after static to avoid accessing store for every request
+app.use(session({
+    secret: "venezuela",        // TODO: store in environment
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 
 
@@ -69,6 +79,13 @@ app.get('/', function(req, res) {
 });
 app.use(express.static(path.join(__dirname + '/public')));
 app.use(express.static(path.join(__dirname + '/client')));
+
+
+
+
+
+
+
 
 
 

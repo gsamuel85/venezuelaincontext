@@ -1,7 +1,6 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var passportLocalMongoose = require('passport-local-mongoose');
 
 var User = new mongoose.Schema({
     username: String,
@@ -11,6 +10,7 @@ var User = new mongoose.Schema({
     lastName: String
 });
 
+var passportLocalMongoose = require('passport-local-mongoose');
 User.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', User);

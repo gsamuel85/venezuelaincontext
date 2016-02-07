@@ -9,27 +9,39 @@
 </div>
 {{/flash}}
 
-<form action="signup" method="POST">
-    <label>
-        First Name
-        <input type="text" name="firstName" required />
-    </label>
-    <label>
-        Last Name
-        <input type="text" name="lastName" required />
-    </label>
-    <label>
-        E-mail
-        <input type="email" name="username" />
-    </label>
-    <label>
-        Password
-        <input type="password" name="password" />
-    </label>
+<div ng-controller="UserCtrl">
     
-    <button type="submit">Sign up</button>
-</form>
+    <form name="form" action="signup" method="POST">
+        <label>
+            First Name
+            <input type="text" name="firstName" required />
+        </label>
+        <label>
+            Last Name
+            <input type="text" name="lastName" required />
+        </label>
+        <label>
+            E-mail
+            <input type="email" name="username" />
+        </label>
+        <label>
+            Password
+            <input type="password" name="password" ng-model="password" ng-model-options="{ debounce: 400 }" password />
+            <span ng-show="form.password.$error.password">Password is too short!</span>
+        </label>
+        
+        <button type="submit">Sign up</button>
+    </form>
+
+</div>
 
 <hr />
 
 <p>Already have an account? <a href="login">Log in</a></p>
+
+
+{{#yield-scripts}}
+    <script type="text/javascript" src="/js/bundle.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="/js/userCtrl.js" defer></script>
+{{/yield-scripts}}

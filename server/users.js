@@ -44,9 +44,13 @@ router.get('/logout', function(req, res) {
 router.get('/profile', function(req, res) {
     // TODO: add authentication middleware
     
-    User.findOne({ username: req.user.username }, function(err, foundUser) {
-        var user = err ? null : foundUser;
-        res.render("users/profile.html", {msg: "Hello there!", user: user});
+    if (!req.user) { return res.send("Please log in"); }
+    
+    User.findOne({ username: req.user.username }, function getProfile(err, foundUser) {
+        if (err) { return res.send("Error: " + err); }
+        
+        if (!foundUser) { return res.send("User not found"); }
+        res.render("users/profile.html", {msg: "Hello there!", user: foundUser._doc});
     });
 });
 
