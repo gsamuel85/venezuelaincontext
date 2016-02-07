@@ -22,6 +22,9 @@ var LocalStrategy = require("passport-local").Strategy;
  * Set up Express application
 */
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 app.use(helmet());              // Security by Helmet
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -71,6 +74,11 @@ app.use('/video', videos);
 var users = require("./server/users");
 app.use(users);
 
+// Comments Socket Test
+app.get('/comments', function(req, res) {
+    res.render('comments.html');
+});
+
 // Serve home page and static content
 app.get('/', function(req, res) {
     res.render('home.html', { 
@@ -82,11 +90,8 @@ app.use(express.static(path.join(__dirname + '/client')));
 
 
 
-
-
-
-
-
+// Sockets for comments
+require("./server/comments-io")(io);
 
 
 // Error handlers
@@ -102,8 +107,10 @@ app.use(function(err, req, res, next) {
     res.send("Error: " + err.message);
 });
 
+
+
+
 // Launch server
-var server = app.listen(process.env.PORT, function() {
-    var port = server.address().port;
-    console.log('Dashboard app listening on port: %s', port);
+http.listen(process.env.PORT, function() {
+    console.log('Server listening on port: %s', process.env.PORT);
 });
