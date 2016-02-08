@@ -5,16 +5,31 @@ app.controller('CommentCtrl', ['$scope', function($scope) {
     
     $scope.aMsg = "This is a message from AngularJS";
     
-    
-    
     $scope.comments = [];
     $scope.newComment = {
         video_id: $scope.video._id,
         author: {
-            name: "Guy",
-            email: "gsamuel85@gmail.com"
+            name: "",
+            email: ""
         },
         text: ""
+    };
+    
+    var loadUserData = function() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = (function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                $scope.$apply( function() {
+                    var user = JSON.parse(xhr.responseText);
+                    $scope.newComment.author = {
+                        name: user.firstName + ' ' + user.lastName,
+                        email: user.username
+                    };
+                });
+            }
+        });
+        xhr.open("GET", "/user.json", true);
+        xhr.send();
     };
     
     var loadInitComments = function() {
@@ -61,4 +76,5 @@ app.controller('CommentCtrl', ['$scope', function($scope) {
     
     // On load - get comments from server
     loadInitComments();
+    loadUserData();
 }]);

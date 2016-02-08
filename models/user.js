@@ -14,6 +14,8 @@ User.virtual('fullName').get(function() {
     return this.firstName + ' ' + this.lastName;
 });
 
+User.index({username: 1});
+
 var passportLocalMongoose = require('passport-local-mongoose');
 User.plugin(passportLocalMongoose);
 
