@@ -10,6 +10,10 @@ var User = new mongoose.Schema({
     lastName: String
 });
 
+User.virtual('fullName').get(function() {
+    return this.firstName + ' ' + this.lastName;
+});
+
 var passportLocalMongoose = require('passport-local-mongoose');
 User.plugin(passportLocalMongoose);
 

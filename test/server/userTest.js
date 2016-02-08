@@ -36,6 +36,14 @@ describe('User', function() {
         });
     });
     
+    it('should display a full name', function(done) {
+        User.findOne({ username: 'test@example.com' }, function(err, user) {
+            assert(!err, 'no error retrieving user');
+            assert.equal(user.fullName, 'John Smith' );
+            done();
+        });
+    });
+    
     afterEach(function(done) {
         User.remove({}, function() {
             done();

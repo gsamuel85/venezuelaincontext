@@ -6,13 +6,43 @@
     <hr />
     
     <div id="video-main"></div>
+
+<hr />
+
+    <div ng-controller="CommentCtrl">
+        
+        <h1>Real-time Comments</h1>
+        
+        <ul id="comments">
+            <li ng-repeat="comment in comments">
+                <strong><span ng-bind="comment.author.name"></span>: </strong>
+                <span ng-bind="comment.text"></span>
+            </li>
+        </ul>
+        
+        {{#user}}
+            <form ng-submit="sendComment()">
+              <input type="text" autocomplete="off" name="comment" ng-model="newComment.text" />
+            </form>
+            <p><a href="/logout">Log out</a></p>
+        {{/user}}
+        
+        {{^user}}
+            <p>Please <a href="/login">log in</a> to participate in this discussion</p>
+            <p>Don't have an account? <a href="signup">Sign up!</a></p>
+        {{/user}}
+        
+        
     
+    </div>
 </div>
 
 {{#yield-scripts}}
     <script type="text/javascript" src="/js/popcorn-complete.min.js"></script>
     <script type="text/javascript" src="/js/bundle.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
     <script type="text/javascript" src="/js/videoCtrl.js" defer></script>
+    <script type="text/javascript" src="/js/commentCtrl.js" defer></script>
     <script type="text/javascript">{{{videoData}}}</script>
 {{/yield-scripts}}

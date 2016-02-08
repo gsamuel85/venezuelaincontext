@@ -3,7 +3,8 @@
 
 app.controller("VideoCtrl", ["$scope", function videoCtrl($scope) {
     $scope.aMsg = "This is a message from AngularJS";
-    console.log(window.video_url);
+    
+    $scope.video = JSON.parse(window.video);
     
     // Store Popcorn controller
     var pop;
@@ -11,7 +12,7 @@ app.controller("VideoCtrl", ["$scope", function videoCtrl($scope) {
     
     function initVideo() {
         var element = Popcorn.HTMLYouTubeVideoElement("#video-main");
-        element.src = window.video_url + YT_SETTINGS;
+        element.src = $scope.video.video_url + YT_SETTINGS;
         pop = new Popcorn(element);
         
         setNextVideo();

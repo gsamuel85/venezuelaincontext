@@ -74,10 +74,11 @@ app.use('/video', videos);
 var users = require("./server/users");
 app.use(users);
 
-// Comments Socket Test
-app.get('/comments', function(req, res) {
-    res.render('comments.html');
-});
+// Sockets for comments
+require("./server/comments-io")(io);
+var comments = require("./server/comments");
+app.use('/comments', comments);
+
 
 // Serve home page and static content
 app.get('/', function(req, res) {
@@ -90,8 +91,7 @@ app.use(express.static(path.join(__dirname + '/client')));
 
 
 
-// Sockets for comments
-require("./server/comments-io")(io);
+
 
 
 // Error handlers
