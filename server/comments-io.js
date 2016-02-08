@@ -10,6 +10,8 @@ var commentsIO = function(io) {
       socket.on('add comment', function(comment) {
           console.log("Received comment: " + JSON.stringify(comment));
           
+          comment.path = "," + (comment.parent_id ? comment.parent_id :  "");
+          
           VideoComment.create(comment, function(err, savedComment) {
               io.emit('add comment', savedComment);
           });

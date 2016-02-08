@@ -17,6 +17,15 @@
             <li ng-repeat="comment in comments">
                 <strong><span ng-bind="comment.author.name"></span>: </strong>
                 <span ng-bind="comment.text"></span>
+                <ul>
+                    <li ng-repeat="reply in comment.replies">
+                        <strong><span ng-bind="reply.author.name"></span>: </strong>
+                        <span ng-bind="reply.text"></span>
+                    </li>
+                </ul>
+                <form ng-submit="sendReply(comment)">
+                    <input type="text" ng-model="comment.replyText" />
+                </form>
             </li>
         </ul>
         

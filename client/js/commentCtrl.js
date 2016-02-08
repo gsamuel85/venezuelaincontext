@@ -44,6 +44,20 @@ app.controller('CommentCtrl', ['$scope', function($scope) {
         $scope.newComment.text = '';        // Reset field
     };
     
+    $scope.sendReply = function(parentComment) {
+        var reply = {
+            video_id: $scope.video._id,
+            author: {
+                name: "Bob",
+                email: "bob@gmail.com"
+            },
+            text: parentComment.replyText,
+            parent_id: parentComment._id
+        };
+        
+        socket.emit('add comment', reply);
+    };
+    
     
     // On load - get comments from server
     loadInitComments();

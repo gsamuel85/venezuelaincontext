@@ -59,7 +59,67 @@ describe('Comment Model', function() {
         ], done);
     });
     
-    it('can add replies to a comment');
+    it('can add replies to a comment', function(done) {
+        async.waterfall([
+            function getParentComment(cb) {
+                VideoComment.findOne({ 'author.name': "Guy" }, cb);
+            },
+            function addReply(parentComment, cb) {
+                var reply = new VideoComment({
+                    author: {
+                        name: "Bob",
+                        email: "bob@capitmobile.com"
+                    },
+                    video_id: 3,
+                    text: 'This is a reply',
+                    path: "," + parentComment._id
+                });
+                
+                reply.save(cb);
+            },
+            function checkReply(savedComment) {
+                assert(savedComment.path, "path is not null");
+                done();
+            }
+        ]);
+    });
+    
+    it('should build a comment tree two levels deep', function(done) {
+        async.waterfall([
+            function getParentComment(cb) {
+                VideoComment.findOne({ 'author.name': "Guy" }, cb);
+            },
+            function addReplies(parentComment, cb) {
+                for (var i=0; i<5; i++) {
+                    var reply = new VideoComment({
+                        author: {
+                            name: "Bob",
+                            email: "bob@capitmobile.com"
+                        },
+                        video_id: 3,
+                        text: "This is a reply " + i,
+                        path: "," + parentComment._id.toString()
+                    });
+                    
+                    reply.save();
+                }
+                
+                cb(null, parentComment);
+            },
+            function buildReplyTree(root, cb) {
+                var pathRegExp = new RegExp("^," + root._id.toString());
+                
+                VideoComment.find({path: pathRegExp}, function(err, comments) {
+                    assert(!err, 'can retrieve replies with regexp');
+                    assert.equal(comments.length, 5, 'should retrieve 5 comments');
+                    done();
+                });
+            }
+        ]);
+    });
+    
+    
+    
     
     afterEach(function(done) {
         VideoComment.remove({}, function() {
