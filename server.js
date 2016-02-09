@@ -12,6 +12,7 @@ var path = require("path");
 var mongoose = require("mongoose");
 var session = require("express-session");
 var MongoStore = require('connect-mongo')(session);
+var sessionStore = new MongoStore({ mongooseConnection: mongoose.connection });
 var passport = require("passport");
 var User = require('./models/user');
 var LocalStrategy = require("passport-local").Strategy;
@@ -53,7 +54,7 @@ app.use(session({
     secret: "venezuela",        // TODO: store in environment
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
+    store: sessionStore
 }));
 
 app.use(passport.initialize());
@@ -63,7 +64,12 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
+var passportSocketIo = require("passport.socketio");
+io.use(passportSocketIo.authorize({
+    cookieParser: cookieParser,
+    secret: 'venezuela',
+    store: sessionStore
+}));
 
 // Videos server module
 var videos = require("./server/videos");

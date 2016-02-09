@@ -41,26 +41,6 @@ router.get('/logout', function(req, res) {
     res.redirect('/');
 });
 
-
-/**
- * Return JSON of currently logged in user
- */
-router.get('/user.json', function(req, res) {
-    if (!req.user) {
-        res.status(403);
-        return res.send("Please log in");
-    }
-    
-    User.findOne({ username: req.user.username }).
-            select('firstName lastName username').lean().
-            exec(function getProfile(err, foundUser) {
-        if (err) { return res.send("Error: " + err); }
-        
-        if (!foundUser) { return res.send("User not found"); }
-        res.send(foundUser);
-    });
-});
-
 /**
  * Load Profile page with user details
  */

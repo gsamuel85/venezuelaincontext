@@ -8,8 +8,13 @@ var commentsIO = function(io) {
       console.log('a user connected');
       
       socket.on('add comment', function(comment) {
-          console.log("Received comment: " + JSON.stringify(comment));
-          
+        
+          // Fill in parent and author data
+          var currentUser = socket.request.user;
+          comment.author = {
+            name: currentUser.firstName + ' ' + currentUser.lastName,
+            email: currentUser.username
+          };
           comment.path = "," + (comment.parent_id ? comment.parent_id :  "");
           
           VideoComment.create(comment, function(err, savedComment) {
