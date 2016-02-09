@@ -11,7 +11,7 @@
 
     <div ng-controller="CommentCtrl">
         
-        <h1>Real-time Comments</h1>
+        <h2>Real-time Comments</h2>
         
         <ul id="comments">
             <li ng-repeat="comment in comments">
@@ -23,6 +23,10 @@
                         <span ng-bind="reply.text"></span>
                     </li>
                 </ul>
+                <form ng-submit="sendReply(comment)">
+                    <input type="text" ng-model="comment.replyText" />
+                </form>
+                
             </li>
         </ul>
         
