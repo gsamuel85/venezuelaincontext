@@ -122,7 +122,7 @@ module.exports = function(grunt) {
         sass: {
             build: {
                 files: {
-                    '<%= app.srcdir %>/css/style.css': '<%= app.srcdir %>/css/*.scss'
+                    '<%= app.srcdir %>/css/main.css': '<%= app.srcdir %>/css/*.scss'
                 }
             }
         },

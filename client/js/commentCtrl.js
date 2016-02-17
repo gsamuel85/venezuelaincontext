@@ -10,6 +10,7 @@ app.controller('CommentCtrl', ['$scope', function($scope) {
         video_id: $scope.video._id,
         text: ""
     };
+    var showReply = null;        // Visible reply for one comment at a time
     
     var loadInitComments = function() {
         var xhr = new XMLHttpRequest();
@@ -26,8 +27,6 @@ app.controller('CommentCtrl', ['$scope', function($scope) {
     
     var addCommentToTree = function(comment) {
         var path = comment.path.split(",");
-        
-        console.log(path);
         
         if (path[1] === "") {
             $scope.$apply(function() {
@@ -66,7 +65,17 @@ app.controller('CommentCtrl', ['$scope', function($scope) {
         };
         
         socket.emit('add comment', reply);
-        comment.replyText = '';
+        comment.replyText = '';     // Rest reply field
+        showReply = null;           // Hide reply form
+    };
+    
+    
+    // Show reply form for a specific thread
+    $scope.toggleReplyForm = function(comment) {
+        showReply = (showReply === comment) ? null : comment;
+    };
+    $scope.replyVisible = function(comment) {
+        return showReply === comment;
     };
     
     

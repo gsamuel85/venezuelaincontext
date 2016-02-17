@@ -1,50 +1,128 @@
 <div ng-controller="VideoCtrl">
-    <h1>{{video.title}}</h1>
-    <p class="lead">{{{video.description}}}</p>
-    <p ng-bind="aMsg"></p>
-    
-    <hr />
-    
-    <div id="video-main"></div>
 
-<hr />
+    <!-- Header -->
+    <div id="header">
+        <div class="container">
 
-    <div ng-controller="CommentCtrl">
-        
-        <h2>Real-time Comments</h2>
-        
-        <ul id="comments">
-            <li ng-repeat="comment in comments">
-                <strong><span ng-bind="comment.author.name"></span>: </strong>
-                <span ng-bind="comment.text"></span>
+            <!-- Logo -->
+            <div id="logo">
+                <h1><a href="#">Venezuela in Context</a></h1>
+            </div>
+
+            <!-- Nav -->
+            <nav id="nav">
                 <ul>
-                    <li ng-repeat="reply in comment.replies">
-                        <strong><span ng-bind="reply.author.name"></span>: </strong>
-                        <span ng-bind="reply.text"></span>
-                    </li>
+                    
+                    <li><a href="index.html">Home</a></li>
+                    {{#user}}
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/logout">Log out</a></li>
+                    {{/user}}
+                    {{^user}}
+                    <li><a href="/login">Log in</a></li>
+                    <li class="active"><a href="/signup">Sign up!</a></li>
+                    {{/user}}
                 </ul>
-                <form ng-submit="sendReply(comment)">
-                    <input type="text" ng-model="comment.replyText" />
-                </form>
-                
-            </li>
-        </ul>
-        
-        {{#user}}
-            <form ng-submit="sendComment()">
-              <input type="text" autocomplete="off" name="comment" ng-model="newComment.text" />
-            </form>
-            <p><a href="/logout">Log out</a></p>
-        {{/user}}
-        
-        {{^user}}
-            <p>Please <a href="/login">log in</a> to participate in this discussion</p>
-            <p>Don't have an account? <a href="signup">Sign up!</a></p>
-        {{/user}}
-        
-        
-    
+            </nav>
+
+        </div>
     </div>
+    <!-- Header -->
+
+    
+    <!-- Main -->
+    <div id="page">
+        <div class="container">
+            <div class="embed-container">
+                <div id="video-main"></div>
+            </div>
+        </div>
+
+        <!-- Main -->
+        <div id="main" class="container">
+            
+            
+            <div class="row">
+                <div class="12u">
+                    <section>
+                        <header>
+                            <h2>{{video.title}}</h2>
+                            <span class="byline">Lorem ipsum whatever</span>
+                        </header>
+                        <p>{{{video.description}}}</p>
+                    </section>
+                    
+                    <section class="comments">
+                        <div ng-controller="CommentCtrl" class="8u">
+
+                            <h2>Comments</h2>
+                            <p>Donec condimentum, urna non molestie semper, ligula enim ornare nibh, quis laoreet eros quam eget ante. Aliquam libero. Vivamus nisl nibh, iaculis vitae, viverra sit amet, ullamcorper vitae, turpis. Aliquam erat volutpat. Vestibulum dui sem, pulvinar sed, imperdiet nec, iaculis nec, leo. Fusce odio.</p>
+                    
+                            <ul id="comments" class="comments-list">
+                                <li ng-repeat="comment in comments">
+                                    <div class="comment-container">
+                                        
+                                        <div class="comment-author">
+                                            <h4 ng-bind="comment.author.name"></h4>
+                                        </div>
+                                        <div class="comment-text">
+                                            <span ng-bind="comment.text"></span>
+                                        </div>
+                                        
+                                        <div class="comment-replies">
+                                            <ul class="comment-replies">
+                                                <li ng-repeat="reply in comment.replies">
+                                                    <h4 ng-bind="reply.author.name"></h4>
+                                                    <span ng-bind="reply.text"></span>
+                                                </li>
+                                            </ul>
+                                            {{#user}}
+                                            <a ng-click="toggleReplyForm(comment)">Reply</a>
+                                            <div class="comment-reply-form" ng-show="replyVisible(comment)">
+                                                <form  ng-submit="sendReply(comment)">
+                                                    <textarea ng-model="comment.replyText" required></textarea>
+                                                    <input type="submit" class="button" value="Submit" />
+                                                </form>
+                                            </div>
+                                            {{/user}}
+                                        </div>
+                                        
+                                    </div>
+                                </li>
+                            </ul>
+                    
+                            {{#user}}
+                            <div class="comment-form">
+                                <h3>Participate in the discussion!</h3>
+                                <form ng-submit="sendComment()">
+                                    <label>Your comment:</label>
+                                    <br />
+                                    <textarea autocomplete="off" rows="5" name="comment" ng-model="newComment.text" required></textarea>
+                                    <br />
+                                    <input type="submit" class="button" value="Submit" />
+                                </form>
+                                <p><a href="/logout">Log out</a></p>
+                            </div>
+                            {{/user}}
+                            {{^user}}
+                            <p>Please <a href="/login">log in</a> to participate in this discussion</p>
+                            <p>Don't have an account? <a href="signup">Sign up!</a></p>
+                            {{/user}}
+                    
+                    
+                    
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+        </div>
+        <!-- Main -->
+
+    </div>
+    <!-- /Main -->
+
+    
 </div>
 
 {{#yield-scripts}}
