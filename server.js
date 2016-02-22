@@ -46,8 +46,8 @@ app.engine('html', require("hogan-express"));
  */
  
  // Connect to database
-var DB_URL = "mongodb://localhost:27017/vic";       // TODO: Replace with config file
-mongoose.connect(DB_URL);
+var dbConfig = require("./config/db");
+mongoose.connect(dbConfig.dev.url);
  
 // Session - place after static to avoid accessing store for every request
 app.use(session({
