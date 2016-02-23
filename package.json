@@ -48,6 +48,7 @@
     "react-tools": "^0.13.3"
   },
   "scripts": {
+    "start": "node server.js",
     "nodemon": "nodemon --delay 3 --watch . server.js"
   }
 }

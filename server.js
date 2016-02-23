@@ -88,7 +88,7 @@ app.use('/comments', comments);
 // Serve home page and static content
 app.get('/', function(req, res) {
     res.render('home.html', { 
-        msg: "Hello, World!"
+        user: req.user
     });
 });
 app.use(express.static(path.join(__dirname + '/public')));
@@ -116,6 +116,6 @@ app.use(function(err, req, res, next) {
 
 
 // Launch server
-http.listen(process.env.PORT, function() {
+http.listen(process.env.PORT || 8080, function() {
     console.log('Server listening on port: %s', process.env.PORT);
 });

@@ -1,33 +1,6 @@
 <div ng-controller="VideoCtrl">
 
-    <!-- Header -->
-    <div id="header">
-        <div class="container">
-
-            <!-- Logo -->
-            <div id="logo">
-                <h1><a href="#">Venezuela in Context</a></h1>
-            </div>
-
-            <!-- Nav -->
-            <nav id="nav">
-                <ul>
-                    
-                    <li><a href="index.html">Home</a></li>
-                    {{#user}}
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="/logout">Log out</a></li>
-                    {{/user}}
-                    {{^user}}
-                    <li><a href="/login">Log in</a></li>
-                    <li class="active"><a href="/signup">Sign up!</a></li>
-                    {{/user}}
-                </ul>
-            </nav>
-
-        </div>
-    </div>
-    <!-- Header -->
+    
 
     
     <!-- Main -->
