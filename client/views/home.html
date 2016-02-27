@@ -8,53 +8,10 @@
 <!-- Main -->
 <div id="page">
 
-    <!-- Extra -->
-    <div id="marketing" class="container">
-        <div class="row">
-            <div class="4u">
-                <section>
-                    <header>
-                        <h2>Polarisation</h2>
-                    </header>
-                    <p class="subtitle">In posuere eleifend odio. Quisque semper augue mattis maecenas ligula.</p>
-                    <p>
-                        <a href="#"><img src="images/pics13.jpg" alt=""></a>
-                    </p>
-                    <a href="#" class="button">More</a>
-                </section>
-            </div>
-            <div class="4u">
-                <section>
-                    <header>
-                        <h2>Economics</h2>
-                    </header>
-                    <p class="subtitle">In posuere eleifend odio. Quisque semper augue mattis maecenas ligula.</p>
-                    <p>
-                        <a href="#"><img src="images/pics14.jpg" alt=""></a>
-                    </p>
-                    <a href="#" class="button">More</a>
-                </section>
-            </div>
-            <div class="4u">
-                <section>
-                    <header>
-                        <h2>Insecurity</h2>
-                    </header>
-                    <p class="subtitle">In posuere eleifend odio. Quisque semper augue mattis maecenas ligula.</p>
-                    <p>
-                        <a href="#"><img src="images/pics15.jpg" alt=""></a>
-                    </p>
-                    <a href="#" class="button">More</a>
-                </section>
-            </div>
-        </div>
-    </div>
-    <!-- /Extra -->
-
     <!-- Main -->
     <div id="main" class="container">
         <div class="row">
-            <div class="6u">
+            <div class="8u">
                 <section>
                     <header>
                         <h2>An open, interactive web documentary</h2>
@@ -62,10 +19,23 @@
                     </header>
                     <p>Why do Venezuelans have to queue before shops? Why is there so much insecurity and inflation? Why is Venezuelan politics so polarised? We create a web-documentary that explains the history and logic of Venezuela's problems!</p>
                     <p>Our format redefines documentary filmmaking. We fuse the best of journalism, social science, documentary filmmaking, and web programming to deliver the most intuitively comprehensible explanations out there on the web. Inventions, such as referenced subtitles and direct access to all data, will make this the most transparently researched documentary in the history of humankind!</p>
-                    <a href="#" class="button">More Details</a>
+                    
+                    <a onclick="showMore()">More Details</a>
+                    <br />
+                    
+                    <div id="more-details">
+                        <h3>About the Project</h3>
+                        <div class='embed-container'>
+                            <iframe src='https://www.youtube.com/embed/J7xhz2qL9xw' frameborder='0' allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                    <a class="button" href="/videos/1">Enter!</a>
+                    
                 </section>
             </div>
-            <div class="3u">
+            
+            <div class="4u">
                 <section class="sidebar">
                     <header>
                         <h2>Hot Topics</h2>
@@ -90,6 +60,8 @@
                     </ul>
                 </section>
             </div>
+            
+            <!--
             <div class="3u">
                 <section class="sidebar">
                     <header>
@@ -116,39 +88,81 @@
                     </ul>
                 </section>
             </div>
+            -->
         </div>
     </div>
     <!-- Main -->
+    
+    <!-- Extra -->
+    <div id="marketing" class="container">
+        <div class="row">
+            <div class="4u">
+                <section>
+                    <header>
+                        <h2>Open</h2>
+                    </header>
+                    <p class="subtitle">This documentary is free to access and view. Spread the word and support free, transparent access to information! </p>
+                    <p>
+                        <a href="#"><img src="images/pics13.jpg" alt=""></a>
+                    </p>
+                </section>
+            </div>
+            <div class="4u">
+                <section>
+                    <header>
+                        <h2>Transparent</h2>
+                    </header>
+                    <p class="subtitle">Immediate access to all sources at your fingertips! Referenced subtitles in all videos, interactive graphs, links and more. </p>
+                    <p>
+                        <a href="#"><img src="images/pics14.jpg" alt=""></a>
+                    </p>
+                </section>
+            </div>
+            <div class="4u">
+                <section>
+                    <header>
+                        <h2>Interactive</h2>
+                    </header>
+                    <p class="subtitle">Participate in the discussions, propose new topics to research and update the content. If we're wrong, we'll adapt and correct. </p>
+                    <p>
+                        <a href="#"><img src="images/pics15.jpg" alt=""></a>
+                    </p>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- /Extra -->
 
 </div>
 <!-- /Main -->
 
 <!-- Featured -->
 <div id="featured">
+    <h2>Explore</h2>
     <div class="container">
         <div class="row">
             <section class="4u">
                 <div class="box">
                     <a href="#" class="image left"><img src="images/pics04.jpg" alt=""></a>
-                    <h3>Open</h3>
-                    <p>This documentary is free to access and view. Spread the word and support free, transparent access to information! </p>
-                    <a href="#" class="button">More</a>
+                    <h3>Polarisation</h3>
+                    <p>In posuere eleifend odio. Quisque semper augue mattis maecenas ligula. </p>
+                    <a href="#" class="button">More &gt;</a>
                 </div>
             </section>
             <section class="4u">
                 <div class="box">
                     <a href="#" class="image left"><img src="images/pics05.jpg" alt=""></a>
-                    <h3>Transparent</h3>
-                    <p>Immediate access to all sources at your fingertips! Referenced subtitles in all videos, interactive graphs, links and more. </p>
-                    <a href="#" class="button">More</a>
+                    <h3>Economics</h3>
+                    <p>In posuere eleifend odio. Quisque semper augue mattis maecenas ligula. </p>
+                    <a href="#" class="button">More &gt;</a>
                 </div>
             </section>
             <section class="4u">
                 <div class="box">
                     <a href="#" class="image left"><img src="images/pics06.jpg" alt=""></a>
-                    <h3>Interactive</h3>
-                    <p>Participate in the discussions, propose new topics to research and update the content. If we're wrong, we'll adapt and correct. </p>
-                    <a href="#" class="button">More</a>
+                    <h3>Insecurity</h3>
+                    <p>In posuere eleifend odio. Quisque semper augue mattis maecenas ligula. </p>
+                    <a href="#" class="button">More &gt;</a>
                 </div>
             </section>
         </div>
@@ -156,3 +170,14 @@
     </div>
 </div>
 <!-- /Featured -->
+
+<script defer>
+    function showMore() {
+        var element = document.getElementById("more-details");
+        if (element.style.display === "inline-block") {
+            element.style.display = "none";
+        } else {
+            element.style.display = "inline-block";
+        }
+    }
+</script>
