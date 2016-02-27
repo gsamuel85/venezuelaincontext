@@ -4,6 +4,6 @@
         ".c9/",
         ".git/",
         "node_modules/",
-        "data",
+        "data"
     ]
 }

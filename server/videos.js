@@ -6,16 +6,13 @@ var async = require("async");
 var Video = require('../models/video');
 var log = require("./logger");
 
-/**
- * Return JSON of all videos
- */ 
-router.get('/all.json', function getVideos(req, res) {
-    Video.find({}, '_id title', function foundVideos(err, videos) {
-        if (err) { return res.send("Error: " + err); }
-        
-        res.send(videos);
-    });
-});
+
+function isAdmin(user) {
+    if (user._doc) {
+        return user._doc.admin;
+    }
+    return false;
+}
 
 
 /**
@@ -49,20 +46,24 @@ router.post('/update', function updateVideo(req, res) {
  * Create a new video
  */
 router.get('/new', function(req, res) {
-    res.render('videos/edit.html');
+    if (!isAdmin(req.user)) { return res.status(403).send("You must be an admin to add a video"); }
+    
+    res.render('videos/edit.html', { user: req.user });
 });    
     
 /**
  * Load EDIT page for individual video
  */
 router.get('/:id/edit', function editVideo(req, res) {
+    if (!isAdmin(req.user)) { return res.status(403).send("You must be an admin to edit a video"); }
+    
     Video.findOne({ _id: req.params.id }, 'title description video_url', function(err, video) {
         if (err) { return res.send("Error: " + err); }
         
         if (!video) { res.send('Video not found'); }
         else {
             var videoData = "var videoData = '" + JSON.stringify(video) + "'";
-            res.render('videos/edit.html', {video: video, videoData: videoData});
+            res.render('videos/edit.html', {video: video, videoData: videoData, user: req.user});
         }
     });
 });
