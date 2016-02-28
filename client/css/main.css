@@ -53,7 +53,9 @@ p.lead {
     float: left;
     margin: 5px; }
   .comment-container .comment-replies {
-    margin-left: 44px; }
+    margin-left: 30px; }
+    .comment-container .comment-replies li {
+      min-height: 56px; }
 
 .comment-form {
   border-top: 1px solid #333; }

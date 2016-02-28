@@ -76,7 +76,11 @@ p.lead {
     }
     
     .comment-replies {
-        margin-left: 44px;
+        margin-left: 30px;
+        
+        li {
+            min-height: 56px;
+        }
     }
 }
 .comment-form {

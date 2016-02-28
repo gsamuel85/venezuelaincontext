@@ -46,8 +46,9 @@ app.engine('html', require("hogan-express"));
  */
  
  // Connect to database
-var dbConfig = require("./config/db");
-mongoose.connect(dbConfig.dev.url);
+var dbConfig = require("./config/db")(process.env.DB_USER, process.env.DB_PASSWORD);
+var dbUrl = (process.env.ENV === "production" ? dbConfig.prod.url : dbConfig.dev.url);
+mongoose.connect(dbUrl);
  
 // Session - place after static to avoid accessing store for every request
 app.use(session({
