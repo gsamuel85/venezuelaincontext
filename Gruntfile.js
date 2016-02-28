@@ -152,6 +152,7 @@ module.exports = function(grunt) {
                     vendor: [
                         'node_modules/angular/angular.js',
                         'node_modules/angular-mocks/angular-mocks.js',
+                        'node_modules/angular-sanitize/angular-sanitize.js',
                         'public/js/popcorn-complete.min.js'
                         // Add vendor code if necessary
                     ]

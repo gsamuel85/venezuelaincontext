@@ -3,6 +3,8 @@
 var router = require("express").Router();
 var VideoComment = require("../models/videocomment");
 
+var gravatar = require("gravatar");
+
 var async = require("async");
 
 

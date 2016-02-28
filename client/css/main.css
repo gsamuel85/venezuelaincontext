@@ -49,8 +49,11 @@ p.lead {
   border-top: 1px solid #ccc;
   padding: 10px;
   margin-top: 20px; }
+  .comment-container .author-img {
+    float: left;
+    margin: 5px; }
   .comment-container .comment-replies {
-    margin-left: 30px; }
+    margin-left: 44px; }
 
 .comment-form {
   border-top: 1px solid #333; }

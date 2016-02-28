@@ -1,7 +1,7 @@
 'use strict';
 /* global app, io */
 
-app.controller('CommentCtrl', ['$scope', function($scope) {
+app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
     
     $scope.aMsg = "This is a message from AngularJS";
     
@@ -76,6 +76,15 @@ app.controller('CommentCtrl', ['$scope', function($scope) {
     };
     $scope.replyVisible = function(comment) {
         return showReply === comment;
+    };
+    
+    
+    // Get Gravate image for comment author's e-mail
+    $scope.getGravatarImage = function(comment) {
+        var imgTag = "<img src='" + 
+                window.gravatar.url(comment.author.email, { s: 35, d: 'mm'}, true) + 
+                "' />";
+        return imgTag;
     };
     
     
