@@ -7,7 +7,9 @@ var User = new mongoose.Schema({
     password: String,
     
     firstName: String,
-    lastName: String
+    lastName: String,
+    
+    admin: Boolean
 });
 
 User.virtual('fullName').get(function() {
