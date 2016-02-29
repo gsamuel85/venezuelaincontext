@@ -1,18 +1,51 @@
+<div id="page">
+    <div id="main" class="container">
+        <section>
+            <header>
+                <h2>User Profile</h2>
+                <span class="byline">Welcome to the El Contexto community</span>
+                
+                {{#flash}}
+                <div class="flash">
+                    <p>{{flash.msg}}</p>
+                </div>
+                {{/flash}}
+            </header>
+            
+            <div class="row">
+                <div class="8u">
+                    {{#user}}
+                    <div ng-bind-html="getGravatarImage('{{user.username}}')" class="author-image"></div>
+                    <div class="user-details">
+                        <ul>
+                            <li>Name: <span class="user-name">{{user.firstName}} {{user.lastName}}</span></li>
+                            <li>E-mail: <span class="user-email">{{user.username}}</span></li>
+                        </ul>
+                    </div>
+                    {{/user}}
+                    
+                    {{^user}}
+                        <p>Please <a href="login">log in</a> to see your profile</p>
+                        <p>Don't have an account? <a href="signup">Sign up!</a></p>
+                    {{/user}}
+                </div>
+            </div>
+        </section>
+        
+        {{#user}}
+        <section>
+            <p><a href="logout">Log out</a></p>
+            <p><a href="/video/1" class="button">To the Videos</a></p>
+        </section>
+        {{/user}}
+    </div>
+</div>
 
-<h1>Profile</h1>
-<p class="lead">{{msg}}</p>
 
-<hr />
 
-{{#user}}
-    <p>Welcome, {{user.firstName}}</p>
-    <p><a href="logout">Log out</a></p>
-{{/user}}
-
-{{^user}}
-    <p>Please <a href="login">log in</a> to see your profile</p>
-    <p>Don't have an account? <a href="signup">Sign up!</a></p>
-{{/user}}
-    
-
-<hr />
+{{#yield-scripts}}
+    <script type="text/javascript" src="/js/bundle.js"></script>
+    <script type="text/javascript" src="/js/angular-sanitize.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+    <script type="text/javascript" src="/js/userCtrl.js" defer></script>
+{{/yield-scripts}}

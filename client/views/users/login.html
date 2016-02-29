@@ -1,21 +1,41 @@
-<h1>Login</h1>
-<p class="lead">{{msg}}</p>
-
-<hr />
-
-<form action="login" method="POST">
-    <label>
-        E-mail
-        <input type="email" name="username" />
-    </label>
-    <label>
-        Password
-        <input type="password" name="password" />
-    </label>
-    
-    <button type="submit">Log In</button>
-</form>
-
-<hr />
-
-<p>Don't have an account? <a href="signup">Sign up!</a></p>
+<div id="page">
+    <div id="main" class="container">
+        <section>
+            <header>
+                <h2>Log in</h2>
+                <span class="byline">Participate in the discussion</span>
+                
+                {{#flash}}
+                <div class="flash">
+                    <p>{{flash.msg}}</p>
+                </div>
+                {{/flash}}
+            </header>
+            
+            <div class="row">
+                <div class="8u">
+                    <div class="form-style-2">
+                        
+                        <form name="form" action="login" method="POST">
+                            <label for="username">
+                                <span>E-mail </span>
+                                <input type="email" class="input-field" name="username" required />
+                            </label>
+                            <label for="password">
+                                <span>Password </span>
+                                <input type="password" class="input-field" name="password" required />
+                            </label>
+                            
+                            <button type="submit" class="button">Log in</button>
+                        </form>
+                    
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <p>Don't have an account? <a href="signup">Sign up!</a></p>
+        </section>
+    </div>
+</div>

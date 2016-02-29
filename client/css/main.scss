@@ -1,3 +1,5 @@
+@import 'partials/form';
+
 $orange: #fcac45;
 $gray: #ccc;
 $dark-gray: #333;
@@ -41,6 +43,23 @@ p.lead {
 #more-details {
     display: none;        // Initially hidden
     width: 100%;
+}
+
+/**
+* USER
+*/
+.user-details {
+    li {
+        list-style-type: none;
+    }
+    
+    span.user-name {
+        font-weight: 700;
+        font-size: 1.3em;
+    }
+    span.user-email {
+        font-size: 1.1em;
+    }
 }
 
 

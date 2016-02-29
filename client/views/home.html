@@ -10,6 +10,13 @@
 
     <!-- Main -->
     <div id="main" class="container">
+        
+        {{#flash}}
+        <div class="flash">
+            <p>{{flash.msg}}</p>
+        </div>
+        {{/flash}}
+        
         <div class="row">
             <div class="8u">
                 <section>
