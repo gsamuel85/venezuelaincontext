@@ -48,6 +48,11 @@ p.lead {
 /**
 * USER
 */
+
+.flash.error {
+    color: $orange;
+}
+
 .user-details {
     li {
         list-style-type: none;

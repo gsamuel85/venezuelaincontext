@@ -3,6 +3,7 @@
 // App modules
 var express = require("express");
 var cookieParser = require("cookie-parser");
+var flash = require("connect-flash");
 var bodyParser= require("body-parser");
 var helmet = require("helmet");
 var path = require("path");
@@ -30,6 +31,7 @@ app.use(helmet());              // Security by Helmet
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(cookieParser());        // Cookies for user sessions
+app.use(flash());
 
 
 // VIEWS: Hogan templating engine

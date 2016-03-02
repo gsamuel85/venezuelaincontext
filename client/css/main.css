@@ -113,6 +113,9 @@ p.lead {
 /**
 * USER
 */
+.flash.error {
+  color: #fcac45; }
+
 .user-details li {
   list-style-type: none; }
 
