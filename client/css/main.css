@@ -110,6 +110,9 @@ p.lead {
   display: none;
   width: 100%; }
 
+#marketing img {
+  max-width: 100%; }
+
 /**
 * USER
 */
