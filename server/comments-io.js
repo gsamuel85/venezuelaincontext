@@ -5,7 +5,7 @@ var log = require("./logger");
 
 var commentsIO = function(io) {
     io.on('connection', function(socket){
-      console.log('a user connected');
+      //console.log('a user connected');
       
       socket.on('add comment', function(comment) {
         
@@ -23,7 +23,7 @@ var commentsIO = function(io) {
       });
       
       socket.on('disconnect', function() {
-          console.log('a user disconnected');
+          // console.log('a user disconnected');
       });
     });
 

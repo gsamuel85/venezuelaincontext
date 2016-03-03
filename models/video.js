@@ -6,6 +6,7 @@ var Video = new mongoose.Schema({
     _id: Number,
     
     title: String,
+    subtitle: String,
     video_url: String,
     description: String,
     
