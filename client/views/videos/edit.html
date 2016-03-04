@@ -1,29 +1,41 @@
-<div ng-controller="VideoEditCtrl" class="form">
-    <form ng-submit="submitVideo">
-        <label>
-            ID:
-            <input type="number" name="id" ng-model="video._id" ng-disabled="!newVideo" />
-        </label>
-        <label>
-            Title:
-            <input type="text" name="title" ng-model="video.title" />
-        </label>
-        <label>
-            Subtitle:
-            <input type="text" name="subtitle" ng-model="video.subtitle" />
-        </label>
-        <label>
-            Description:
-            <input type="textarea" name="description" ng-model="video.description" />
-        </label>
-        <label>
-            YouTube Embed URL:
-            <input type="text" name="video_url" ng-model="video.video_url" />
-        </label>
-        
-        <input type="button" ng-click="loadInitVideo()" value="Reset" />
-        <input type="submit" ng-click="submitVideo()" value="Submit" />
-    </form>
+<div id="page">
+    <div id="main" class="container">
+        <header>
+            <h2>Video Details</h2>
+        </header>
+
+        <div class="row">
+            <div class="8u">
+                <div class="form-style-2" ng-controller="VideoEditCtrl">
+                    <form ng-submit="submitVideo">
+                        <label for="id">
+                            <span>ID: </span>
+                            <input class="input-field" type="number" name="id" ng-model="video._id" ng-disabled="!newVideo" />
+                        </label>
+                        <label for="title">
+                            <span>Title: </span>
+                            <input class="input-field" type="text" name="title" ng-model="video.title" />
+                        </label>
+                        <label for="subtitle">
+                            <span>Subtitle: </span>
+                            <input class="input-field" type="text" name="subtitle" ng-model="video.subtitle" />
+                        </label>
+                        <label for="description">
+                            <span>Description: </span>
+                            <textarea class="textarea-field" name="description" ng-model="video.description"></textarea>
+                        </label>
+                        <label for="video_url">
+                            <span>YouTube Embed URL: </span>
+                            <input class="input-field" type="text" name="video_url" ng-model="video.video_url" />
+                        </label>
+
+                        <button type="button" ng-click="loadInitVideo()" value="Reset"></button>
+                        <button type="submit" ng-click="submitVideo()" value="Submit"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
