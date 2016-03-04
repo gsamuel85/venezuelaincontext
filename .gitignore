@@ -6,3 +6,6 @@ node_modules/
 
 # Ignore dev database
 data/
+
+#Ignore WebStorm config
+.idea/
