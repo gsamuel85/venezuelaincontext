@@ -205,19 +205,19 @@ module.exports = function(grunt) {
                 files: ['<%= app.commondir %>/main.js'],
                 tasks: ['browserify']
             },
-            json: {
-                files: ['data/**/*.json'],
-                tasks: ['jsonlint']
-            },
+            //json: {
+            //    files: ['data/**/*.json'],
+            //    tasks: ['jsonlint']
+            //},
             sass: {
-                files: ['<%= app.srcdir %>/css/*.scss'],
+                files: ['<%= app.srcdir %>/css/**/*.scss'],
                 tasks: ['css']
             }
         }
     });
     
     
-    grunt.registerTask('css', ['scsslint', 'sass', 'cssmin']);
+    grunt.registerTask('css', ['sass', 'cssmin']);
 
     grunt.registerTask('default', ['htmlhint', 'jshint', 'jasmine', 'mochaTest', 'jsonlint', 'css']);
 

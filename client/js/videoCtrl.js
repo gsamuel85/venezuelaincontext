@@ -26,6 +26,10 @@ app.controller("VideoCtrl", ["$scope", function videoCtrl($scope) {
         }
         
     }
+
+    $scope.goToVideo = function(id) {
+        window.location.assign("/video/" + id);
+    }
     
     initVideo();
 }]);

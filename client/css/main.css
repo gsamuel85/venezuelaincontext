@@ -77,6 +77,36 @@
   background: #EA7B00;
   color: #fff; }
 
+#banner.video-nav {
+  padding: 0;
+  font-family: 'Georgia', serif;
+  font-size: 1.5em;
+  height: 150px; }
+  #banner.video-nav table {
+    table-layout: fixed;
+    width: 100%;
+    height: 100%; }
+  #banner.video-nav td {
+    width: 14%;
+    height: 50px;
+    vertical-align: middle;
+    border: 1px inset transparent;
+    border-left: 1px solid #333;
+    padding-left: 20px;
+    cursor: pointer; }
+    #banner.video-nav td.theme, #banner.video-nav td.unavailable {
+      cursor: auto; }
+    #banner.video-nav td:hover {
+      border: 1px solid red; }
+    #banner.video-nav td.theme:hover, #banner.video-nav td.unavailable:hover {
+      border: 1px inset transparent; }
+  #banner.video-nav .nav-row1 {
+    background-color: rgba(252, 209, 22, 0.4); }
+  #banner.video-nav .nav-row2 {
+    background-color: rgba(0, 56, 147, 0.4); }
+  #banner.video-nav .nav-row3 {
+    background-color: rgba(206, 17, 38, 0.4); }
+
 html {
   font-family: 'Helvetica', 'Arial', sans-serif; }
 
