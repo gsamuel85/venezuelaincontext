@@ -110,9 +110,15 @@ p.lead {
   display: none;
   width: 100%; }
 
+#marketing img {
+  max-width: 100%; }
+
 /**
 * USER
 */
+.flash.error {
+  color: #fcac45; }
+
 .user-details li {
   list-style-type: none; }
 

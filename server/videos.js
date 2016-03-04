@@ -72,7 +72,7 @@ router.get('/:id/edit', function editVideo(req, res) {
  * Display individual video
  */ 
 router.get('/:id', function getVideo(req, res) {
-    Video.findOne({ _id: req.params.id }, '_id title description video_url', function(err, video) {
+    Video.findOne({ _id: req.params.id }, '_id title subtitle description video_url', function(err, video) {
         if (err) { return res.send("Error: " + err); }
         
         if (!video) { res.send('Video not found'); }

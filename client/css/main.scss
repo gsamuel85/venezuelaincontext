@@ -45,9 +45,20 @@ p.lead {
     width: 100%;
 }
 
+#marketing {
+    img {
+        max-width: 100%;
+    }
+}
+
 /**
 * USER
 */
+
+.flash.error {
+    color: $orange;
+}
+
 .user-details {
     li {
         list-style-type: none;

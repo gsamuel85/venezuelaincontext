@@ -6,7 +6,11 @@ var User = require('../models/user');
 
 
 router.get('/signup', function(req, res) {
-    res.render('users/signup.html', {});
+    if (req.user) {
+        res.redirect('/profile');
+    } else {
+        res.render('users/signup.html', {});
+    }
 });
 
 router.post('/signup', function(req, res) {
@@ -29,12 +33,17 @@ router.post('/signup', function(req, res) {
 });
 
 router.get('/login', function(req, res) {
-    res.render('users/login.html', { user: req.user });
+    if (req.user) {
+        res.redirect('/profile');
+    } else {
+        res.render('users/login.html', { flash: req.flash('error') });
+    }
 });
 
-router.post('/login', passport.authenticate('local'), function(req, res) {
-    res.redirect('/profile');
-});
+router.post('/login', passport.authenticate('local', {
+        successRedirect: '/profile',
+        failureRedirect: '/login',
+        failureFlash: "Incorrect e-mail or password"} ));
 
 router.get('/logout', function(req, res) {
     req.logout();
