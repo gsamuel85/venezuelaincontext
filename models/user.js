@@ -18,7 +18,10 @@ User.virtual('fullName').get(function() {
 
 User.index({username: 1});
 
-var passportLocalMongoose = require('passport-local-mongoose');
+var passportLocalMongoose = require('passport-local-mongoose', {
+    limitAttemtpts: true,
+    maxAttempts: 50
+});
 User.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('User', User);

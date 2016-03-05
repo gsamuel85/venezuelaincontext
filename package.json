@@ -53,6 +53,7 @@
   "scripts": {
     "start": "node server.js",
     "mongo-local": "mongod --dbpath=data --nojournal --rest",
+    "security": "nsp check",
     "nodemon": "nodemon --delay 3 --watch . server.js"
   }
 }

@@ -54,7 +54,7 @@ mongoose.connect(dbUrl);
  
 // Session - place after static to avoid accessing store for every request
 app.use(session({
-    secret: "venezuela",        // TODO: store in environment
+    secret: process.env.COOKIE_KEY,
     resave: false,
     saveUninitialized: false,
     store: sessionStore
