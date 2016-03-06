@@ -68,8 +68,9 @@ router.get('/:id/edit', function editVideo(req, res) {
     });
 });
 
+
 /**
- * Display individual video
+ * SHOW individual video
  */ 
 router.get('/:id', function getVideo(req, res) {
     Video.findOne({ _id: req.params.id }, '_id title subtitle description video_url', function(err, video) {
@@ -77,8 +78,12 @@ router.get('/:id', function getVideo(req, res) {
         
         if (!video) { res.send('Video not found'); }
         else {
+            var nextVideoId = Math.min(video._id + 1, 12);
+            var prevVideoId = Math.max(video._id - 1, 1);
+
             var videoData = "var video = '" + JSON.stringify(video) +  "';\n" +
-                "var nextVideoUrl = '';";        // TODO: Add funciton to get next video URL
+                "var nextVideoId = " + nextVideoId + ";\n" +
+                "var prevVideoId = " + prevVideoId + ";\n";
             res.render('videos/video.html', {video: video, videoData: videoData, user: req.user});
         }
     });

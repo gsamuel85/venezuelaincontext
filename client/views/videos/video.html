@@ -1,4 +1,4 @@
-<div ng-controller="VideoCtrl">
+<div id="video-page" ng-controller="VideoCtrl">
 
 
     <!-- Banner -->
@@ -35,6 +35,22 @@
             </table>
         </div>
     </div>
+
+    <div class="container">
+        <table class="nav-years">
+            <tbody>
+                <tr>
+                    <td>1980</td>
+                    <td>1992</td>
+                    <td>1999</td>
+                    <td>2002</td>
+                    <td>2005</td>
+                    <td>2010</td>
+                    <td>2013</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <!-- /Banner -->
     
     <!-- Main -->
@@ -45,9 +61,8 @@
             </div>
             <div class="video-buttons">
                 <ul>
-                    <li>PREV</li>
-                    <li>NEXT</li>
-                    <li>ETC</li>
+                    <li ng-click="goToPrev()">PREV</li>
+                    <li ng-click="goToNext()">NEXT</li>
                 </ul>
             </div>
         </div>

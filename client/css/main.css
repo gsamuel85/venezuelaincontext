@@ -77,6 +77,9 @@
   background: #EA7B00;
   color: #fff; }
 
+#video-page {
+  background-color: #ffffff; }
+
 #banner.video-nav {
   padding: 0;
   font-family: 'Georgia', serif;
@@ -106,6 +109,20 @@
     background-color: rgba(0, 56, 147, 0.4); }
   #banner.video-nav .nav-row3 {
     background-color: rgba(206, 17, 38, 0.4); }
+
+table.nav-years {
+  width: 100%;
+  text-align: right;
+  font-family: 'Georgia',serif; }
+  table.nav-years td {
+    width: 14%;
+    border-right: 1px solid #333;
+    padding-right: 3px; }
+
+.video-buttons li {
+  cursor: pointer; }
+  .video-buttons li:hover {
+    color: #fcac45; }
 
 html {
   font-family: 'Helvetica', 'Arial', sans-serif; }
