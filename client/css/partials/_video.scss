@@ -1,0 +1,79 @@
+$orange: #fcac45;
+
+$opacity: 0.4;
+$flag-yellow: rgba(252,209,22, $opacity);
+$flag-blue: rgba(0,56,147,$opacity);
+$flag-red: rgba(206,17,38,$opacity);
+$white-bg: rgba(255,255,255,$opacity);
+
+$video-nav-height: 150px;
+
+#video-page {
+  background-color: #ffffff;
+}
+
+#banner.video-nav {
+  padding: 0;
+  font-family: 'Georgia', serif;
+  font-size: 1.5em;
+  height: $video-nav-height;
+
+  table {
+    table-layout: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
+  td {
+    width: 14%;
+    height: $video-nav-height / 3;
+    vertical-align: middle;
+    border: 1px inset transparent;
+    border-left: 1px solid #333;
+    padding-left: 20px;
+    cursor: pointer;
+
+    &.theme, &.unavailable {
+      cursor: auto;
+    }
+    &:hover {
+      border: 1px solid red;
+    }
+    &.theme:hover, &.unavailable:hover {
+      border: 1px inset transparent;
+    }
+
+  }
+
+  .nav-row1 {
+    background-color: $flag-yellow;
+  }
+  .nav-row2 {
+    background-color: $flag-blue;
+  }
+  .nav-row3 {
+    background-color: $flag-red;
+  }
+}
+
+table.nav-years {
+  width: 100%;
+  text-align: right;
+  font-family: 'Georgia',serif;
+
+  td {
+    width: 14%;
+    border-right: 1px solid #333;
+    padding-right: 3px;
+  }
+}
+
+.video-buttons {
+  li {
+    cursor: pointer;
+
+    &:hover {
+      color: $orange;
+    }
+  }
+}
