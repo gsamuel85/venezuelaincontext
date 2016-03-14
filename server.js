@@ -1,6 +1,9 @@
 'use strict';
 
-require("newrelic");
+if (process.env.ENV === "production") {
+    // Activate only on PROD server
+    require("newrelic");
+}
 
 // App modules
 var express = require("express");
