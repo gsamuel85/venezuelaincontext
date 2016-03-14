@@ -41,9 +41,16 @@ p.lead {
     margin-bottom: 60px;
 }
 
+
 #more-details {
     display: none;        // Initially hidden
     width: 100%;
+}
+
+#featured {
+    margin: 60px 20px 20px;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
 }
 
 #marketing {

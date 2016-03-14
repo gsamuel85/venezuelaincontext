@@ -157,6 +157,11 @@ p.lead {
   display: none;
   width: 100%; }
 
+#featured {
+  margin: 60px 20px 20px;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333; }
+
 #marketing img {
   max-width: 100%; }
 

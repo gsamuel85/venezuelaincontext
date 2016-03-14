@@ -1,5 +1,7 @@
 'use strict';
 
+require("newrelic");
+
 // App modules
 var express = require("express");
 var cookieParser = require("cookie-parser");
@@ -34,7 +36,9 @@ app.use(cookieParser());        // Cookies for user sessions
 app.use(flash());
 
 
-// VIEWS: Hogan templating engine
+/**
+ * Views - Use Hogan.js template engine
+ */
 app.set('view engine', 'html');
 app.set('views', path.join(__dirname, '/client/views'));
 app.set('layout', 'layout');
@@ -73,6 +77,11 @@ io.use(passportSocketIo.authorize({
     secret: 'venezuela',
     store: sessionStore
 }));
+
+
+/**
+ * Server modules
+ */
 
 // Videos server module
 var videos = require("./server/videos");

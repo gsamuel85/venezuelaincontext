@@ -1,7 +1,6 @@
 'use strict';
 
 var VideoComment = require("../models/videocomment");
-var log = require("./logger");
 
 var commentsIO = function(io) {
     io.on('connection', function(socket){

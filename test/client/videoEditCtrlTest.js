@@ -14,7 +14,5 @@ describe('VideoEditCtrl', function() {
         });
     }));
     
-    it('should display test message', function() {
-        expect(scope.aMsg).toEqual("This is a message from AngularJS");
-    });
+    it('should display test message');
 });

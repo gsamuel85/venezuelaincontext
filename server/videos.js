@@ -4,7 +4,6 @@ var router = require("express").Router();
 var async = require("async");
 
 var Video = require('../models/video');
-var log = require("./logger");
 
 
 function isAdmin(user) {
