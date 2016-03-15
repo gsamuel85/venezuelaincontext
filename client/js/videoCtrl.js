@@ -27,7 +27,7 @@ app.controller("VideoCtrl", ["$scope", function videoCtrl($scope) {
      * When a video ends, automatically navigate to the next video
      */
     function setNextVideo() {
-        if (window.nextVideoUrl) {
+        if (window.nextVideoId) {
             pop.on("ended", function() {
                 if ($scope.video && $scope.video._id !== window.nextVideoId) {
                     $scope.goToVideo(window.nextVideoId);

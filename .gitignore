@@ -9,3 +9,6 @@ data/
 
 #Ignore WebStorm config
 .idea/
+
+#Ignore temporary Grunt files
+.grunt/
