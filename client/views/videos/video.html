@@ -56,9 +56,18 @@
     <!-- Main -->
     <div id="page">
         <div class="container">
-            <div class="embed-container">
-                <div id="video-main"></div>
+            <div class="video-container">
+                <div class="embed-container">
+                    <div id="video-main"></div>
+                </div>
+                <div id="next-video-popup">
+                    <span class="next-video-popup-close" ng-click="hideNextVideoPopup()">X</span>
+                    <h2 ng-bind="nextVideoTitle">Coming up</h2>
+                    <p>Loading next video...</p>
+                    <p><button class="next-video-popup-go button" ng-click="goToNext()">Go &gt;</button></p>
+                </div>
             </div>
+
             <div id="timeline" style="height: 80px; width: 100%"></div>
             <div class="video-buttons">
                 <ul>

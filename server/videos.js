@@ -68,6 +68,21 @@ router.get('/:id/edit', function editVideo(req, res) {
 });
 
 
+
+/**
+ * GET JSON data for individual video
+ */
+router.get('/:id.json', function getVideoData(req,res) {
+    Video.findOne({ _id: req.params.id }, '_id title video_url', function(err, video) {
+        if (err) { return res.send("Error: " + err); }
+
+        if (!video) { res.send('Video not found'); }
+        else {
+            res.send(video);
+        }
+    });
+});
+
 /**
  * SHOW individual video
  */ 
