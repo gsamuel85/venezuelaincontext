@@ -15,14 +15,16 @@ var commentsIO = function(io) {
             email: currentUser.username
           };
           comment.path = "," + (comment.parent_id ? comment.parent_id :  "");
-          
+
           VideoComment.create(comment, function(err, savedComment) {
+              if (err) { console.error(err); }
+
               io.emit('add comment', savedComment);
           });
       });
       
       socket.on('disconnect', function() {
-          // console.log('a user disconnected');
+           //console.log('a user disconnected');
       });
     });
 

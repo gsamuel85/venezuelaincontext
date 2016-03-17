@@ -7,3 +7,35 @@ $flag-yellow: rgba(252,209,22, $opacity);
 $flag-blue: rgba(0,56,147,$opacity);
 $flag-red: rgba(206,17,38,$opacity);
 $white-bg: rgba(255,255,255,$opacity);
+
+.animated {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}

@@ -2,6 +2,8 @@
 @import 'vars';
 
 $video-nav-height: 150px;
+$timeline-height: 16px;
+$timeline-bg: rgba(51,51,51,$opacity);
 
 #video-page {
   background-color: #ffffff;
@@ -110,6 +112,48 @@ table.nav-years {
     }
   }
 }
+
+
+
+/**
+* TIMELNE
+*/
+
+#timeline {
+  position: absolute;
+  bottom: 36px;
+  height: $timeline-height;
+  width: 100%;
+  background-color: $timeline-bg;
+
+  .trigger {
+    position: absolute;
+    height: 100%;
+    width: 5px;
+    background-color: red;
+  }
+}
+
+#timeline-comment-modal {
+  position: absolute;
+  top: 50%;
+  max-height: 50%;
+  overflow-y: auto;
+  background-color: $white-bg;
+  border-radius: 5px;
+  border: 1px solid $dark-gray;
+  padding: 15px;
+
+  .timeline-modal-close {
+    float: right;
+  }
+
+  h2 {
+    font-size: 1.6em;
+    color: #fff;
+  }
+}
+
 
 // Video Comments
 .comments {

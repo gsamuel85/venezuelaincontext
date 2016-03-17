@@ -1,0 +1,34 @@
+<div class="comment-container">
+
+    <div class="comment-author">
+        <div ng-bind-html="getGravatarImage(comment)" class="author-img"></div>
+        <h4 ng-bind="comment.author.name"></h4>
+    </div>
+    <div class="comment-text">
+        <span ng-bind="comment.text"></span>
+    </div>
+
+    <div class="comment-replies">
+        <ul class="comment-replies">
+            <li ng-repeat="reply in comment.replies">
+                <div class="reply-author">
+                    <div ng-bind-html="getGravatarImage(reply)" class="author-img"></div>
+                    <h4 ng-bind="reply.author.name"></h4>
+                </div>
+                <div class="comment-text">
+                    <span ng-bind="reply.text"></span>
+                </div>
+            </li>
+        </ul>
+        {{#user}}
+        <a ng-click="toggleReplyForm(comment)">Reply</a>
+        <div class="comment-reply-form" ng-show="replyVisible(comment)">
+            <form  ng-submit="sendReply(comment)">
+                <textarea ng-model="comment.replyText" required></textarea>
+                <input type="submit" class="button" value="Submit" />
+            </form>
+        </div>
+        {{/user}}
+    </div>
+
+</div>

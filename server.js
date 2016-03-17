@@ -77,7 +77,7 @@ passport.deserializeUser(User.deserializeUser());
 var passportSocketIo = require("passport.socketio");
 io.use(passportSocketIo.authorize({
     cookieParser: cookieParser,
-    secret: 'venezuela',
+    secret: process.env.COOKIE_KEY,
     store: sessionStore
 }));
 

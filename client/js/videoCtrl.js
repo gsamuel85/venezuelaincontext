@@ -12,12 +12,32 @@ app.controller("VideoCtrl", ["$scope", "$http", function videoCtrl($scope, $http
     var pop;
     var YT_SETTINGS = "?controls=2&autohide=1&modestbranding=0&theme=dark&autoplay=0";
 
+
+    /**
+     * Load video in Popcorn element
+     */
+    var initVideo = function initVideo() {
+        var element = Popcorn.HTMLYouTubeVideoElement("#video-main");
+        element.src = $scope.video.video_url + YT_SETTINGS;
+        pop = new Popcorn(element);
+
+        pop.on("loadeddata", function() {
+            $scope.$apply(function() {
+                $scope.duration = pop.duration();
+            });
+        });
+
+        setNextVideo();
+    };
+
+
+
     /**
      * Show popup overlay 5 seconds before transition to the next video
      */
-    function showNextVideoPopup() {
+    var showNextVideoPopup = function showNextVideoPopup() {
         nextVideoPopup.style.visibility = "visible";
-    }
+    };
     $scope.hideNextVideoPopup = function() {
         pop.pause();
         nextVideoPopup.style.visibility = "hidden";
@@ -26,18 +46,19 @@ app.controller("VideoCtrl", ["$scope", "$http", function videoCtrl($scope, $http
     /**
      * When a video ends, automatically navigate to the next video
      */
-    function setNextVideo() {
+    var setNextVideo = function setNextVideo() {
         if ($scope.video && $scope.video._id !== window.nextVideoId) {
             // When video duration is known, add an event to show the transition popup
 
-            $http.get('/video/' + window.nextVideoId + '.json').
-                success(function(data){
+            $http.get('/video/' + window.nextVideoId + '.json').success(function (data) {
                     $scope.nextVideoTitle = data.title;
 
-                    pop.on("durationchange", function() {
+                    pop.on("durationchange", function () {
                         pop.code({
                             start: pop.duration() - 5,
-                            onStart: function(options) { showNextVideoPopup(); }
+                            onStart: function (options) {
+                                showNextVideoPopup();
+                            }
                         });
                     });
 
@@ -48,18 +69,9 @@ app.controller("VideoCtrl", ["$scope", "$http", function videoCtrl($scope, $http
                 }
             );
         }
-    }
+    };
 
-    /**
-     * Load video in Popcorn element
-     */
-    function initVideo() {
-        var element = Popcorn.HTMLYouTubeVideoElement("#video-main");
-        element.src = $scope.video.video_url + YT_SETTINGS;
-        pop = new Popcorn(element);
 
-        setNextVideo();
-    }
 
 
 
@@ -73,6 +85,29 @@ app.controller("VideoCtrl", ["$scope", "$http", function videoCtrl($scope, $http
 
     $scope.goToNext = function() { $scope.goToVideo(window.nextVideoId); };
     $scope.goToPrev = function() { $scope.goToVideo(window.prevVideoId); };
-    
+
+
+
+
+    /**
+     * Set position of timeline triggers
+     * @param time
+     * @returns style object
+     */
+    $scope.triggerPositionStyle = function(time) {
+        var pc = Math.floor((time / $scope.duration) * 100) + "%";
+        console.log("place trigger at: " + pc);
+
+        return {
+            left: pc
+        };
+    };
+
+
+
+
+
+
+    // All ready? Load the video
     initVideo();
 }]);

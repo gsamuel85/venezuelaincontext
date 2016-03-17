@@ -1,88 +1,62 @@
 <div id="video-page" ng-controller="VideoCtrl">
 
-
-    <!-- Banner -->
-    <div id="banner" class="video-nav">
-        <div class="container">
-            <table cellpadding="0" cellspacing="0">
-                <tr class="nav-row1">
-                    <td class="theme">Polarisation</td>
-                    <td ng-click="goToVideo(1)"></td>
-                    <td ng-click="goToVideo(2)"></td>
-                    <td ng-click="goToVideo(3)"></td>
-                    <td ng-click="goToVideo(4)"></td>
-                    <td ng-click="goToVideo(5)"></td>
-                    <td ng-click="goToVideo(6)"></td>
-                </tr>
-                <tr class="nav-row2">
-                    <td class="theme">Economy</td>
-                    <td ng-click="goToVideo(7)"></td>
-                    <td ng-click="goToVideo(8)"></td>
-                    <td ng-click="goToVideo(9)"></td>
-                    <td ng-click="goToVideo(10)"></td>
-                    <td ng-click="goToVideo(11)"></td>
-                    <td ng-click="goToVideo(12)"></td>
-                </tr>
-                <tr class="nav-row3">
-                    <td class="theme">Insecurity</td>
-                    <td class="unavailable"></td>
-                    <td class="unavailable"></td>
-                    <td class="unavailable"></td>
-                    <td class="unavailable"></td>
-                    <td class="unavailable"></td>
-                    <td class="unavailable"></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-    <div class="container">
-        <table class="nav-years">
-            <tbody>
-                <tr>
-                    <td>1980</td>
-                    <td>1992</td>
-                    <td>1999</td>
-                    <td>2002</td>
-                    <td>2005</td>
-                    <td>2010</td>
-                    <td>2013</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <!-- /Banner -->
+    {{> video_nav}}
     
     <!-- Main -->
-    <div id="page">
+    <div id="page" ng-controller="CommentCtrl">
         <div class="container">
-            <div class="video-container">
+            <div class="video-container"
+                    ng-mouseenter="timelineVisible = true"
+                    ng-mouseleave="timelineVisible= false"
+                    ng-init="timelineVisible = false">
                 <div class="embed-container">
                     <div id="video-main"></div>
                 </div>
+
                 <div id="next-video-popup">
                     <span class="next-video-popup-close" ng-click="hideNextVideoPopup()">X</span>
                     <h2 ng-bind="nextVideoTitle">Coming up</h2>
                     <p>Loading next video...</p>
                     <p><button class="next-video-popup-go button" ng-click="goToNext()">Go &gt;</button></p>
                 </div>
+
+                <div id="timeline" ng-show="timelineVisible" class="animated fadeIn">
+                    <div ng-repeat="trigger in timelineTriggers">
+                        <div class="trigger"
+                                ng-click="showTimelineComment(trigger)"
+                                ng-style="triggerPositionStyle(trigger.time)">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="timeline-comment-modal"
+                     class="8u -2u"
+                     ng-show="timelineModalVisible">
+                    <div class="timeline-comment-modal-inner">
+                        <span class="button timeline-modal-close" ng-click="timelineModalVisible = false">X</span>
+                        <div ng-repeat="comment in timelineComments">
+                            <h2>Comments at <span ng-bind="comment.timeline.time | secondsToTime | date: 'm:ss'"></span></h2>
+                            {{> comment}}
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div id="timeline" style="height: 80px; width: 100%"></div>
             <div class="video-buttons">
                 <ul>
                     <li ng-click="goToPrev()">PREV</li>
                     <li ng-click="goToNext()">NEXT</li>
                 </ul>
             </div>
+
         </div>
 
-        <!-- Main -->
+        <!-- Video Details + Comments -->
         <div id="main" class="container">
-            
-            
+
             <div class="row">
                 <div class="12u">
+                    <!-- Video details -->
                     <section>
                         <header>
                             <span class="byline">{{video.subtitle}}</span>
@@ -90,92 +64,50 @@
                         </header>
                         <p>{{{video.description}}}</p>
                     </section>
+                    <!-- /Video details -->
 
-                    
+
+                    <!-- Comments -->
                     <section class="comments">
-                        <div ng-controller="CommentCtrl" class="8u">
+                        <div class="8u">
 
                             <h2>Comments</h2>
                             <p>We love polite, relevant and substantiated criticism! And we hate impolite, irrelevant, or unsubstantiated rants.</p>
                     
                             <ul id="comments" class="comments-list">
                                 <li ng-repeat="comment in comments">
-                                    <div class="comment-container">
-                                        
-                                        <div class="comment-author">
-                                            <div ng-bind-html="getGravatarImage(comment)" class="author-img"></div>
-                                            <h4 ng-bind="comment.author.name"></h4>
-                                        </div>
-                                        <div class="comment-text">
-                                            <span ng-bind="comment.text"></span>
-                                        </div>
-                                        
-                                        <div class="comment-replies">
-                                            <ul class="comment-replies">
-                                                <li ng-repeat="reply in comment.replies">
-                                                    <div class="reply-author">
-                                                        <div ng-bind-html="getGravatarImage(reply)" class="author-img"></div>
-                                                        <h4 ng-bind="reply.author.name"></h4>
-                                                    </div>
-                                                    <div class="comment-text">
-                                                        <span ng-bind="reply.text"></span>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                            {{#user}}
-                                            <a ng-click="toggleReplyForm(comment)">Reply</a>
-                                            <div class="comment-reply-form" ng-show="replyVisible(comment)">
-                                                <form  ng-submit="sendReply(comment)">
-                                                    <textarea ng-model="comment.replyText" required></textarea>
-                                                    <input type="submit" class="button" value="Submit" />
-                                                </form>
-                                            </div>
-                                            {{/user}}
-                                        </div>
-                                        
-                                    </div>
+                                    {{> comment}}
                                 </li>
                             </ul>
-                    
+
+                            <!-- New Comment Form -->
                             {{#user}}
-                            <div class="comment-form">
-                                <h3>Participate in the discussion!</h3>
-                                <form ng-submit="sendComment()">
-                                    <label>Your comment:</label>
-                                    <br />
-                                    <textarea autocomplete="off" rows="5" name="comment" ng-model="newComment.text" required></textarea>
-                                    <br />
-                                    <input type="submit" class="button" value="Submit" />
-                                </form>
-                                <p><a href="/logout">Log out</a></p>
-                            </div>
+                                {{> comment_form}}
                             {{/user}}
                             {{^user}}
                             <p>Please <a href="/login">log in</a> to participate in this discussion</p>
                             <p>Don't have an account? <a href="signup">Sign up!</a></p>
                             {{/user}}
-                    
-                    
-                    
+
                         </div>
                     </section>
+                    <!-- /Comments -->
                 </div>
 
             </div>
         </div>
-        <!-- Main -->
+        <!-- /Video Details + Comments -->
 
     </div>
     <!-- /Main -->
 
-    
 </div>
 
 {{#yield-scripts}}
     <script type="text/javascript" src="/js/popcorn-complete.min.js"></script>
     <script type="text/javascript" src="/js/bundle.js"></script>
     <script type="text/javascript" src="/js/angular-sanitize.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="/js/app.js"></script>
     <script type="text/javascript" src="/js/videoCtrl.js" defer></script>
     <script type="text/javascript" src="/js/commentCtrl.js" defer></script>

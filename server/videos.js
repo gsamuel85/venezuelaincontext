@@ -98,7 +98,16 @@ router.get('/:id', function getVideo(req, res) {
             var videoData = "var video = '" + JSON.stringify(video) +  "';\n" +
                 "var nextVideoId = " + nextVideoId + ";\n" +
                 "var prevVideoId = " + prevVideoId + ";\n";
-            res.render('videos/video.html', {video: video, videoData: videoData, user: req.user});
+            res.render('videos/video.html', {
+                video: video,
+                videoData: videoData,
+                user: req.user,
+                partials: {
+                    video_nav: 'partials/_video_nav',
+                    comment: 'partials/_comment',
+                    comment_form: 'partials/_comment_form'
+                }
+            });
         }
     });
 });

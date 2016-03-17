@@ -3,14 +3,27 @@
 
 app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
     
-    $scope.aMsg = "This is a message from AngularJS";
-    
     $scope.comments = [];
     $scope.newComment = {
         video_id: $scope.video._id,
         text: ""
     };
+    $scope.timelineTriggers = [];
+    $scope.timelineComments = [];
     var showReply = null;        // Visible reply for one comment at a time
+
+    function placeTimelineComments() {
+        $scope.comments.forEach(function placeTimelineComment(comment) {
+            if (comment.timeline) {
+                $scope.$apply(function() {
+                    $scope.timelineTriggers.push({
+                        id: comment._id,
+                        time: comment.timeline.time
+                    });
+                });
+            }
+        });
+    }
     
     var loadInitComments = function() {
         var xhr = new XMLHttpRequest();
@@ -19,6 +32,7 @@ app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
                 $scope.$apply( function() {
                     $scope.comments = JSON.parse(xhr.responseText);
                 });
+                placeTimelineComments();
             }
         });
         xhr.open("GET", "/comments/" + $scope.video._id, true);
@@ -29,6 +43,7 @@ app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
         var path = comment.path.split(",");
         
         if (path[1] === "") {
+            // Root comment
             $scope.$apply(function() {
                 $scope.comments.push(comment);
             });
@@ -44,9 +59,44 @@ app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
             });
         }
     };
-    
+
+
+    /**
+     * TIMELINE
+     */
+
+    /**
+     * When clicking on a trigger, load and display the corresponding comment
+     * @param trigger: Trigger object
+     */
+    $scope.showTimelineComment = function showTimelineComment(trigger) {
+        console.log("loading comment at: " + trigger.time + " with ID: " + trigger.id);
+
+        var showComment = null;
+
+        for (var i in $scope.comments) {
+            if ($scope.comments[i]._id === trigger.id) {
+                showComment = $scope.comments[i];
+                break;
+            }
+        }
+
+        if (showComment) {
+            console.log(showComment);
+            $scope.timelineComments = [];
+            $scope.timelineComments.push(showComment);
+            $scope.timelineModalVisible = true;
+        }
+    };
+
+
+
+
+    /**
+     * Sockets.IO
+     */
     var socket = io();
-    
+
     socket.on('add comment', function(comment) {
         addCommentToTree(comment);
     });
