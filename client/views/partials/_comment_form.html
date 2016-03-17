@@ -5,6 +5,15 @@
         <br />
         <textarea autocomplete="off" rows="5" name="comment" ng-model="newComment.text" required></textarea>
         <br />
+        <div ng-show="newComment.timeline">
+            <span>
+                Attach to video at:
+                <a class="timeline-comment-time"
+                   ng-bind="newComment.timeline.time | secondsToTime | date: 'm:ss'"
+                   ng-click="videoSeekTo(newComment.timeline.time)"></a> |
+                <a ng-click="removeNewCommentTime()">(remove)</a>
+            </span>
+        </div>
         <input type="submit" class="button" value="Submit" />
     </form>
     <p><a href="/logout">Log out</a></p>

@@ -29,6 +29,7 @@
                             </div>
                         </div>
                     </div>
+                    <button class="comment-now-btn button" ng-click="addCommentNow()">Comment Now</button>
                 </div>
 
                 <div id="timeline-comment-modal"
@@ -85,14 +86,16 @@
                                 </li>
                             </ul>
 
-                            <!-- New Comment Form -->
-                            {{#user}}
-                                {{> comment_form}}
-                            {{/user}}
-                            {{^user}}
-                            <p>Please <a href="/login">log in</a> to participate in this discussion</p>
-                            <p>Don't have an account? <a href="signup">Sign up!</a></p>
-                            {{/user}}
+                            <div id="new-comment">
+                                <!-- New Comment Form -->
+                                {{#user}}
+                                    {{> comment_form}}
+                                {{/user}}
+                                {{^user}}
+                                <p>Please <a href="/login">log in</a> to participate in this discussion</p>
+                                <p>Don't have an account? <a href="signup">Sign up!</a></p>
+                                {{/user}}
+                            </div>
 
                         </div>
                     </section>

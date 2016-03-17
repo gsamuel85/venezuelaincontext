@@ -216,6 +216,8 @@ table.nav-years {
     width: 5px;
     background-color: red;
     cursor: pointer; }
+  #timeline .comment-now-btn {
+    float: right; }
 
 #timeline-comment-modal {
   position: absolute;

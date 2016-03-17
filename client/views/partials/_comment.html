@@ -5,6 +5,10 @@
         <h4 ng-bind="comment.author.name"></h4>
     </div>
     <div class="comment-text">
+        <a class="timeline-comment-time"
+           ng-show="comment.timeline"
+           ng-bind="comment.timeline.time | secondsToTime | date: 'm:ss'"
+           ng-click="videoSeekTo(comment.timeline.time)"></a> |
         <span ng-bind="comment.text"></span>
     </div>
 

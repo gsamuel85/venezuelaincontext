@@ -1,7 +1,8 @@
 'use strict';
 /* global app, Popcorn */
 
-app.controller("VideoCtrl", ["$scope", "$http", function videoCtrl($scope, $http) {
+app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
+        function videoCtrl($scope, $http, $location, $anchorScroll) {
 
     // Load video data embedded by server
     $scope.video = JSON.parse(window.video);
@@ -11,6 +12,8 @@ app.controller("VideoCtrl", ["$scope", "$http", function videoCtrl($scope, $http
     // Store Popcorn controller
     var pop;
     var YT_SETTINGS = "?controls=2&autohide=1&modestbranding=0&theme=dark&autoplay=0";
+
+    $anchorScroll.yOffset = 80;
 
 
     /**
@@ -26,6 +29,8 @@ app.controller("VideoCtrl", ["$scope", "$http", function videoCtrl($scope, $http
                 $scope.duration = pop.duration();
             });
         });
+
+        $scope.pop = pop;       // Expose to sub-controllers
 
         setNextVideo();
     };
@@ -88,6 +93,8 @@ app.controller("VideoCtrl", ["$scope", "$http", function videoCtrl($scope, $http
 
     $scope.videoSeekTo = function videoSeekTo(time) {
         pop.currentTime(time);
+        $location.hash("video-main");
+        $anchorScroll();
     };
 
 
@@ -100,7 +107,6 @@ app.controller("VideoCtrl", ["$scope", "$http", function videoCtrl($scope, $http
      */
     $scope.triggerPositionStyle = function(time) {
         var pc = (((time+1) / $scope.duration) * 100) + "%";
-        console.log("place trigger at: " + pc);
 
         return {
             left: pc

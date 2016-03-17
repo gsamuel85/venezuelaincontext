@@ -1,7 +1,8 @@
 'use strict';
 /* global app, io */
 
-app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
+app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll",
+        function($scope, $sce, $location, $anchorScroll) {
     
     $scope.comments = [];
     $scope.newComment = {
@@ -11,14 +12,21 @@ app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
     $scope.timelineTriggers = [];
     $scope.timelineComments = [];
 
+
+    $anchorScroll.yOffset = 80;
+
+
+
     var loadInitComments = function() {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = (function() {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                $scope.$apply( function() {
-                    $scope.comments = JSON.parse(xhr.responseText);
-                });
+                //$scope.$apply( function() {
+                //
+                //});
+                $scope.comments = JSON.parse(xhr.responseText);
                 placeTimelineComments();
+
             }
         });
         xhr.open("GET", "/comments/" + $scope.video._id, true);
@@ -28,11 +36,9 @@ app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
     function placeTimelineComments() {
         $scope.comments.forEach(function placeTimelineComment(comment) {
             if (comment.timeline) {
-                $scope.$apply(function() {
-                    $scope.timelineTriggers.push({
-                        id: comment._id,
-                        time: comment.timeline.time
-                    });
+                $scope.timelineTriggers.push({
+                    id: comment._id,
+                    time: comment.timeline.time
                 });
             }
         });
@@ -78,6 +84,22 @@ app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
         }
     };
 
+    /**
+     * Add comment at the current point in the timeline
+     */
+    $scope.addCommentNow = function addCommentNow(){
+        $scope.newComment.timeline = { time: Math.floor($scope.pop.currentTime()) };
+        $location.hash("new-comment");
+        $anchorScroll();
+    };
+    /**
+     * Remove time from next comment
+     */
+    $scope.removeNewCommentTime = function removeNewCommentTime() {
+        $scope.newComment.timeline = null;
+    };
+
+
 
 
 
@@ -109,12 +131,16 @@ app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
 
     socket.on('add comment', function(comment) {
         addCommentToTree(comment);
+        placeTimelineComments();
     });
     
     $scope.sendComment = function() {
         socket.emit('add comment', $scope.newComment);
-        
-        $scope.newComment.text = '';        // Reset field
+
+        // Reset fields
+        $scope.newComment.text = '';
+        $scope.newComment.timeline = null;
+
     };
     
     $scope.sendReply = function(comment) {
@@ -128,7 +154,6 @@ app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
         comment.replyText = '';     // Rest reply field
         $scope.replyVisible = null;           // Hide reply form
     };
-
 
 
     
