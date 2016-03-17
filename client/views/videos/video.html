@@ -21,10 +21,12 @@
                 </div>
 
                 <div id="timeline" ng-show="timelineVisible" class="animated fadeIn">
-                    <div ng-repeat="trigger in timelineTriggers">
-                        <div class="trigger"
-                                ng-click="showTimelineComment(trigger)"
-                                ng-style="triggerPositionStyle(trigger.time)">
+                    <div class="timeline-inner">
+                        <div ng-repeat="trigger in timelineTriggers">
+                            <div class="trigger"
+                                    ng-click="showTimelineComment(trigger)"
+                                    ng-style="triggerPositionStyle(trigger.time)">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -32,10 +34,13 @@
                 <div id="timeline-comment-modal"
                      class="8u -2u"
                      ng-show="timelineModalVisible">
+                    <span class="button timeline-modal-close" ng-click="timelineModalVisible = false">X</span>
+
                     <div class="timeline-comment-modal-inner">
-                        <span class="button timeline-modal-close" ng-click="timelineModalVisible = false">X</span>
                         <div ng-repeat="comment in timelineComments">
-                            <h2>Comments at <span ng-bind="comment.timeline.time | secondsToTime | date: 'm:ss'"></span></h2>
+                            <h2>Comments at <a class="timeline-comment-time"
+                                                  ng-bind="comment.timeline.time | secondsToTime | date: 'm:ss'"
+                                                    ng-click="videoSeekTo(comment.timeline.time)"></a></h2>
                             {{> comment}}
                         </div>
                     </div>
@@ -69,7 +74,7 @@
 
                     <!-- Comments -->
                     <section class="comments">
-                        <div class="8u">
+                        <div class="10u -1u">
 
                             <h2>Comments</h2>
                             <p>We love polite, relevant and substantiated criticism! And we hate impolite, irrelevant, or unsubstantiated rants.</p>

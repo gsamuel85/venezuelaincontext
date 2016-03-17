@@ -86,6 +86,10 @@ app.controller("VideoCtrl", ["$scope", "$http", function videoCtrl($scope, $http
     $scope.goToNext = function() { $scope.goToVideo(window.nextVideoId); };
     $scope.goToPrev = function() { $scope.goToVideo(window.prevVideoId); };
 
+    $scope.videoSeekTo = function videoSeekTo(time) {
+        pop.currentTime(time);
+    };
+
 
 
 
@@ -95,7 +99,7 @@ app.controller("VideoCtrl", ["$scope", "$http", function videoCtrl($scope, $http
      * @returns style object
      */
     $scope.triggerPositionStyle = function(time) {
-        var pc = Math.floor((time / $scope.duration) * 100) + "%";
+        var pc = (((time+1) / $scope.duration) * 100) + "%";
         console.log("place trigger at: " + pc);
 
         return {

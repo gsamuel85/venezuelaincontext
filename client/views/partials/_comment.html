@@ -21,8 +21,8 @@
             </li>
         </ul>
         {{#user}}
-        <a ng-click="toggleReplyForm(comment)">Reply</a>
-        <div class="comment-reply-form" ng-show="replyVisible(comment)">
+        <a ng-click="replyVisible = (replyVisible == comment ? null : comment)">Reply</a>
+        <div class="comment-reply-form" ng-show="replyVisible == comment">
             <form  ng-submit="sendReply(comment)">
                 <textarea ng-model="comment.replyText" required></textarea>
                 <input type="submit" class="button" value="Submit" />

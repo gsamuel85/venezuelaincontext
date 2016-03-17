@@ -10,7 +10,20 @@ app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
     };
     $scope.timelineTriggers = [];
     $scope.timelineComments = [];
-    var showReply = null;        // Visible reply for one comment at a time
+
+    var loadInitComments = function() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = (function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                $scope.$apply( function() {
+                    $scope.comments = JSON.parse(xhr.responseText);
+                });
+                placeTimelineComments();
+            }
+        });
+        xhr.open("GET", "/comments/" + $scope.video._id, true);
+        xhr.send();
+    };
 
     function placeTimelineComments() {
         $scope.comments.forEach(function placeTimelineComment(comment) {
@@ -25,39 +38,16 @@ app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
         });
     }
     
-    var loadInitComments = function() {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = (function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                $scope.$apply( function() {
-                    $scope.comments = JSON.parse(xhr.responseText);
-                });
-                placeTimelineComments();
-            }
-        });
-        xhr.open("GET", "/comments/" + $scope.video._id, true);
-        xhr.send();
-    };
-    
-    var addCommentToTree = function(comment) {
-        var path = comment.path.split(",");
-        
-        if (path[1] === "") {
-            // Root comment
-            $scope.$apply(function() {
-                $scope.comments.push(comment);
-            });
-        } else {
-            // Find parent comment
-            $scope.comments.forEach(function(item) {
-                if (item._id === path[1]) {
-                    $scope.$apply(function() {
-                        if (!item.replies) { item.replies = []; }
-                        item.replies.push(comment);
-                    });
-                }
-            });
-        }
+
+
+    /**
+     * Get Gravatar image for comment author's e-mail
+     */
+    $scope.getGravatarImage = function(comment) {
+        var imgTag = "<img src='" +
+            window.gravatar.url(comment.author.email, { s: 35, d: 'mm'}, true) +
+            "' />";
+        return imgTag;
     };
 
 
@@ -77,12 +67,11 @@ app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
         for (var i in $scope.comments) {
             if ($scope.comments[i]._id === trigger.id) {
                 showComment = $scope.comments[i];
-                break;
+                break;      // Use first comment with the given time
             }
         }
 
         if (showComment) {
-            console.log(showComment);
             $scope.timelineComments = [];
             $scope.timelineComments.push(showComment);
             $scope.timelineModalVisible = true;
@@ -96,6 +85,27 @@ app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
      * Sockets.IO
      */
     var socket = io();
+
+    var addCommentToTree = function(comment) {
+        var path = comment.path.split(",");
+
+        if (path[1] === "") {
+            // Root comment
+            $scope.$apply(function() {
+                $scope.comments.push(comment);
+            });
+        } else {
+            // Find parent comment
+            $scope.comments.forEach(function(item) {
+                if (item._id === path[1]) {
+                    $scope.$apply(function() {
+                        if (!item.replies) { item.replies = []; }
+                        item.replies.push(comment);
+                    });
+                }
+            });
+        }
+    };
 
     socket.on('add comment', function(comment) {
         addCommentToTree(comment);
@@ -116,26 +126,11 @@ app.controller('CommentCtrl', ['$scope', '$sce', function($scope, $sce) {
         
         socket.emit('add comment', reply);
         comment.replyText = '';     // Rest reply field
-        showReply = null;           // Hide reply form
+        $scope.replyVisible = null;           // Hide reply form
     };
-    
-    
-    // Show reply form for a specific thread
-    $scope.toggleReplyForm = function(comment) {
-        showReply = (showReply === comment) ? null : comment;
-    };
-    $scope.replyVisible = function(comment) {
-        return showReply === comment;
-    };
-    
-    
-    // Get Gravate image for comment author's e-mail
-    $scope.getGravatarImage = function(comment) {
-        var imgTag = "<img src='" + 
-                window.gravatar.url(comment.author.email, { s: 35, d: 'mm'}, true) + 
-                "' />";
-        return imgTag;
-    };
+
+
+
     
     
     // On load - get comments from server

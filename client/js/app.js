@@ -9,8 +9,8 @@ app.filter('secondsToTime', [function() {
         var d = new Date(0,0,0,0,0,0);
         d.setSeconds(seconds);
         return d;
-    }
-}])
+    };
+}]);
 
 // Dynamically bootstrap Angular app when document is loaded
 angular.element(document).ready(function() {

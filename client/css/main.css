@@ -202,22 +202,27 @@ table.nav-years {
 */
 #timeline {
   position: absolute;
-  bottom: 36px;
-  height: 16px;
+  bottom: 40px;
+  height: 10px;
   width: 100%;
-  background-color: rgba(51, 51, 51, 0.4); }
+  padding: 0 12px; }
+  #timeline .timeline-inner {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(153, 153, 153, 0.4); }
   #timeline .trigger {
     position: absolute;
     height: 100%;
     width: 5px;
-    background-color: red; }
+    background-color: red;
+    cursor: pointer; }
 
 #timeline-comment-modal {
   position: absolute;
   top: 50%;
   max-height: 50%;
   overflow-y: auto;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.55);
   border-radius: 5px;
   border: 1px solid #333;
   padding: 15px; }
@@ -226,6 +231,9 @@ table.nav-years {
   #timeline-comment-modal h2 {
     font-size: 1.6em;
     color: #fff; }
+  #timeline-comment-modal a.timeline-comment-time {
+    color: #fcac45;
+    cursor: pointer; }
 
 .comments {
   border-top: 2px solid #ccc; }
@@ -241,6 +249,8 @@ table.nav-years {
     margin-left: 30px; }
     .comment-container .comment-replies li {
       min-height: 56px; }
+    .comment-container .comment-replies a {
+      cursor: pointer; }
 
 .comment-form {
   border-top: 1px solid #333; }

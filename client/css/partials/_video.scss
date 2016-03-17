@@ -2,8 +2,9 @@
 @import 'vars';
 
 $video-nav-height: 150px;
-$timeline-height: 16px;
-$timeline-bg: rgba(51,51,51,$opacity);
+$timeline-height: 10px;
+$timeline-bg: rgba(153,153,153,$opacity);
+$timeline-modal-bg: rgba(255,255,255,.55);
 
 #video-page {
   background-color: #ffffff;
@@ -121,16 +122,24 @@ table.nav-years {
 
 #timeline {
   position: absolute;
-  bottom: 36px;
+  bottom: 40px;
   height: $timeline-height;
   width: 100%;
-  background-color: $timeline-bg;
+  padding: 0 12px;
+
+
+  .timeline-inner {
+    width: 100%;
+    height: 100%;
+    background-color: $timeline-bg;
+  }
 
   .trigger {
     position: absolute;
     height: 100%;
     width: 5px;
     background-color: red;
+    cursor: pointer;
   }
 }
 
@@ -139,7 +148,7 @@ table.nav-years {
   top: 50%;
   max-height: 50%;
   overflow-y: auto;
-  background-color: $white-bg;
+  background-color: $timeline-modal-bg;
   border-radius: 5px;
   border: 1px solid $dark-gray;
   padding: 15px;
@@ -151,6 +160,11 @@ table.nav-years {
   h2 {
     font-size: 1.6em;
     color: #fff;
+  }
+
+  a.timeline-comment-time {
+    color: $orange;
+    cursor: pointer;
   }
 }
 
@@ -175,6 +189,9 @@ table.nav-years {
 
     li {
       min-height: 56px;
+    }
+    a {
+      cursor: pointer;
     }
   }
 }
