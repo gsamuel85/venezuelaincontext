@@ -220,7 +220,8 @@ table.nav-years {
     border-radius: 2px;
     cursor: pointer; }
   #timeline .comment-now-btn {
-    float: right; }
+    float: right;
+    margin-right: 20%; }
 
 #timeline-comment-modal {
   margin-top: 15px;
