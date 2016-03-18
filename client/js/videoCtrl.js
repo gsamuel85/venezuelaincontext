@@ -11,7 +11,7 @@ app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
     
     // Store Popcorn controller
     var pop;
-    var YT_SETTINGS = "?controls=2&autohide=1&modestbranding=0&theme=dark&autoplay=0";
+    var YT_SETTINGS = "?controls=2&autohide=1&modestbranding=0&theme=dark&autoplay=1";
 
     $anchorScroll.yOffset = 80;
 
