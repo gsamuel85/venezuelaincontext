@@ -32,20 +32,7 @@
                     <button class="comment-now-btn button" ng-click="addCommentNow()">Comment Now</button>
                 </div>
 
-                <div id="timeline-comment-modal"
-                     class="8u -2u"
-                     ng-show="timelineModalVisible">
-                    <span class="button timeline-modal-close" ng-click="timelineModalVisible = false">X</span>
 
-                    <div class="timeline-comment-modal-inner">
-                        <div ng-repeat="comment in timelineComments">
-                            <h2>Comments at <a class="timeline-comment-time"
-                                                  ng-bind="comment.timeline.time | secondsToTime | date: 'm:ss'"
-                                                    ng-click="videoSeekTo(comment.timeline.time)"></a></h2>
-                            {{> comment}}
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div class="video-buttons">
@@ -53,6 +40,21 @@
                     <li ng-click="goToPrev()">PREV</li>
                     <li ng-click="goToNext()">NEXT</li>
                 </ul>
+            </div>
+
+            <div id="timeline-comment-modal"
+                 class="8u -2u"
+                 ng-show="timelineModalVisible">
+                <span class="button timeline-modal-close" ng-click="timelineModalVisible = false">X</span>
+
+                <div class="timeline-comment-modal-inner">
+                    <div ng-repeat="comment in timelineComments">
+                        <h2>Comments at <a class="timeline-comment-time"
+                                           ng-bind="comment.timeline.time | secondsToTime | date: 'm:ss'"
+                                           ng-click="videoSeekTo(comment.timeline.time)"></a></h2>
+                        {{> comment}}
+                    </div>
+                </div>
             </div>
 
         </div>

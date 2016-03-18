@@ -3,12 +3,14 @@
     <div class="comment-author">
         <div ng-bind-html="getGravatarImage(comment)" class="author-img"></div>
         <h4 ng-bind="comment.author.name"></h4>
+        <span ng-if="comment.timeline"> |
+            <a class="timeline-comment-time"
+               ng-show="comment.timeline"
+               ng-bind="comment.timeline.time | secondsToTime | date: 'm:ss'"
+               ng-click="videoSeekTo(comment.timeline.time)"></a>
+        </span>
     </div>
     <div class="comment-text">
-        <a class="timeline-comment-time"
-           ng-show="comment.timeline"
-           ng-bind="comment.timeline.time | secondsToTime | date: 'm:ss'"
-           ng-click="videoSeekTo(comment.timeline.time)"></a> |
         <span ng-bind="comment.text"></span>
     </div>
 

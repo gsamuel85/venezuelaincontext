@@ -2,9 +2,12 @@
 @import 'vars';
 
 $video-nav-height: 150px;
-$timeline-height: 10px;
+$timeline-height: 7px;
 $timeline-bg: rgba(153,153,153,$opacity);
 $timeline-modal-bg: rgba(255,255,255,.55);
+
+$timeline-trigger-bg: rgba(255,0,0,1);
+$timeline-trigger-border: rgba(255,0,0,$opacity);
 
 #video-page {
   background-color: #ffffff;
@@ -32,6 +35,7 @@ $timeline-modal-bg: rgba(255,255,255,.55);
     cursor: pointer;
 
     &.theme, &.unavailable {
+      text-shadow: 1px 1px $dark-gray;
       cursor: auto;
     }
     &:hover {
@@ -137,8 +141,10 @@ table.nav-years {
   .trigger {
     position: absolute;
     height: 100%;
-    width: 5px;
-    background-color: red;
+    width: $timeline-height;
+    background-color: $timeline-trigger-bg;
+    border: 1px solid $timeline-trigger-border;
+    border-radius: 2px;
     cursor: pointer;
   }
 
@@ -148,13 +154,11 @@ table.nav-years {
 }
 
 #timeline-comment-modal {
-  position: absolute;
-  top: 50%;
+  margin-top: 15px;
   max-height: 50%;
   overflow-y: auto;
-  background-color: $timeline-modal-bg;
   border-radius: 5px;
-  border: 1px solid $dark-gray;
+  border: 1px solid gray;
   padding: 15px;
 
   .timeline-modal-close {
@@ -163,7 +167,6 @@ table.nav-years {
 
   h2 {
     font-size: 1.6em;
-    color: #fff;
   }
 
   a.timeline-comment-time {
