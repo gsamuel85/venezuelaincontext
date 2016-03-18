@@ -11,7 +11,7 @@
         </span>
     </div>
     <div class="comment-text">
-        <span ng-bind="comment.text"></span>
+        <span ng-bind-html="comment.text"></span>
     </div>
 
     <div class="comment-replies">
@@ -22,15 +22,15 @@
                     <h4 ng-bind="reply.author.name"></h4>
                 </div>
                 <div class="comment-text">
-                    <span ng-bind="reply.text"></span>
+                    <span ng-bind-html="reply.text"></span>
                 </div>
             </li>
         </ul>
         {{#user}}
         <a ng-click="replyVisible = (replyVisible == comment ? null : comment)">Reply</a>
-        <div class="comment-reply-form" ng-show="replyVisible == comment">
+        <div class="comment-reply-form" ng-show="replyVisible === comment">
             <form  ng-submit="sendReply(comment)">
-                <textarea ng-model="comment.replyText" required></textarea>
+                <div text-angular ng-model="comment.replyText" ta-toolbar="[['bold', 'italics', 'underline', 'insertLink', 'clear']]"></div>
                 <input type="submit" class="button" value="Submit" />
             </form>
         </div>
