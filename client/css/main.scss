@@ -49,6 +49,11 @@ p.lead {
     margin: 60px 20px 20px;
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
+
+    .more-button {
+        position: absolute;
+        bottom: 60px;
+    }
 }
 
 #marketing {

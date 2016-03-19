@@ -6,8 +6,8 @@ $timeline-height: 7px;
 $timeline-bg: rgba(153,153,153,$opacity);
 $timeline-modal-bg: rgba(255,255,255,.55);
 
-$timeline-trigger-bg: rgba(255,0,0,1);
-$timeline-trigger-border: rgba(255,0,0,$opacity);
+$timeline-trigger-bg: rgba(255,85,85,1);
+$timeline-trigger-border: rgba(255,85,85,$opacity);
 
 #video-page {
   background-color: #ffffff;
@@ -102,6 +102,8 @@ table.nav-years {
 }
 
 .video-buttons {
+  display: none;      // Provisionally hidden
+
   width: 100%;
   height: 30px;
   background: $gray;
@@ -135,7 +137,7 @@ table.nav-years {
   .timeline-inner {
     width: 100%;
     height: 100%;
-    background-color: $timeline-bg;
+    //background-color: $timeline-bg;
   }
 
   .trigger {
@@ -150,8 +152,10 @@ table.nav-years {
 
   .comment-now-btn {
     float: right;
-
+    margin-top: 8px;
     margin-right: 20%;
+    height: 24px;
+    border-radius: 3px;
   }
 }
 

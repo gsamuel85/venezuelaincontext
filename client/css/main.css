@@ -188,6 +188,7 @@ table.nav-years {
     float: right; }
 
 .video-buttons {
+  display: none;
   width: 100%;
   height: 30px;
   background: #ccc; }
@@ -209,19 +210,21 @@ table.nav-years {
   padding: 0 12px; }
   #timeline .timeline-inner {
     width: 100%;
-    height: 100%;
-    background-color: rgba(153, 153, 153, 0.4); }
+    height: 100%; }
   #timeline .trigger {
     position: absolute;
     height: 100%;
     width: 7px;
-    background-color: red;
-    border: 1px solid rgba(255, 0, 0, 0.4);
+    background-color: #ff5555;
+    border: 1px solid rgba(255, 85, 85, 0.4);
     border-radius: 2px;
     cursor: pointer; }
   #timeline .comment-now-btn {
     float: right;
-    margin-right: 20%; }
+    margin-top: 8px;
+    margin-right: 20%;
+    height: 24px;
+    border-radius: 3px; }
 
 #timeline-comment-modal {
   margin-top: 15px;
@@ -481,6 +484,9 @@ p.lead {
   margin: 60px 20px 20px;
   border-top: 1px solid #333;
   border-bottom: 1px solid #333; }
+  #featured .more-button {
+    position: absolute;
+    bottom: 60px; }
 
 #marketing img {
   max-width: 100%; }
