@@ -1,8 +1,7 @@
 /* global angular */
 'use strict';
 
-
-var app = angular.module('vic-app', ['ngSanitize']);
+var app = angular.module('vic-app', ['textAngular']);
 
 app.filter('secondsToTime', [function() {
     return function(seconds) {

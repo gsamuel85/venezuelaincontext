@@ -3,7 +3,7 @@
     <form ng-submit="sendComment()">
         <label>Your comment:</label>
         <br />
-        <textarea autocomplete="off" rows="5" name="comment" ng-model="newComment.text" required></textarea>
+        <div text-angular ng-model="newComment.text" ta-toolbar="[['bold', 'italics', 'underline', 'insertLink', 'clear']]"></div>
         <br />
         <div ng-show="newComment.timeline">
             <span>

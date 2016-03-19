@@ -151,8 +151,10 @@ app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll",
         };
         
         socket.emit('add comment', reply);
-        comment.replyText = '';     // Rest reply field
+
         $scope.replyVisible = null;           // Hide reply form
+        comment.replyText = '';              // Reset reply field
+
     };
 
 
