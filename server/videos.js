@@ -62,7 +62,7 @@ router.get('/:id/edit', function editVideo(req, res) {
         if (!video) { res.send('Video not found'); }
         else {
             var videoData = "var videoData = '" + JSON.stringify(video) + "'";
-            res.render('videos/edit.html', {video: video, videoData: videoData, user: req.user});
+            res.render('videos/edit', {video: video, videoData: videoData, user: req.user});
         }
     });
 });
@@ -98,7 +98,7 @@ router.get('/:id', function getVideo(req, res) {
             var videoData = "var video = '" + JSON.stringify(video) +  "';\n" +
                 "var nextVideoId = " + nextVideoId + ";\n" +
                 "var prevVideoId = " + prevVideoId + ";\n";
-            res.render('videos/video.html', {
+            res.render('videos/video', {
                 video: video,
                 videoData: videoData,
                 user: req.user,

@@ -1,7 +1,7 @@
 'use strict';
 
 if (process.env.ENV === "production") {
-    // Activate only on PROD server
+    // Activate only on production server
     require("newrelic");
 }
 
@@ -58,8 +58,7 @@ app.engine('html', require("hogan-express"));
 var dbConfig = require("./config/db")(process.env.DB_USER, process.env.DB_PASSWORD);
 var dbUrl = (process.env.ENV === "production" ? dbConfig.prod.url : dbConfig.dev.url);
 mongoose.connect(dbUrl);
- 
-// Session - place after static to avoid accessing store for every request
+
 app.use(session({
     secret: process.env.COOKIE_KEY,
     resave: false,
@@ -80,6 +79,8 @@ io.use(passportSocketIo.authorize({
     secret: process.env.COOKIE_KEY,
     store: sessionStore
 }));
+
+
 
 
 /**
