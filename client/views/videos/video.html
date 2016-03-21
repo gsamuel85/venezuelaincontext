@@ -15,11 +15,20 @@
                     <div id="video-main"></div>
                 </div>
 
-                <div id="next-video-popup">
-                    <span class="next-video-popup-close" ng-click="hideNextVideoPopup()">X</span>
-                    <h2 ng-bind="nextVideoTitle">Coming up</h2>
-                    <p>Loading next video...</p>
-                    <p><button class="next-video-popup-go button" ng-click="goToNext()">Go &gt;</button></p>
+                <div id="next-video-popup" class="animated fadeIn">
+                    <span class="next-video-popup-close button" ng-click="cancelCountdown()">X</span>
+                    <div class="next-video-popup-inner">
+                        <h2 ng-bind="nextVideoTitle">Coming up</h2>
+                        <p>Loading next video...</p>
+                        <div class="countdown">
+                            <span ng-bind="timeToNextVideo"></span>
+                        </div>
+                        <ul>
+                            <li><button class="next-video-popup-go button" ng-click="pauseCountdown()"><span class="fa fa-pause"</button></li>
+                            <li><button class="next-video-popup-go button" ng-click="goToNext()">Go &gt;</button></li>
+                        </ul>
+                    </div>
+
                 </div>
 
                 <div id="timeline" ng-show="timelineVisible" class="animated fadeIn">

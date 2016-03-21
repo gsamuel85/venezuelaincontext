@@ -12,6 +12,9 @@ app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
     // Store Popcorn controller
     var pop;
     var YT_SETTINGS = "?controls=2&autohide=1&modestbranding=0&theme=dark&autoplay=0";
+    // Countdown when transitioning to next video
+    var COUNTDOWN_TIME = 5;
+    var countdownTimer, paused;
 
     $anchorScroll.yOffset = 80;
 
@@ -38,15 +41,22 @@ app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
 
 
     /**
-     * Show popup overlay 5 seconds before transition to the next video
+     * Navigate to a selected video
+     * @param id _id of the video to navigate to
      */
-    var showNextVideoPopup = function showNextVideoPopup() {
-        nextVideoPopup.style.visibility = "visible";
+    $scope.goToVideo = function(id) {
+        window.location.assign("/video/" + id);
     };
-    $scope.hideNextVideoPopup = function() {
-        pop.pause();
-        nextVideoPopup.style.visibility = "hidden";
+    $scope.goToNext = function() { $scope.goToVideo(window.nextVideoId); };
+    $scope.goToPrev = function() { $scope.goToVideo(window.prevVideoId); };
+
+    $scope.videoSeekTo = function videoSeekTo(time) {
+        pop.currentTime(time);
+        $location.hash("video-main");
+        $anchorScroll();
     };
+
+
 
     /**
      * When a video ends, automatically navigate to the next video
@@ -57,46 +67,59 @@ app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
 
             $http.get('/video/' + window.nextVideoId + '.json').success(function (data) {
                     $scope.nextVideoTitle = data.title;
-
-                    pop.on("durationchange", function () {
-                        pop.code({
-                            start: pop.duration() - 5,
-                            onStart: function (options) {
-                                showNextVideoPopup();
-                            }
-                        });
-                    });
-
                     // When video is finished, transition to next video
                     pop.on("ended", function () {
-                        $scope.goToNext();
+                        initializeCountdown();
                     });
                 }
             );
         }
     };
 
-
-
-
+    /**
+     * Show popup overlay before transition to the next video
+     */
+    var showNextVideoPopup = function showNextVideoPopup() {
+        nextVideoPopup.style.visibility = "visible";
+    };
+    var hideNextVideoPopup = function hideNextVideoPopup() {
+        nextVideoPopup.style.visibility = "hidden";
+    };
 
     /**
-     * Navigate to a selected video
-     * @param id _id of the video to navigate to
+     * Show the transition popup and begin the countdown
      */
-    $scope.goToVideo = function(id) {
-        window.location.assign("/video/" + id);
+    var initializeCountdown = function initializeCountdown() {
+        $scope.timeToNextVideo = COUNTDOWN_TIME;
+        showNextVideoPopup();
+        startTimer();
+        
     };
+    var startTimer = function startTimer() {
+        countdownTimer = setInterval(function countdown() {
+            if (!paused) {
+                $scope.$apply(function() {
+                    $scope.timeToNextVideo--;
+                });
+            }
 
-    $scope.goToNext = function() { $scope.goToVideo(window.nextVideoId); };
-    $scope.goToPrev = function() { $scope.goToVideo(window.prevVideoId); };
-
-    $scope.videoSeekTo = function videoSeekTo(time) {
-        pop.currentTime(time);
-        $location.hash("video-main");
-        $anchorScroll();
+            if ($scope.timeToNextVideo <= 0) {
+                $scope.goToNext();
+            }
+        }, 1000);
     };
-
+    $scope.pauseCountdown = function pauseCountdown() {
+        paused = !paused;
+    };
+    /**
+     * Clear countdown interval and popup
+     */
+    $scope.cancelCountdown = function cancelCountdown() {
+        clearInterval(countdownTimer);
+        countdownTimer = null;
+        paused = false;
+        hideNextVideoPopup();
+    };
 
 
 
@@ -112,9 +135,6 @@ app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
             left: pc
         };
     };
-
-
-
 
 
 

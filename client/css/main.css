@@ -173,19 +173,25 @@ table.nav-years {
 #next-video-popup {
   visibility: hidden;
   position: absolute;
-  bottom: 15%;
-  right: 0;
-  min-width: 25%;
-  min-height: 25%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   padding: 20px;
-  border-radius: 5px;
-  background: rgba(51, 51, 51, 0.7);
-  color: #fff; }
+  background: rgba(255, 255, 255, 0.4); }
   #next-video-popup .next-video-popup-close {
     float: right;
     cursor: pointer; }
-  #next-video-popup .button {
-    float: right; }
+  #next-video-popup .next-video-popup-inner {
+    margin: 20%;
+    font-weight: 700;
+    text-align: center; }
+    #next-video-popup .next-video-popup-inner h2 {
+      font-size: 2em; }
+    #next-video-popup .next-video-popup-inner .countdown {
+      font-size: 4em; }
+    #next-video-popup .next-video-popup-inner ul {
+      margin-top: 35px; }
 
 .video-buttons {
   display: none;

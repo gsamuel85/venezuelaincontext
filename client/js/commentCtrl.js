@@ -66,8 +66,6 @@ app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll",
      * @param trigger: Trigger object
      */
     $scope.showTimelineComment = function showTimelineComment(trigger) {
-        console.log("loading comment at: " + trigger.time + " with ID: " + trigger.id);
-
         var showComment = null;
 
         for (var i in $scope.comments) {

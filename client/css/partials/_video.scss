@@ -82,23 +82,34 @@ table.nav-years {
   visibility: hidden;   // Initially hidden
 
   position: absolute;
-  bottom: 15%;
-  right: 0;
-  min-width: 25%;
-  min-height: 25%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   padding: 20px;
-  border-radius: 5px;
-
-  background: rgba(51,51,51,0.7);
-  color: #fff;
+  background: $white-bg;
 
   .next-video-popup-close {
     float: right;
     cursor: pointer;
   }
-  .button {
-    float: right;
+
+  .next-video-popup-inner {
+    margin: 20%;
+    font-weight: 700;
+    text-align: center;
+
+    h2 {
+      font-size: 2em;
+    }
+    .countdown {
+      font-size: 4em;
+    }
+    ul {
+      margin-top: 35px;
+    }
   }
+
 }
 
 .video-buttons {
