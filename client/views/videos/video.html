@@ -31,7 +31,7 @@
 
                 </div>
 
-                <div id="timeline" ng-show="timelineVisible" class="animated fadeIn">
+                <div id="timeline" ng-show="timelineVisible  && !nextVideoVisible" class="animated fadeIn">
                     <div class="timeline-inner">
                         <div ng-repeat="trigger in timelineTriggers">
                             <div class="trigger"

@@ -81,9 +81,11 @@ app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
      */
     var showNextVideoPopup = function showNextVideoPopup() {
         nextVideoPopup.style.visibility = "visible";
+        $scope.nextVideoVisible = true;
     };
     var hideNextVideoPopup = function hideNextVideoPopup() {
         nextVideoPopup.style.visibility = "hidden";
+        $scope.nextVideoVisible = false;
     };
 
     /**
@@ -103,7 +105,7 @@ app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
                 });
             }
 
-            if ($scope.timeToNextVideo <= 0) {
+            if ($scope.timeToNextVideo <= 1) {
                 $scope.goToNext();
             }
         }, 1000);
@@ -119,6 +121,7 @@ app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
         countdownTimer = null;
         paused = false;
         hideNextVideoPopup();
+        $scope.timeToNextVideo = COUNTDOWN_TIME;        // Reset in case the user begins again
     };
 
 
