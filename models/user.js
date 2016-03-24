@@ -9,7 +9,14 @@ var User = new mongoose.Schema({
     firstName: String,
     lastName: String,
     
-    admin: Boolean
+    admin: Boolean,
+
+    facebook: {
+        id: String,
+        token: String,
+        email: String,
+        name: String
+    }
 });
 
 User.virtual('fullName').get(function() {

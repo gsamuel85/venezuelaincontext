@@ -5,6 +5,14 @@ var passport = require("passport");
 var User = require('../models/user');
 
 
+var isLoggedIn = function(req,res,next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+
+    res.send("Please log in");
+};
+
 router.get('/signup', function(req, res) {
     if (req.user) {
         res.redirect('/profile');
@@ -51,13 +59,26 @@ router.get('/logout', function(req, res) {
     res.redirect('/');
 });
 
+
+/**
+ * Facebook Auhentication
+ */
+router.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
+
+router.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/profile',
+        failureRedirect: '/login',
+        failureFlash: "Unable to log in with Facebook"
+    })
+);
+
+
+
 /**
  * Load Profile page with user details
  */
-router.get('/profile', function(req, res) {
-    // TODO: add authentication middleware
-    
-    if (!req.user) { return res.send("Please log in"); }
+router.get('/profile', isLoggedIn, function(req, res) {
     
     User.findOne({ username: req.user.username }, function getProfile(err, foundUser) {
         if (err) { return res.send("Error: " + err); }
@@ -66,6 +87,7 @@ router.get('/profile', function(req, res) {
         res.render("users/profile.html", {msg: "Hello there!", user: foundUser._doc});
     });
 });
+
 
 
 module.exports = router;

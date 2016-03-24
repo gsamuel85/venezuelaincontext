@@ -20,8 +20,6 @@ var session = require("express-session");
 var MongoStore = require('connect-mongo')(session);
 var sessionStore = new MongoStore({ mongooseConnection: mongoose.connection });
 var passport = require("passport");
-var User = require('./models/user');
-var LocalStrategy = require("passport-local").Strategy;
 
 
 
@@ -66,12 +64,11 @@ app.use(session({
     store: sessionStore
 }));
 
+// Configure passport - in passport config
 app.use(passport.initialize());
 app.use(passport.session());
+require('./config/passport')(passport);
 
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 var passportSocketIo = require("passport.socketio");
 io.use(passportSocketIo.authorize({
