@@ -23,7 +23,7 @@ var passportFacebookConfig = function passportFacebookConfig(passport) {
         clientID: configAuth.facebookAuth.clientID,
         clientSecret: configAuth.facebookAuth.clientSecret,
         callbackURL: configAuth.facebookAuth.callbackURL,
-        profileFields: ["emails", "displayName", "name"]
+        profileFields: ["emails", "displayName", "name", "photos"]
     },
     function facebookStrategy(token, refreshToken, profile, done) {
 
@@ -54,7 +54,8 @@ var passportFacebookConfig = function passportFacebookConfig(passport) {
                             id: profile.id,
                             token: token,
                             name: profile.name.givenName + ' ' + profile.name.familyName,
-                            email: profile.emails[0].value
+                            email: profile.emails[0].value,
+                            photoUrl: profile.photos[0].value
                         };
 
                         user.save(function(err) {
@@ -74,6 +75,7 @@ var passportFacebookConfig = function passportFacebookConfig(passport) {
                     newUser.facebook.token = token;
                     newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
                     newUser.facebook.email = profile.emails[0].value;
+                    newUser.facebook.photoUrl = profile.photos[0].value;
 
                     // Copy to local User model
                     newUser.username = newUser.facebook.email;
