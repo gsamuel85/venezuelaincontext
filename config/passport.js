@@ -2,6 +2,8 @@
 
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+
 var User = require('../models/user');
 var configAuth = require('../config/auth');
 
@@ -43,7 +45,6 @@ var passportFacebookConfig = function passportFacebookConfig(passport) {
 
                 if (user) {
                     // User found
-
                     // Is Facebook already part of their profile?
                     if (user.facebook && user.facebook.id === profile.id) {
                         // Facebook is already in their profile - log in
@@ -79,6 +80,74 @@ var passportFacebookConfig = function passportFacebookConfig(passport) {
 
                     // Copy to local User model
                     newUser.username = newUser.facebook.email;
+                    newUser.firstName = profile.name.givenName;
+                    newUser.lastName = profile.name.familyName;
+
+
+                    newUser.save(function(err) {
+                        if (err) {
+                            throw(err);
+                        }
+                        done(null, newUser);
+                    });
+                }
+            });
+        });
+    }));
+
+
+    /**
+     * Google Auth Configuration
+     */
+    passport.use(new GoogleStrategy({
+        clientID: configAuth.googleAuth.clientID,
+        clientSecret: configAuth.googleAuth.clientSecret,
+        callbackURL: configAuth.googleAuth.callbackURL,
+    },
+    function googleStrategy(token, refreshToken, profile, done) {
+        process.nextTick(function googleAuth() {
+            var googleEmail = profile.emails[0].value;
+
+            User.findOne({'username': googleEmail}, function(err, user) {
+                if (err) {
+                    return done(err);
+                }
+
+                if (user) {
+                    // User found
+                    // Is Google already part of their profile?
+                    if (user.google && user.google.id === profile.id) {
+                        // Google is already in their profile - log in
+                        return done(null, user);
+                    } else {
+                        // If not, add Facebook data and log them in
+                        user.google = {
+                            id: profile.id,
+                            token: token,
+                            name: profile.name.givenName + ' ' + profile.name.familyName,
+                            email: profile.emails[0].value
+                        };
+
+                        user.save(function(err) {
+                            if (err) {
+                                throw(err);
+                            }
+                            return done(null, user);
+                        });
+                    }
+
+
+                } else {
+                    // No user found, create new user
+                    var newUser = new User();
+
+                    newUser.google.id = profile.id;
+                    newUser.google.token = token;
+                    newUser.google.name = profile.name.givenName + ' ' + profile.name.familyName;
+                    newUser.google.email = profile.emails[0].value;
+
+                    // Copy to local User model
+                    newUser.username = newUser.google.email;
                     newUser.firstName = profile.name.givenName;
                     newUser.lastName = profile.name.familyName;
 

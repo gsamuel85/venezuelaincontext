@@ -64,12 +64,23 @@ router.get('/logout', function(req, res) {
  * Facebook Auhentication
  */
 router.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
-
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
         successRedirect: '/profile',
         failureRedirect: '/login',
         failureFlash: "Unable to log in with Facebook"
+    })
+);
+
+/**
+ * Google Authentication
+ */
+router.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
+router.get('/auth/google/callback',
+    passport.authenticate('google', {
+        successRedirect: '/profile',
+        failureRedirect: '/login',
+        failureFlash: "Unable to log in with Google"
     })
 );
 
