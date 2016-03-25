@@ -27,14 +27,45 @@ var passportFacebookConfig = function passportFacebookConfig(passport) {
     },
     function facebookStrategy(token, refreshToken, profile, done) {
 
-        process.nextTick(function facebookAuth() {      // Asynchoronous
-            User.findOne({'facebook.id': profile.id}, function(err, user) {
+        /**
+         * Login with Facebook
+         * 1. Already registered with Facebook: log in
+         * 2. Registered with e-mail, no Facebook: add Facebook data to user, log in
+         * 3. E-mail not registered: create new profile with Facebook data
+         */
+        process.nextTick(function facebookAuth() {      // Asynchronous
+            var facebookEmail = profile.emails[0].value;
+
+            User.findOne({'username': facebookEmail}, function(err, user) {
                 if (err) {
                     return done(err);
                 }
 
                 if (user) {
-                    // User found, log them in
+                    // User found
+
+                    // Is Facebook already part of their profile?
+                    if (user.facebook && user.facebook.id === profile.id) {
+                        // Facebook is already in their profile - log in
+                        return done(null, user);
+                    } else {
+                        // If not, add Facebook data and log them in
+                        user.facebook = {
+                            id: profile.id,
+                            token: token,
+                            name: profile.name.givenName + ' ' + profile.name.familyName,
+                            email: profile.emails[0].value
+                        };
+
+                        user.save(function(err) {
+                            if (err) {
+                                throw(err);
+                            }
+                            return done(null, user);
+                        });
+                    }
+
+
                 } else {
                     // No user found, create new user
                     var newUser = new User();
@@ -54,7 +85,6 @@ var passportFacebookConfig = function passportFacebookConfig(passport) {
                         if (err) {
                             throw(err);
                         }
-
                         done(null, newUser);
                     });
                 }

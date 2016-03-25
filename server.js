@@ -12,6 +12,7 @@ var flash = require("connect-flash");
 var bodyParser= require("body-parser");
 var helmet = require("helmet");
 var path = require("path");
+var morgan =  require("morgan");
 
 
 // DB + User modules
@@ -29,6 +30,11 @@ var passport = require("passport");
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+
+if (process.env.ENV !== "production") {
+    // Log all requests
+    app.use(morgan('dev'));
+}
 
 app.use(helmet());              // Security by Helmet
 app.use(bodyParser.json());

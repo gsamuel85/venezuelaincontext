@@ -23,6 +23,7 @@
     "hogan.js": "^3.0.2",
     "mongodb": "^2.1.4",
     "mongoose": "^4.3.7",
+    "morgan": "^1.7.0",
     "newrelic": "^1.25.5",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.0",
