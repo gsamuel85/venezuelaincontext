@@ -1,8 +1,7 @@
 'use strict';
 /* global app, io */
 
-app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll",
-        function($scope, $sce, $location, $anchorScroll) {
+app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll", function($scope, $sce, $location, $anchorScroll) {
     
     $scope.comments = [];
     $scope.newComment = {
@@ -95,6 +94,32 @@ app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll",
      */
     $scope.removeNewCommentTime = function removeNewCommentTime() {
         $scope.newComment.timeline = null;
+    };
+
+
+    /**
+     * Admin deletes a comment
+     * @param comment
+     */
+    $scope.deleteComment = function deleteComment(comment) {
+        var confirmDelete = confirm("Are you sure? This comment will be permanently deleted");
+
+        if (confirmDelete) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // Comment successfully deleted: reload from server
+                    // TODO: Dynmically remove just the deleted comment, also for replies
+                    $scope.$apply(function removeDeletedComment() {
+                        $scope.comments = $scope.comments.filter(function(scopeComment) {
+                            return scopeComment._id !== comment._id;
+                        });
+                    });
+                }
+            };
+            xhr.open("DELETE", "/comments/" + comment._id, true);
+            xhr.send();
+        }
     };
 
 

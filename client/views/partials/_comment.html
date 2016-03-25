@@ -23,7 +23,12 @@
                 </div>
                 <div class="comment-text">
                     <span ng-bind-html="reply.text"></span>
+                    {{#user._doc.admin}}
+                    | <a ng-click="deleteComment(reply)">Delete</a>
+                    {{/user._doc.admin}}
                 </div>
+
+
             </li>
         </ul>
         {{#user}}
@@ -35,6 +40,11 @@
             </form>
         </div>
         {{/user}}
+
+        {{#user._doc.admin}}
+             |
+            <a ng-click="deleteComment(comment)">Delete</a>
+        {{/user._doc.admin}}
     </div>
 
 </div>

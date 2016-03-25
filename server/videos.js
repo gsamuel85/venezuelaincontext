@@ -5,19 +5,27 @@ var async = require("async");
 
 var Video = require('../models/video');
 
+var isLoggedIn = function(req,res,next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
 
-function isAdmin(user) {
+    res.send("Please log in");
+};
+var isAdmin = function isAdmin(user) {
     if (user._doc) {
         return user._doc.admin;
     }
     return false;
-}
+};
 
 
 /**
  * Add a new video, or post an update to an existing video
  */ 
 router.post('/update', function updateVideo(req, res) {
+    if (!isAdmin(req.user)) { return res.status(403).send("You must be an admin to edit a video"); }
+    
     var video = req.body;
     
     async.waterfall([
@@ -53,7 +61,7 @@ router.get('/new', function(req, res) {
 /**
  * Load EDIT page for individual video
  */
-router.get('/:id/edit', function editVideo(req, res) {
+router.get('/:id/edit', isLoggedIn, function editVideo(req, res) {
     if (!isAdmin(req.user)) { return res.status(403).send("You must be an admin to edit a video"); }
     
     Video.findOne({ _id: req.params.id }, 'title description video_url', function(err, video) {
