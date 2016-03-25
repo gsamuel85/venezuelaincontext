@@ -7,7 +7,52 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var User = require('../models/user');
 var configAuth = require('../config/auth');
 
-var passportFacebookConfig = function passportFacebookConfig(passport) {
+
+
+/**
+ * Create the social data object for an existing user's profile from the Passport profile object
+ * @param profile
+ * @param token
+ * @returns {{id: *, token: token, name: string, email: *, photoUrl: *}}
+ */
+var createUserSocialData = function createUserSocialData(profile, token) {
+    return {
+        id: profile.id,
+        token: token,
+        name: profile.name.givenName + ' ' + profile.name.familyName,
+        email: profile.emails[0].value,
+        photoUrl: profile.photos[0].value
+    };
+};
+
+var createUserFromProfile = function(service, profile, token, done) {
+    var newUser = new User();
+
+    switch (service) {
+        case 'facebook':
+            newUser.facebook = createUserSocialData(profile, token);
+            break;
+        case 'google':
+            newUser.google = createUserSocialData(profile, token);
+            break;
+    }
+
+    // Copy to local User model
+    newUser.username = profile.emails[0].value;
+    newUser.firstName = profile.name.givenName;
+    newUser.lastName = profile.name.familyName;
+
+
+    newUser.save(function(err) {
+        if (err) {
+            done(err);
+        }
+        done(null, newUser);
+    });
+};
+
+
+var passportConfig = function passportConfig(passport) {
     // Serialization
     passport.serializeUser(User.serializeUser());
     passport.deserializeUser(User.deserializeUser());
@@ -39,9 +84,7 @@ var passportFacebookConfig = function passportFacebookConfig(passport) {
             var facebookEmail = profile.emails[0].value;
 
             User.findOne({'username': facebookEmail}, function(err, user) {
-                if (err) {
-                    return done(err);
-                }
+                if (err) { return done(err); }
 
                 if (user) {
                     // User found
@@ -51,13 +94,7 @@ var passportFacebookConfig = function passportFacebookConfig(passport) {
                         return done(null, user);
                     } else {
                         // If not, add Facebook data and log them in
-                        user.facebook = {
-                            id: profile.id,
-                            token: token,
-                            name: profile.name.givenName + ' ' + profile.name.familyName,
-                            email: profile.emails[0].value,
-                            photoUrl: profile.photos[0].value
-                        };
+                        user.facebook = createUserSocialData(profile, token);
 
                         user.save(function(err) {
                             if (err) {
@@ -66,30 +103,9 @@ var passportFacebookConfig = function passportFacebookConfig(passport) {
                             return done(null, user);
                         });
                     }
-
-
                 } else {
                     // No user found, create new user
-                    var newUser = new User();
-
-                    newUser.facebook.id = profile.id;
-                    newUser.facebook.token = token;
-                    newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
-                    newUser.facebook.email = profile.emails[0].value;
-                    newUser.facebook.photoUrl = profile.photos[0].value;
-
-                    // Copy to local User model
-                    newUser.username = newUser.facebook.email;
-                    newUser.firstName = profile.name.givenName;
-                    newUser.lastName = profile.name.familyName;
-
-
-                    newUser.save(function(err) {
-                        if (err) {
-                            throw(err);
-                        }
-                        done(null, newUser);
-                    });
+                    createUserFromProfile('facebook', profile, token, done);
                 }
             });
         });
@@ -109,9 +125,7 @@ var passportFacebookConfig = function passportFacebookConfig(passport) {
             var googleEmail = profile.emails[0].value;
 
             User.findOne({'username': googleEmail}, function(err, user) {
-                if (err) {
-                    return done(err);
-                }
+                if (err) { return done(err); }
 
                 if (user) {
                     // User found
@@ -121,12 +135,7 @@ var passportFacebookConfig = function passportFacebookConfig(passport) {
                         return done(null, user);
                     } else {
                         // If not, add Facebook data and log them in
-                        user.google = {
-                            id: profile.id,
-                            token: token,
-                            name: profile.name.givenName + ' ' + profile.name.familyName,
-                            email: profile.emails[0].value
-                        };
+                        user.google = createUserSocialData(profile, token);
 
                         user.save(function(err) {
                             if (err) {
@@ -135,29 +144,9 @@ var passportFacebookConfig = function passportFacebookConfig(passport) {
                             return done(null, user);
                         });
                     }
-
-
                 } else {
                     // No user found, create new user
-                    var newUser = new User();
-
-                    newUser.google.id = profile.id;
-                    newUser.google.token = token;
-                    newUser.google.name = profile.name.givenName + ' ' + profile.name.familyName;
-                    newUser.google.email = profile.emails[0].value;
-
-                    // Copy to local User model
-                    newUser.username = newUser.google.email;
-                    newUser.firstName = profile.name.givenName;
-                    newUser.lastName = profile.name.familyName;
-
-
-                    newUser.save(function(err) {
-                        if (err) {
-                            throw(err);
-                        }
-                        done(null, newUser);
-                    });
+                    createUserFromProfile('google', profile, token, done);
                 }
             });
         });
@@ -167,4 +156,4 @@ var passportFacebookConfig = function passportFacebookConfig(passport) {
 };
 
 
-module.exports = passportFacebookConfig;
+module.exports = passportConfig;
