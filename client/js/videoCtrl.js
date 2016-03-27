@@ -1,22 +1,23 @@
 'use strict';
 /* global app, Popcorn */
 
-app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
-        function videoCtrl($scope, $http, $location, $anchorScroll) {
+app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll", function videoCtrl($scope, $http, $location, $anchorScroll) {
 
     // Load video data embedded by server
     $scope.video = JSON.parse(window.video);
+
+    // Store handles for next video popup
     $scope.nextVideoTitle = "Coming up";
     var nextVideoPopup = document.getElementById("next-video-popup");
+    // Countdown when transitioning to next video
+    var COUNTDOWN_TIME = 5;
+    var countdownTimer, paused;
     
     // Store Popcorn controller
     var pop;
     var YT_SETTINGS = "?controls=2&autohide=1&modestbranding=0&theme=dark&autoplay=0";
-    // Countdown when transitioning to next video
-    var COUNTDOWN_TIME = 5;
-    var countdownTimer, paused;
 
-    $anchorScroll.yOffset = 80;
+    $anchorScroll.yOffset = 80;     // Offset when scrolling to comment form / video
 
 
     /**
@@ -27,8 +28,8 @@ app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
         element.src = $scope.video.video_url + YT_SETTINGS;
         pop = new Popcorn(element);
 
-        pop.on("loadeddata", function() {
-            $scope.$apply(function() {
+        pop.on("loadeddata", function receivedVideoData() {
+            $scope.$apply(function updateDuration() {
                 $scope.duration = pop.duration();
             });
         });
@@ -50,6 +51,10 @@ app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
     $scope.goToNext = function() { $scope.goToVideo(window.nextVideoId); };
     $scope.goToPrev = function() { $scope.goToVideo(window.prevVideoId); };
 
+    /**
+     * Seek to a point in the current video, and scroll up to the video
+     * @param time
+     */
     $scope.videoSeekTo = function videoSeekTo(time) {
         pop.currentTime(time);
         $location.hash("video-main");
@@ -59,12 +64,12 @@ app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
 
 
     /**
-     * When a video ends, automatically navigate to the next video
+     * When a video ends, show a popup and navigate to the next video
      */
     var setNextVideo = function setNextVideo() {
         if ($scope.video && $scope.video._id !== window.nextVideoId) {
-            // When video duration is known, add an event to show the transition popup
 
+            // When video duration is known, add an event to show the transition popup
             $http.get('/video/' + window.nextVideoId + '.json').success(function (data) {
                     $scope.nextVideoTitle = data.title;
                     // When video is finished, transition to next video
@@ -113,6 +118,7 @@ app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
     $scope.pauseCountdown = function pauseCountdown() {
         paused = !paused;
     };
+
     /**
      * Clear countdown interval and popup
      */
@@ -133,7 +139,6 @@ app.controller("VideoCtrl", ["$scope", "$http", "$location", "$anchorScroll",
      */
     $scope.triggerPositionStyle = function(time) {
         var pc = (((time+1) / $scope.duration) * 100) + "%";
-
         return {
             left: pc
         };

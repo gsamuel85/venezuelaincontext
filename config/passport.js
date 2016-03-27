@@ -26,6 +26,14 @@ var createUserSocialData = function createUserSocialData(profile, token) {
     };
 };
 
+
+/**
+ * Create a user record from the received social profile
+ * @param service: String 'facebook', 'google', 'wordpress', etc.
+ * @param profile: profile object from Passport authentication
+ * @param token: token object from Passport authentication
+ * @param done: callback when done
+ */
 var createUserFromProfile = function(service, profile, token, done) {
     var newUser = new User();
 
@@ -37,7 +45,6 @@ var createUserFromProfile = function(service, profile, token, done) {
             newUser.google = createUserSocialData(profile, token);
             break;
         case 'wordpress':
-        case 'google':
             newUser.wordpress = createUserSocialData(profile, token);
             break;
     }
@@ -46,7 +53,6 @@ var createUserFromProfile = function(service, profile, token, done) {
     newUser.username = profile.emails[0].value;
     newUser.firstName = profile.name.givenName;
     newUser.lastName = profile.name.familyName;
-
 
     newUser.save(function(err) {
         if (err) {
@@ -169,7 +175,7 @@ var passportConfig = function passportConfig(passport) {
             process.nextTick(function googleAuth() {
                 var wordpressEmail = profile.emails[0].value;
 
-                User.findOne({'username': googleEmail}, function(err, user) {
+                User.findOne({'username': wordpressEmail}, function(err, user) {
                     if (err) { return done(err); }
 
                     if (user) {

@@ -6,6 +6,9 @@ var User = require('../models/user');
 
 var access = require('../config/access');
 
+/**
+ * GET signup page
+ */
 router.get('/signup', function(req, res) {
     if (req.user) {
         res.redirect('/profile');
@@ -16,6 +19,12 @@ router.get('/signup', function(req, res) {
     }
 });
 
+/**
+ * POST signup with e-mail and password
+ * Register new user with passport-local-mongoose module
+ * Assumes password is valid
+ * Returns error only if the e-mail is already registered
+ */
 router.post('/signup', function(req, res) {
     User.register(new User({
             username: req.body.username,
@@ -35,6 +44,10 @@ router.post('/signup', function(req, res) {
     );
 });
 
+
+/**
+ * GET login page
+ */
 router.get('/login', function(req, res) {
     if (req.user) {
         res.redirect('/profile');
@@ -45,11 +58,17 @@ router.get('/login', function(req, res) {
     }
 });
 
+/**
+ * POST login with e-mail and password
+ */
 router.post('/login', passport.authenticate('local', {
         successRedirect: '/profile',
         failureRedirect: '/login',
         failureFlash: "Incorrect e-mail or password"} ));
 
+/**
+ * Log a user out
+ */
 router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');

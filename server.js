@@ -87,7 +87,7 @@ io.use(passportSocketIo.authorize({
 
 
 /**
- * Server modules
+ * ROUTES
  */
 
 // Videos server module
@@ -112,7 +112,6 @@ app.get('/', function(req, res) {
 });
 app.use(express.static(path.join(__dirname + '/public')));
 app.use(express.static(path.join(__dirname + '/client')));
-
 
 
 

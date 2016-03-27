@@ -151,8 +151,13 @@ module.exports = function(grunt) {
                     specs: "test/client/*.js",
                     vendor: [
                         'node_modules/angular/angular.js',
+                        //'node_modules/angular-sanitize/angular-sanitize.js',
+                        'node_modules/textangular/dist/textAngular-sanitize.js',
+                        'node_modules/textangular/dist/textAngular-rangy.min.js',
+                        'node_modules/textangular/dist/textAngular.js',
+                        'node_modules/textangular/dist/textAngularSetup.js',
+
                         'node_modules/angular-mocks/angular-mocks.js',
-                        'node_modules/angular-sanitize/angular-sanitize.js',
                         'public/js/popcorn-complete.min.js'
                         // Add vendor code if necessary
                     ]
@@ -182,7 +187,7 @@ module.exports = function(grunt) {
                 tasks: ['htmlhint']
             },
             clientjs: {
-                files: ['<%= app.srcdir %>/js/**/*.js'],
+                files: ['client/js/**/*.js'],
                 tasks: ['jshint:client', 'jasmine:client']
             },
             serverjs: {
@@ -194,7 +199,7 @@ module.exports = function(grunt) {
                 tasks: ['jshint:common', 'mochaTest:common']
             },
             client_tests: {
-                files: ['test/<%= app.srcdir%>/**/*.js'],
+                files: ['test/client/**/*.js'],
                 tasks: ['jasmine:client']
             },
             tests: {

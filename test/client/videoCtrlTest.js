@@ -13,6 +13,7 @@ describe('VideoCtrl', function() {
             $scope: scope
         });
     }));
-    
-    it('should display test message');;
+
+
+    it('should write more tests');
 });

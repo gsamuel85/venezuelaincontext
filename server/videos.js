@@ -2,7 +2,6 @@
 
 var router = require("express").Router();
 var async = require("async");
-
 var Video = require('../models/video');
 
 var access = require('../config/access');

@@ -11,27 +11,26 @@ app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll", f
     $scope.timelineTriggers = [];
     $scope.timelineComments = [];
 
-
     $anchorScroll.yOffset = 80;
 
-
-
-    var loadInitComments = function() {
+    /**
+     * Load the comments from the server and place into the scope
+     */
+    var loadInitComments = function loadInitComments() {
         var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = (function() {
+        xhr.onreadystatechange = (function initComments() {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                //$scope.$apply( function() {
-                //
-                //});
                 $scope.comments = JSON.parse(xhr.responseText);
                 placeTimelineComments();
-
             }
         });
         xhr.open("GET", "/comments/" + $scope.video._id, true);
         xhr.send();
     };
 
+    /**
+     * Apply positioning style to timeline comment triggers
+     */
     function placeTimelineComments() {
         $scope.comments.forEach(function placeTimelineComment(comment) {
             if (comment.timeline) {
@@ -48,7 +47,7 @@ app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll", f
     /**
      * Get Gravatar image for comment author's e-mail
      */
-    $scope.getGravatarImage = function(comment) {
+    $scope.getGravatarImage = function gravatarImage(comment) {
         var imgTag = "<img src='" +
             window.gravatar.url(comment.author.email, { s: 35, d: 'mm'}, true) +
             "' />";
@@ -56,9 +55,9 @@ app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll", f
     };
 
 
-    /**
-     * TIMELINE
-     */
+    /************
+     * TIMELINE *
+     ************/
 
     /**
      * When clicking on a trigger, load and display the corresponding comment
@@ -74,6 +73,7 @@ app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll", f
             }
         }
 
+        // Found a comment? Put it in the timeline comment modal
         if (showComment) {
             $scope.timelineComments = [];
             $scope.timelineComments.push(showComment);
@@ -107,7 +107,7 @@ app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll", f
         if (confirmDelete) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.readyState === 4 && xhr.status === 200) {
                     // Comment successfully deleted: reload from server
                     // TODO: Dynmically remove just the deleted comment, also for replies
                     $scope.$apply(function removeDeletedComment() {

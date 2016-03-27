@@ -3,7 +3,12 @@
 
 app.controller("VideoEditCtrl", ["$scope", function videoCtrl($scope) {
     $scope.aMsg = "This is a message from AngularJS";
-    
+
+    /**
+     * Send video data to server
+     * @param video
+     * @param callback
+     */
     function sendVideo(video, callback) {
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = (function () {
@@ -16,8 +21,11 @@ app.controller("VideoEditCtrl", ["$scope", function videoCtrl($scope) {
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
         xhr.send(JSON.stringify($scope.video));
     }
-    
-    $scope.loadInitVideo = function() {
+
+    /**
+     * Populate scope.video with embedded data received from server
+     */
+    $scope.loadInitVideo = function loadInitVideo() {
         // Is there information about an exisitng video?
         if (window.videoData) {
             $scope.video = JSON.parse(window.videoData);
@@ -27,9 +35,11 @@ app.controller("VideoEditCtrl", ["$scope", function videoCtrl($scope) {
             $scope.newVideo = true;
         }
     };
-    
-    
-    $scope.submitVideo = function() {
+
+    /**
+     * Handle form submission
+     */
+    $scope.submitVideo = function submitVideo() {
         console.log($scope.video);
         
         sendVideo($scope.video, function(response) {
@@ -44,6 +54,6 @@ app.controller("VideoEditCtrl", ["$scope", function videoCtrl($scope) {
         });
     };
     
-    // Load initial video data implanted by server
+    // Load initial video data embedded by server
     $scope.loadInitVideo();
 }]);

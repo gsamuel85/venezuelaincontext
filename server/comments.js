@@ -31,7 +31,6 @@ router.get('/:video_id', function(req, res) {
             
         }, function(err, result) {
             if (err) { return new Error(err); }
-            
             res.send(result);
         });
     });
@@ -49,7 +48,7 @@ router.delete('/:comment_id', access.isLoggedIn, function deleteComment(req,res)
         if (err) { return new Error(err); }
 
         res.send("Comment successfully deleted");
-    })
+    });
 });
 
 module.exports = router;

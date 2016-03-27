@@ -3,9 +3,11 @@
 
 app.controller('UserCtrl', ['$scope', function($scope) {
     $scope.password = "";   // Initialise password field
-    
-    // Get Gravate image for comment author's e-mail
-    $scope.getGravatarImage = function(email) {
+
+    /**
+     * Get Gravatar image for comment author's e-mail
+     */
+    $scope.getGravatarImage = function getGravatarImage(email) {
         var imgTag = "<img src='" + 
                 window.gravatar.url(email, { s: 55, d: 'mm'}, true) + 
                 "' />";

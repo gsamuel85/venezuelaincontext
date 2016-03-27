@@ -3,10 +3,13 @@
 var VideoComment = require("../models/videocomment");
 
 var commentsIO = function(io) {
-    io.on('connection', function(socket){
-      //console.log('a user connected');
-      
-      socket.on('add comment', function(comment) {
+    io.on('connection', function onConnect(socket){
+
+        /**
+         * When a comment is received, add the data of the currently logged in user
+         * When the comment is successfully saved, emit an event to update the client
+         */
+        socket.on('add comment', function addComment(comment) {
         
           // Fill in parent and author data
           var currentUser = socket.request.user;

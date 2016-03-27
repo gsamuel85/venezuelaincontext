@@ -3,16 +3,19 @@
 
 describe('CommentCtrl', function() {
     var scope;
-    var ctrl;
+    var controller;
 
     beforeEach(module('vic-app'));
 
     beforeEach(inject(function($rootScope, $controller) {
         scope = $rootScope.$new();
-        ctrl = $controller('CommentCtrl', {
+        controller = $controller('CommentCtrl', {
             $scope: scope
         });
     }));
     
-    it('should display test message');
+    it('should have an initial comment', function() {
+        expect(scope.newComment).toBeDefined();
+    });
+
 });
