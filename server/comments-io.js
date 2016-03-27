@@ -10,6 +10,9 @@ var commentsIO = function(io) {
         
           // Fill in parent and author data
           var currentUser = socket.request.user;
+          // No logged in user? Return
+          if (!currentUser) { return; }
+
           comment.author = {
             name: currentUser.firstName + ' ' + currentUser.lastName,
             email: currentUser.username
@@ -23,9 +26,9 @@ var commentsIO = function(io) {
           });
       });
       
-      socket.on('disconnect', function() {
-           //console.log('a user disconnected');
-      });
+      // socket.on('disconnect', function() {
+      //      console.log('a user disconnected');
+      // });
     });
 
 };

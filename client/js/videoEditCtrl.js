@@ -33,7 +33,14 @@ app.controller("VideoEditCtrl", ["$scope", function videoCtrl($scope) {
         console.log($scope.video);
         
         sendVideo($scope.video, function(response) {
-            console.log("Success: " + response);
+            if (response === "OK") {
+                $scope.$apply(function() {
+                    $scope.msg = "Video saved successully";
+                });
+            }
+            else {
+                console.log(response);
+            }
         });
     };
     

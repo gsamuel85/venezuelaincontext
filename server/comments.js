@@ -2,27 +2,15 @@
 
 var router = require("express").Router();
 var VideoComment = require("../models/videocomment");
-
 var gravatar = require("gravatar");
-
 var async = require("async");
 
+var access = require('../config/access');
 
-var isLoggedIn = function(req,res,next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-
-    res.send("Please log in");
-};
-
-var isAdmin = function isAdmin(user) {
-    if (user._doc) {
-        return user._doc.admin;
-    }
-    return false;
-};
-
+/**
+ * Get JSON of all comments for a specified video
+ * @returns JSON of roots comments and their replies, ordered by time
+ */
 router.get('/:video_id', function(req, res) {
     // Get roots
     VideoComment.find({'video_id': req.params.video_id, 'path':  "," }).
@@ -53,8 +41,8 @@ router.get('/:video_id', function(req, res) {
  * Delete a comment
  * Only an admin can delete a comment
  */
-router.delete('/:comment_id', isLoggedIn, function deleteComment(req,res) {
-    if (!isAdmin(req.user)) { return res.status(403).send("You must be an admin to perform this action"); }
+router.delete('/:comment_id', access.isLoggedIn, function deleteComment(req,res) {
+    if (!access.isAdmin(req.user)) { return res.status(403).send("You must be an admin to perform this action"); }
 
     // Delete selected comment
     VideoComment.remove({_id: req.params.comment_id}, function(err) {

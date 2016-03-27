@@ -4,14 +4,7 @@ var router = require("express").Router();
 var passport = require("passport");
 var User = require('../models/user');
 
-
-var isLoggedIn = function(req,res,next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-
-    res.send("Please log in");
-};
+var access = require('../config/access');
 
 router.get('/signup', function(req, res) {
     if (req.user) {
@@ -47,7 +40,6 @@ router.get('/login', function(req, res) {
         res.render('users/login.html', { flash: req.flash('error') });
     }
 });
-
 
 router.post('/login', passport.authenticate('local', {
         successRedirect: '/profile',
@@ -89,8 +81,7 @@ router.get('/auth/google/callback',
 /**
  * Load Profile page with user details
  */
-router.get('/profile', isLoggedIn, function(req, res) {
-    
+router.get('/profile', access.isLoggedIn, function(req, res) {
     User.findOne({ username: req.user.username }, function getProfile(err, foundUser) {
         if (err) { return res.send("Error: " + err); }
         
@@ -98,7 +89,6 @@ router.get('/profile', isLoggedIn, function(req, res) {
         res.render("users/profile.html", {msg: "Hello there!", user: foundUser._doc});
     });
 });
-
 
 
 module.exports = router;

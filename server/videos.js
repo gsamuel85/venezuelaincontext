@@ -5,26 +5,14 @@ var async = require("async");
 
 var Video = require('../models/video');
 
-var isLoggedIn = function(req,res,next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-
-    res.send("Please log in");
-};
-var isAdmin = function isAdmin(user) {
-    if (user._doc) {
-        return user._doc.admin;
-    }
-    return false;
-};
+var access = require('../config/access');
 
 
 /**
  * Add a new video, or post an update to an existing video
  */ 
-router.post('/update', function updateVideo(req, res) {
-    if (!isAdmin(req.user)) { return res.status(403).send("You must be an admin to edit a video"); }
+router.post('/update', access.isLoggedIn, function updateVideo(req, res) {
+    if (!access.isAdmin(req.user)) { return res.status(403).send("You must be an admin to edit a video"); }
     
     var video = req.body;
     
@@ -43,7 +31,7 @@ router.post('/update', function updateVideo(req, res) {
         }
         ], function callback(err, savedVideo) {
             if (err) { return res.send("Error: " + err); }
-            res.send("Video saved successfully: " + savedVideo._id);
+            res.status(200).send("OK");
         }
     );
 });
@@ -52,8 +40,8 @@ router.post('/update', function updateVideo(req, res) {
 /**
  * Create a new video
  */
-router.get('/new', function(req, res) {
-    if (!isAdmin(req.user)) { return res.status(403).send("You must be an admin to add a video"); }
+router.get('/new', access.isLoggedIn, function(req, res) {
+    if (!access.isAdmin(req.user)) { return res.status(403).send("You must be an admin to add a video"); }
     
     res.render('videos/edit.html', { user: req.user });
 });    
@@ -61,10 +49,10 @@ router.get('/new', function(req, res) {
 /**
  * Load EDIT page for individual video
  */
-router.get('/:id/edit', isLoggedIn, function editVideo(req, res) {
-    if (!isAdmin(req.user)) { return res.status(403).send("You must be an admin to edit a video"); }
+router.get('/:id/edit', access.isLoggedIn, function editVideo(req, res) {
+    if (!access.isAdmin(req.user)) { return res.status(403).send("You must be an admin to edit a video"); }
     
-    Video.findOne({ _id: req.params.id }, 'title description video_url', function(err, video) {
+    Video.findOne({ _id: req.params.id }, 'title subtitle description video_url', function(err, video) {
         if (err) { return res.send("Error: " + err); }
         
         if (!video) { res.send('Video not found'); }

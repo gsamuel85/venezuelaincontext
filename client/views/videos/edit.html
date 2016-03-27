@@ -29,9 +29,10 @@
                             <input class="input-field" type="text" name="video_url" ng-model="video.video_url" />
                         </label>
 
-                        <button type="button" ng-click="loadInitVideo()" value="Reset"></button>
-                        <button type="submit" ng-click="submitVideo()" value="Submit"></button>
+                        <button type="button" ng-click="loadInitVideo()">Reset</button>
+                        <button type="submit" ng-click="submitVideo()">Save</button>
                     </form>
+                    <span class="info" ng-bind="msg"></span>
                 </div>
             </div>
         </div>
