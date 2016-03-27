@@ -10,7 +10,9 @@ router.get('/signup', function(req, res) {
     if (req.user) {
         res.redirect('/profile');
     } else {
-        res.render('users/signup.html', {});
+        res.render('users/signup.html', {partials: {
+            social: 'partials/_social'
+        }});
     }
 });
 
@@ -37,7 +39,9 @@ router.get('/login', function(req, res) {
     if (req.user) {
         res.redirect('/profile');
     } else {
-        res.render('users/login.html', { flash: req.flash('error') });
+        res.render('users/login.html', { flash: req.flash('error'), partials: {
+            social: 'partials/_social'
+        } });
     }
 });
 
@@ -73,6 +77,18 @@ router.get('/auth/google/callback',
         successRedirect: '/profile',
         failureRedirect: '/login',
         failureFlash: "Unable to log in with Google"
+    })
+);
+
+/**
+ * WordPress Auhentication
+ */
+router.get('/auth/wordpress', passport.authenticate('wordpress', {scope: 'email'}));
+router.get('/auth/wordpress/callback',
+    passport.authenticate('wordpress', {
+        successRedirect: '/profile',
+        failureRedirect: '/login',
+        failureFlash: "Unable to log in with WordPress"
     })
 );
 

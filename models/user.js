@@ -24,6 +24,12 @@ var User = new mongoose.Schema({
         token: String,
         email: String,
         name: String
+    },
+    wordpress: {
+        id: String,
+        token: String,
+        email: String,
+        name: String
     }
 });
 

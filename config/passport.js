@@ -3,6 +3,7 @@
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var WordpressStrategy = require('passport-wordpress').Strategy;
 
 var User = require('../models/user');
 var configAuth = require('../config/auth');
@@ -34,6 +35,10 @@ var createUserFromProfile = function(service, profile, token, done) {
             break;
         case 'google':
             newUser.google = createUserSocialData(profile, token);
+            break;
+        case 'wordpress':
+        case 'google':
+            newUser.wordpress = createUserSocialData(profile, token);
             break;
     }
 
@@ -152,6 +157,45 @@ var passportConfig = function passportConfig(passport) {
         });
     }));
 
+    /**
+     * WordPress Auth Configuration
+     */
+    passport.use(new WordpressStrategy({
+            clientID: configAuth.wordpressAuth.clientID,
+            clientSecret: configAuth.wordpressAuth.clientSecret,
+            callbackURL: configAuth.wordpressAuth.callbackURL,
+        },
+        function wordpressStrategy(token, refreshToken, profile, done) {
+            process.nextTick(function googleAuth() {
+                var wordpressEmail = profile.emails[0].value;
+
+                User.findOne({'username': googleEmail}, function(err, user) {
+                    if (err) { return done(err); }
+
+                    if (user) {
+                        // User found
+                        // Is WordPress already part of their profile?
+                        if (user.wordpress && user.wordpress.id === profile.id) {
+                            // Google is already in their profile - log in
+                            return done(null, user);
+                        } else {
+                            // If not, add Facebook data and log them in
+                            user.wordpress = createUserSocialData(profile, token);
+
+                            user.save(function(err) {
+                                if (err) {
+                                    throw(err);
+                                }
+                                return done(null, user);
+                            });
+                        }
+                    } else {
+                        // No user found, create new user
+                        createUserFromProfile('wordpress', profile, token, done);
+                    }
+                });
+            });
+        }));
 
 };
 
