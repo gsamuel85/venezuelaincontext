@@ -2,6 +2,8 @@
 @import 'partials/form';
 @import 'partials/video';
 @import 'partials/comment';
+@import 'partials/users';
+
 
 html {
     font-family: 'Helvetica', 'Arial', sans-serif;
@@ -69,19 +71,3 @@ p.lead {
 .flash.error {
     color: $orange;
 }
-
-.user-details {
-    li {
-        list-style-type: none;
-    }
-    
-    span.user-name {
-        font-weight: 700;
-        font-size: 1.3em;
-    }
-    span.user-email {
-        font-size: 1.1em;
-    }
-}
-
-

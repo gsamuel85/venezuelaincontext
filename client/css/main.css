@@ -460,6 +460,28 @@ table.nav-years {
   border-top-width: 0;
   border-bottom-color: #fff; }
 
+/** SIGN IN **/
+.social-login {
+  list-type: none; }
+  .social-login li {
+    width: 280px;
+    color: #fff; }
+  .social-login .button.fb-login {
+    background-color: #3b5998; }
+  .social-login .button.google-login {
+    background-color: #dd4b39; }
+
+/** PROFILE **/
+.user-details li {
+  list-style-type: none; }
+
+.user-details span.user-name {
+  font-weight: 700;
+  font-size: 1.3em; }
+
+.user-details span.user-email {
+  font-size: 1.1em; }
+
 html {
   font-family: 'Helvetica', 'Arial', sans-serif; }
 
@@ -509,13 +531,3 @@ p.lead {
 */
 .flash.error {
   color: #fcac45; }
-
-.user-details li {
-  list-style-type: none; }
-
-.user-details span.user-name {
-  font-weight: 700;
-  font-size: 1.3em; }
-
-.user-details span.user-email {
-  font-size: 1.1em; }

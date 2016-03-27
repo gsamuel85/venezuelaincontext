@@ -13,11 +13,14 @@
             </header>
             
             <div class="row">
-                <div class="8u">
-                    <p>Log in with: <a href="/auth/facebook" class="button fb-login"><span class="fa fa-facebook"></span></a></p>
+                <div class="6u">
+                    <ul class="social-login">
+                        <li><a href="/auth/facebook" class="button fb-login"><span class="fa fa-facebook"></span> Sign in with Facebook</a></li>
+                        <li><a href="/auth/google" class="button google-login"><span class="fa fa-google-plus"></span> Sign in with Google</a></li>
+                    </ul>
+                </div>
 
-                    <hr />
-
+                <div class="6u">
                     <div class="form-style-2" ng-controller="UserCtrl">
                         
                         <form name="form" action="signup" method="POST">
