@@ -23,7 +23,17 @@
                         </ul>
                     </div>
                     {{/user}}
-                    
+
+                    {{#admin}}
+                    <div class="admin-details">
+                        {{#user.blocked}}
+                            <span class="blocked">User Blocked</span>
+                            <a href
+                        {{/user.blocked}}
+                    </div>
+                    {{/admin}}
+
+
                     {{^user}}
                         <p>Please <a href="login">log in</a> to see your profile</p>
                         <p>Don't have an account? <a href="signup">Sign up!</a></p>

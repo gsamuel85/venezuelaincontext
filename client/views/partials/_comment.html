@@ -24,14 +24,14 @@
                 <div class="comment-text">
                     <span ng-bind-html="reply.text"></span>
                     {{#user._doc.admin}}
-                    | <a ng-click="deleteComment(reply)">Delete</a>
+                    | <a ng-click="deleteComment(reply)">Delete</a> | <a ng-click="viewAuthor(reply.author.email)">Block</a>
                     {{/user._doc.admin}}
                 </div>
 
 
             </li>
         </ul>
-        {{#user}}
+        {{^user.blocked}}
         <a ng-click="replyVisible = (replyVisible == comment ? null : comment)">Reply</a>
         <div class="comment-reply-form" ng-show="replyVisible === comment">
             <form  ng-submit="sendReply(comment)">
@@ -39,11 +39,11 @@
                 <input type="submit" class="button" value="Submit" />
             </form>
         </div>
-        {{/user}}
+        {{/user.blocked}}
 
         {{#user._doc.admin}}
              |
-            <a ng-click="deleteComment(comment)">Delete</a>
+            <a ng-click="deleteComment(comment)">Delete</a> | <a ng-click="viewAuthor(reply.author.email)">Block</a>
         {{/user._doc.admin}}
     </div>
 

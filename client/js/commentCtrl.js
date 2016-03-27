@@ -122,6 +122,10 @@ app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll", f
         }
     };
 
+    $scope.viewAuthor = function viewAuthor(email) {
+        window.location.assign("/user/" + encodeURIComponent(email));
+    };
+
 
 
 

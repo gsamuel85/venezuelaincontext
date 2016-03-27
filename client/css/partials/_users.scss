@@ -1,3 +1,4 @@
+@import 'vars';
 
 /** SIGN IN **/
 .social-login {
@@ -30,5 +31,9 @@
   span.user-email {
     font-size: 1.1em;
   }
+}
+
+.blocked {
+  color: $orange;
 }
 

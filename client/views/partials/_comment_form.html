@@ -1,5 +1,6 @@
 <div class="comment-form">
     <h3>Participate in the discussion!</h3>
+    {{^user.blocked}}
     <form ng-submit="sendComment()">
         <label>Your comment:</label>
         <br />
@@ -16,5 +17,6 @@
         </div>
         <input type="submit" class="button" value="Submit" />
     </form>
+    {{/user.blocked}}
     <p><a href="/logout">Log out</a></p>
 </div>

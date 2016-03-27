@@ -10,6 +10,7 @@ var User = new mongoose.Schema({
     lastName: String,
     
     admin: Boolean,
+    blocked: Boolean,
 
     facebook: {
         id: String,

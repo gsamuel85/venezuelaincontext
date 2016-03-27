@@ -91,4 +91,20 @@ router.get('/profile', access.isLoggedIn, function(req, res) {
 });
 
 
+/**
+ * GET details of a user
+ * Only the admin can view (and block) other users
+ */
+router.get('/user/:email', access.isLoggedIn, function(req,res) {
+    if (!access.isAdmin(req.user)) { return res.status(403).send("You must be an admin to manage users"); }
+
+    User.findOne({ username: req.params.email }, function getProfile(err, foundUser) {
+        if (err) { return res.send("Error: " + err); }
+
+        if (!foundUser) { return res.send("User not found"); }
+        res.render("users/profile.html", {admin: true, user: foundUser._doc});
+    });
+});
+
+
 module.exports = router;
