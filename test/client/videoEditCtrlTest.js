@@ -21,6 +21,12 @@ describe('VideoEditCtrl', function() {
             $scope: scope
         });
     }));
+
+
+    afterEach(function() {
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
+    });
     
     it('should have a test video', function() {
         expect(scope.video).toBeDefined();

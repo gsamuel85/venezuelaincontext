@@ -1,4 +1,4 @@
-<div id="page">
+<div id="page" ng-app="userApp">
     <div id="main" class="container">
         <section>
             <header>

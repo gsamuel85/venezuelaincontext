@@ -22,7 +22,7 @@ userApp.directive('password', function() {
   return {
     require: 'ngModel',
     link: function(scope, elm, attrs, ctrl) {
-      ctrl.$validators.password = function(modelValue, viewValue) {
+      ctrl.$validators.password = function validatePassword(modelValue, viewValue) {
         if (viewValue.length < 8 && viewValue.length !== 0) {    // TODO: Replace with REGEXP
           // it is invalid
           return false;
@@ -32,10 +32,4 @@ userApp.directive('password', function() {
       };
     }
   };
-});
-
-
-// Dynamically bootstrap Angular app when document is loaded
-angular.element(document).ready(function() {
-  angular.bootstrap(document, ["userApp"]);
 });
