@@ -1,7 +1,7 @@
 'use strict';
 /* global app, io */
 
-app.controller('CommentCtrl', ['$scope', '$http', '$location', '$anchorScroll', function($scope, $http, $location, $anchorScroll) {
+app.controller('CommentCtrl', ['$scope', '$http', '$socketio', '$location', '$anchorScroll', function($scope, $http, $socketio, $location, $anchorScroll) {
     
     $scope.comments = [];
     $scope.newComment = {
@@ -128,7 +128,7 @@ app.controller('CommentCtrl', ['$scope', '$http', '$location', '$anchorScroll', 
     /**
      * Sockets.IO
      */
-    var socket = io();
+    var socket = $socketio();
 
     var addCommentToTree = function(comment) {
         var path = comment.path.split(",");
