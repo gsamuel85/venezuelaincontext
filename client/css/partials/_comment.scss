@@ -11,6 +11,10 @@
   .author-img {
     float: left;
     margin: 5px;
+
+    img {
+      max-width: 35px;
+    }
   }
 
   .comment-replies {

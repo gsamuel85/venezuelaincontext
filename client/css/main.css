@@ -266,6 +266,8 @@ table.nav-years {
   .comment-container .author-img {
     float: left;
     margin: 5px; }
+    .comment-container .author-img img {
+      max-width: 35px; }
   .comment-container .comment-replies {
     margin-left: 30px; }
     .comment-container .comment-replies li {

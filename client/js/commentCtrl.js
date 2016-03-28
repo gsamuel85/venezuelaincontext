@@ -48,10 +48,9 @@ app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll", f
     /**
      * Get Gravatar image for comment author's e-mail
      */
-    $scope.getGravatarImage = function(comment) {
-        var imgTag = "<img src='" +
-            window.gravatar.url(comment.author.email, { s: 35, d: 'mm'}, true) +
-            "' />";
+    $scope.getProfileImage = function(author) {
+        var imgURL = author.profileImageURL ? author.profileImageURL : window.gravatar.url(author.email, { s: 55, d: 'mm'}, true);
+        var imgTag = "<img src='" + imgURL + "' />";
         return imgTag;
     };
 

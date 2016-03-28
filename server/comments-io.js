@@ -2,6 +2,22 @@
 
 var VideoComment = require("../models/videocomment");
 
+var gravatar = require('gravatar');
+
+/**
+ * Helper method to get the user's profile image
+ * @param user: User document from database
+ * @returns String of URL to profile picture
+ */
+var getUserProfileImageURL = function getUserProfileImageURL(user) {
+    if (user.facebook.photoUrl) { return user.facebook.photoUrl; }
+    if (user.google.photoUrl) { return user.google.photoUrl; }
+    if (user.facebook.photoUrl) { return user.facebook.photoUrl; }
+
+    // Nothing found? Try to get image from gravatar
+    return gravatar.url(user.username, {s: 50}, true);
+};
+
 var commentsIO = function(io) {
     io.on('connection', function(socket){
       //console.log('a user connected');
@@ -15,7 +31,8 @@ var commentsIO = function(io) {
 
           comment.author = {
             name: currentUser.firstName + ' ' + currentUser.lastName,
-            email: currentUser.username
+            email: currentUser.username,
+            profileImageURL: getUserProfileImageURL(currentUser)
           };
           comment.path = "," + (comment.parent_id ? comment.parent_id :  "");
 

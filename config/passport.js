@@ -169,7 +169,7 @@ var passportConfig = function passportConfig(passport) {
             process.nextTick(function googleAuth() {
                 var wordpressEmail = profile.emails[0].value;
 
-                User.findOne({'username': googleEmail}, function(err, user) {
+                User.findOne({'username': wordpressEmail}, function(err, user) {
                     if (err) { return done(err); }
 
                     if (user) {

@@ -1,7 +1,7 @@
 <div class="comment-container">
 
     <div class="comment-author">
-        <div ng-bind-html="getGravatarImage(comment)" class="author-img"></div>
+        <div class="author-img" ng-bind-html="getProfileImage(comment.author)"></div>
         <h4 ng-bind="comment.author.name"></h4>
         <span ng-if="comment.timeline"> |
             <a class="timeline-comment-time"
@@ -18,7 +18,7 @@
         <ul class="comment-replies">
             <li ng-repeat="reply in comment.replies">
                 <div class="reply-author">
-                    <div ng-bind-html="getGravatarImage(reply)" class="author-img"></div>
+                    <div class="author-img" ng-bind-html="getProfileImage(reply.author)"></div>
                     <h4 ng-bind="reply.author.name"></h4>
                 </div>
                 <div class="comment-text">
