@@ -11,7 +11,7 @@ switch (process.env.ENV) {
         baseURL = "https://vic-2016-gsamuel.c9users.io";
         break;
     default:
-        baseURL = "http://localhost:3000"
+        baseURL = "http://localhost:3000";
 }
 
 module.exports = {

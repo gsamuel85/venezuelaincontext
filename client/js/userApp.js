@@ -8,10 +8,16 @@
 
 var userApp = angular.module('userApp', []);
 
+/**
+ * Controller to manage user sign up
+ */
 userApp.controller('UserCtrl', ['$scope', function($scope) {
   $scope.password = "";
 }]);
 
+/**
+ * Validator for password field
+ */
 userApp.directive('password', function() {
   return {
     require: 'ngModel',
@@ -21,13 +27,13 @@ userApp.directive('password', function() {
           // it is invalid
           return false;
         }
-
         // it is valid / still empty
         return true;
       };
     }
   };
 });
+
 
 // Dynamically bootstrap Angular app when document is loaded
 angular.element(document).ready(function() {
