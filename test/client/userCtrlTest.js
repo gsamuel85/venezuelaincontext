@@ -5,7 +5,7 @@ describe('UserCtrl', function() {
     var scope;
     var controller;
 
-    beforeEach(module('vic-app'));
+    beforeEach(module('userApp'));
 
     beforeEach(inject(function($rootScope, $controller) {
         scope = $rootScope.$new();
@@ -14,10 +14,6 @@ describe('UserCtrl', function() {
         });
     }));
     
-    it('should return an image tag with a gravatar url', function() {
-        var email = "test@example.com";
-        var expectedTag = "<img src='https://s.gravatar.com/avatar/55502f40dc8b7c769880b10874abc9d0?s=100' />";
-        expect(scope.getGravatarImage(email)).toEqual(expectedTag);
-    });
+    it('should validate password criteria');
 
 });

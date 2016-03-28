@@ -1,7 +1,7 @@
 'use strict';
 /* global app, io */
 
-app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll", function($scope, $sce, $location, $anchorScroll) {
+app.controller('CommentCtrl', ['$scope', '$http', '$location', '$anchorScroll', function($scope, $http, $location, $anchorScroll) {
     
     $scope.comments = [];
     $scope.newComment = {
@@ -17,15 +17,15 @@ app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll", f
      * Load the comments from the server and place into the scope
      */
     var loadInitComments = function loadInitComments() {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = (function initComments() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                $scope.comments = JSON.parse(xhr.responseText);
+        $http.get('/comments/' + $scope.video._id).then(
+            function receivedComments(response) {
+                $scope.comments = response.data;
                 placeTimelineComments();
+            },
+            function onError(err) {
+                console.error(err);
             }
-        });
-        xhr.open("GET", "/comments/" + $scope.video._id, true);
-        xhr.send();
+        );
     };
 
     /**
@@ -104,27 +104,24 @@ app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll", f
         var confirmDelete = confirm("Are you sure? This comment will be permanently deleted");
 
         if (confirmDelete) {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    // Comment successfully deleted: reload from server
+            $http.delete('/comments/' + comment._id).then(
+                function onDeleteSuccess(response) {
                     // TODO: Dynmically remove just the deleted comment, also for replies
-                    $scope.$apply(function removeDeletedComment() {
-                        $scope.comments = $scope.comments.filter(function(scopeComment) {
-                            return scopeComment._id !== comment._id;
-                        });
+                    $scope.comments = $scope.comments.filter(function(scopeComment) {
+                        return scopeComment._id !== comment._id;
                     });
+                },
+                function onDeleteError(err) {
+                    console.error(err);
                 }
-            };
-            xhr.open("DELETE", "/comments/" + comment._id, true);
-            xhr.send();
+            );
+
         }
     };
 
     $scope.viewAuthor = function viewAuthor(email) {
         window.location.assign("/user/" + encodeURIComponent(email));
     };
-
 
 
 
@@ -180,11 +177,9 @@ app.controller('CommentCtrl', ['$scope', '$sce', "$location", "$anchorScroll", f
 
         $scope.replyVisible = null;           // Hide reply form
         comment.replyText = '';              // Reset reply field
-
     };
 
 
-    
     
     // On load - get comments from server
     loadInitComments();

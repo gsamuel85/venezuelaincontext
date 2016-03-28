@@ -2,13 +2,18 @@
 /* global inject, expect */
 
 describe('CommentCtrl', function() {
-    var scope;
-    var controller;
+    var scope, controller, $httpBackend, io;
 
     beforeEach(module('vic-app'));
 
     beforeEach(inject(function($rootScope, $controller) {
-        scope = $rootScope.$new();
+        scope = {
+            video: { _id: 1 }
+        };
+
+        io = function() {
+        }
+
         controller = $controller('CommentCtrl', {
             $scope: scope
         });
