@@ -1,8 +1,7 @@
 'use strict';
 /* global app */
 
-app.controller("VideoEditCtrl", ["$scope", function videoCtrl($scope) {
-    $scope.aMsg = "This is a message from AngularJS";
+app.controller('VideoEditCtrl', ['$scope', '$http', function videoCtrl($scope, $http) {
 
     /**
      * Send video data to server
@@ -10,23 +9,21 @@ app.controller("VideoEditCtrl", ["$scope", function videoCtrl($scope) {
      * @param callback
      */
     function sendVideo(video, callback) {
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = (function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                callback(xhr.responseText);
+        $http.post("/video/update", $scope.video).then(
+            function onEditSuccess(response) {
+                callback(response.data);
+            },
+            function onEditError(err) {
+                console.error(err);
             }
-        });
-
-        xhr.open("POST", "/video/update", true);
-        xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-        xhr.send(JSON.stringify($scope.video));
+        );
     }
 
     /**
      * Populate scope.video with embedded data received from server
      */
     $scope.loadInitVideo = function loadInitVideo() {
-        // Is there information about an exisitng video?
+        // Is there information about an existing video?
         if (window.videoData) {
             $scope.video = JSON.parse(window.videoData);
             $scope.newVideo = false;        // Disable ID editing of existing videos
@@ -44,9 +41,7 @@ app.controller("VideoEditCtrl", ["$scope", function videoCtrl($scope) {
         
         sendVideo($scope.video, function(response) {
             if (response === "OK") {
-                $scope.$apply(function() {
-                    $scope.msg = "Video saved successully";
-                });
+                $scope.msg = "Video saved successully";
             }
             else {
                 console.log(response);
