@@ -15,7 +15,7 @@
                     <div id="video-main"></div>
                 </div>
 
-                <div id="next-video-popup" class="animated fadeIn">
+                <div id="next-video-popup" ng-show="nextVideoVisible" class="animated fadeIn">
                     <span class="next-video-popup-close button" ng-click="cancelCountdown()">X</span>
                     <div class="next-video-popup-inner">
                         <h2 ng-bind="nextVideoTitle">Coming up</h2>
