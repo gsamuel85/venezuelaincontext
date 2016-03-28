@@ -134,6 +134,6 @@ app.use(function(err, req, res, next) {
 
 
 // Launch server
-http.listen(process.env.PORT || 3000, function() {
-    console.log('Server listening on port: %s', process.env.PORT);
+var server = http.listen(process.env.PORT || 3000, function() {
+    console.log('Server running');
 });

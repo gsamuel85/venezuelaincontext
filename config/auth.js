@@ -4,22 +4,32 @@
  Configuration data for Social Authentication using Passport
  */
 
+var baseURL = "http://www.venezuelaincontext.org";
+
+switch (process.env.ENV) {
+    case "staging":
+        baseURL = "https://vic-2016-gsamuel.c9users.io";
+        break;
+    default:
+        baseURL = "http://localhost:3000"
+}
+
 module.exports = {
     facebookAuth: {
         clientID: process.env.FB_CLIENT_ID,
         clientSecret: process.env.FB_CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/auth/facebook/callback"
+        callbackURL: baseURL + "/auth/facebook/callback"
     },
 
     googleAuth: {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/auth/google/callback"
+        callbackURL: baseURL + "/auth/google/callback"
     },
 
     wordpressAuth: {
         clientID: process.env.WP_CLIENT_ID,
         clientSecret: process.env.WP_CLIENT_SECRET,
-        callbackURL: "http://localhost:3000/auth/wordpress/callback"
+        callbackURL: baseURL + "/auth/wordpress/callback"
     }
 };
