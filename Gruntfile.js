@@ -182,10 +182,10 @@ module.exports = function(grunt) {
          * WATCH TASKS *
          ***************/
         watch: {
-            html: {
-                files: ['<%= app.srcdir %>/**/*.html'],
-                tasks: ['htmlhint']
-            },
+            // html: {
+            //     files: ['<%= app.srcdir %>/**/*.html'],
+            //     tasks: ['htmlhint']
+            // },
             clientjs: {
                 files: ['client/js/**/*.js'],
                 tasks: ['jshint:client', 'jasmine:client']

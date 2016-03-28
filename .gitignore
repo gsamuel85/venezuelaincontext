@@ -1,5 +1,6 @@
 # Ignore Cloud9 config
 .c9/
+.ssl/
 
 # Ignore node modules
 node_modules/

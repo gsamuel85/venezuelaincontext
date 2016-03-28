@@ -50,7 +50,7 @@ app.set('view engine', 'html');
 app.set('views', path.join(__dirname, '/client/views'));
 app.set('layout', 'layout');
 app.enable('view cache');
-app.engine('html', require("hogan-express"));
+app.engine('hjs', require("hogan-express"));
 
 
 
@@ -106,7 +106,7 @@ app.use('/comments', comments);
 
 // Serve home page and static content
 app.get('/', function(req, res) {
-    res.render('home.html', { 
+    res.render('home.hjs', {
         user: req.user
     });
 });
@@ -128,6 +128,7 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.send("Error: " + err.message);
+    next(err);
 });
 
 

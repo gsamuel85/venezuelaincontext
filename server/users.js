@@ -29,7 +29,7 @@ router.get('/signup', function(req, res) {
     if (req.user) {
         res.redirect('/profile');
     } else {
-        res.render('users/signup.html', {partials: {
+        res.render('users/signup.hjs', {partials: {
             social: 'partials/_social'
         }});
     }
@@ -49,7 +49,7 @@ router.post('/signup', function(req, res) {
         }), req.body.password, 
         function(err, user) {
             if (err) {
-                res.render('users/signup.html', {flash: {msg: "Sorry, that e-mail address is already registered"}});
+                res.render('users/signup.hjs', {flash: {msg: "Sorry, that e-mail address is already registered"}});
                 return;
             }
             
@@ -68,7 +68,7 @@ router.get('/login', function(req, res) {
     if (req.user) {
         res.redirect('/profile');
     } else {
-        res.render('users/login.html', { flash: req.flash('error'), partials: {
+        res.render('users/login.hjs', { flash: req.flash('error'), partials: {
             social: 'partials/_social'
         } });
     }
@@ -140,7 +140,7 @@ router.get('/profile', access.isLoggedIn, function(req, res) {
 
         var user = foundUser._doc;
         user.profileImageURL = getUserProfileImageURL(user);
-        res.render("users/profile.html", {msg: "Hello there!", user: user});
+        res.render("users/profile.hjs", {msg: "Hello there!", user: user});
     });
 });
 
@@ -156,7 +156,7 @@ router.get('/user/:email', access.isLoggedIn, function(req,res) {
         if (err) { return res.send("Error: " + err); }
 
         if (!foundUser) { return res.send("User not found"); }
-        res.render("users/profile.html", {admin: true, user: foundUser._doc});
+        res.render("users/profile.hjs", {admin: true, user: foundUser._doc});
     });
 });
 

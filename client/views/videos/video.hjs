@@ -24,7 +24,7 @@
                             <span ng-bind="timeToNextVideo"></span>
                         </div>
                         <ul>
-                            <li><button class="next-video-popup-go button" ng-click="pauseCountdown()"><span class="fa fa-pause"</button></li>
+                            <li><button class="next-video-popup-go button" ng-click="pauseCountdown()"><span class="fa fa-pause"></span></button></li>
                             <li><button class="next-video-popup-go button" ng-click="goToNext()">Go &gt;</button></li>
                         </ul>
                     </div>

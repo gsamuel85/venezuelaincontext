@@ -42,7 +42,7 @@ router.post('/update', access.isLoggedIn, function updateVideo(req, res) {
 router.get('/new', access.isLoggedIn, function(req, res) {
     if (!access.isAdmin(req.user)) { return res.status(403).send("You must be an admin to add a video"); }
     
-    res.render('videos/edit.html', { user: req.user });
+    res.render('videos/edit', { user: req.user });
 });    
     
 /**
@@ -57,7 +57,7 @@ router.get('/:id/edit', access.isLoggedIn, function editVideo(req, res) {
         if (!video) { res.send('Video not found'); }
         else {
             var videoData = "var videoData = '" + JSON.stringify(video) + "'";
-            res.render('videos/edit', {video: video, videoData: videoData, user: req.user});
+            res.render('videos/edit.hjs', {video: video, videoData: videoData, user: req.user});
         }
     });
 });
@@ -93,7 +93,7 @@ router.get('/:id', function getVideo(req, res) {
             var videoData = "var video = '" + JSON.stringify(video) +  "';\n" +
                 "var nextVideoId = " + nextVideoId + ";\n" +
                 "var prevVideoId = " + prevVideoId + ";\n";
-            res.render('videos/video', {
+            res.render('videos/video.hjs', {
                 video: video,
                 videoData: videoData,
                 user: req.user,

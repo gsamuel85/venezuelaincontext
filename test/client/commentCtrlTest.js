@@ -12,7 +12,7 @@ describe('CommentCtrl', function() {
         };
 
         io = function() {
-        }
+        };
 
         controller = $controller('CommentCtrl', {
             $scope: scope

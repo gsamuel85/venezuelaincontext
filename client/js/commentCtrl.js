@@ -49,8 +49,7 @@ app.controller('CommentCtrl', ['$scope', '$http', '$location', '$anchorScroll', 
      */
     $scope.getProfileImage = function(author) {
         var imgURL = author.profileImageURL ? author.profileImageURL : window.gravatar.url(author.email, { s: 55, d: 'mm'}, true);
-        var imgTag = "<img src='" + imgURL + "' />";
-        return imgTag;
+        return "<img src='" + imgURL + "' />";
     };
 
 
