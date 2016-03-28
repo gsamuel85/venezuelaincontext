@@ -8,7 +8,8 @@ var VideoComment = new mongoose.Schema({
     path: String,
     author: {
         name: String,
-        email: String
+        email: String,
+        profileImageURL: String
     },
     timeline: {
         time: Number

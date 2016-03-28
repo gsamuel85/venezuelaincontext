@@ -15,7 +15,9 @@
             <div class="row">
                 <div class="8u">
                     {{#user}}
-                    <div ng-bind-html="getGravatarImage('{{user.username}}')" class="author-image"></div>
+                    <div class="author-image">
+                        <img src="{{user.profileImageURL}}" />
+                    </div>
                     <div class="user-details">
                         <ul>
                             <li>Name: <span class="user-name">{{user.firstName}} {{user.lastName}}</span></li>

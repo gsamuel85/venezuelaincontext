@@ -3,8 +3,24 @@
 var router = require("express").Router();
 var passport = require("passport");
 var User = require('../models/user');
+var gravatar = require('gravatar');
 
 var access = require('../config/access');
+
+
+/**
+ * Helper method to get the user's profile image
+ * @param user: User document from database
+ * @returns String of URL to profile picture
+ */
+var getUserProfileImageURL = function getUserProfileImageURL(user) {
+    if (user.facebook.photoUrl) { return user.facebook.photoUrl; }
+    if (user.google.photoUrl) { return user.google.photoUrl; }
+    if (user.facebook.photoUrl) { return user.facebook.photoUrl; }
+
+    // Nothing found? Try to get image from gravatar
+    return gravatar.url(user.username, {s: 50}, true);
+};
 
 /**
  * GET signup page
@@ -121,7 +137,10 @@ router.get('/profile', access.isLoggedIn, function(req, res) {
         if (err) { return res.send("Error: " + err); }
         
         if (!foundUser) { return res.send("User not found"); }
-        res.render("users/profile.html", {msg: "Hello there!", user: foundUser._doc});
+
+        var user = foundUser._doc;
+        user.profileImageURL = getUserProfileImageURL(user);
+        res.render("users/profile.html", {msg: "Hello there!", user: user});
     });
 });
 
