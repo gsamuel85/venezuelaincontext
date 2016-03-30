@@ -44,9 +44,6 @@ var createUserFromProfile = function(service, profile, token, done) {
         case 'google':
             newUser.google = createUserSocialData(profile, token);
             break;
-        case 'wordpress':
-            newUser.wordpress = createUserSocialData(profile, token);
-            break;
     }
 
     // Copy to local User model
@@ -172,8 +169,8 @@ var passportConfig = function passportConfig(passport) {
             callbackURL: configAuth.wordpressAuth.callbackURL,
         },
         function wordpressStrategy(token, refreshToken, profile, done) {
-            process.nextTick(function googleAuth() {
-                var wordpressEmail = profile.emails[0].value;
+            process.nextTick(function wordpressAuth() {
+                var wordpressEmail = profile._json.email || "";
 
                 User.findOne({'username': wordpressEmail}, function(err, user) {
                     if (err) { return done(err); }
@@ -181,12 +178,18 @@ var passportConfig = function passportConfig(passport) {
                     if (user) {
                         // User found
                         // Is WordPress already part of their profile?
-                        if (user.wordpress && user.wordpress.id === profile.id) {
+                        if (user.wordpress && user.wordpress.id === profile._json.ID) {
                             // Google is already in their profile - log in
                             return done(null, user);
                         } else {
                             // If not, add Facebook data and log them in
-                            user.wordpress = createUserSocialData(profile, token);
+                            user.wordpress = {
+                                id: profile._json.ID,
+                                token: token,
+                                name: profile._json.display_name,
+                                email: wordpressEmail,
+                                photoUrl: profile._json.avatar_URL
+                            };
 
                             user.save(function(err) {
                                 if (err) {
@@ -197,7 +200,27 @@ var passportConfig = function passportConfig(passport) {
                         }
                     } else {
                         // No user found, create new user
-                        createUserFromProfile('wordpress', profile, token, done);
+                        var newUser = new User();
+
+                        newUser.wordpress = {
+                            id: profile._json.ID,
+                            token: token,
+                            name: profile._json.display_name,
+                            email: wordpressEmail,
+                            photoUrl: profile._json.avatar_URL
+                        };
+
+                        // Copy to local User model
+                        newUser.username = wordpressEmail;
+                        newUser.firstName = profile._json.display_name;
+
+                        newUser.save(function(err) {
+                            if (err) {
+                                done(err);
+                            }
+                            done(null, newUser);
+                        });
+
                     }
                 });
             });
