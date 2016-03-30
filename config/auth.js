@@ -4,14 +4,17 @@
  Configuration data for Social Authentication using Passport
  */
 
-var baseURL = "http://www.venezuelaincontext.org";
+var baseURL = "http://localhost:3000";
 
 switch (process.env.ENV) {
+    case "production":
+        baseURL = "http://www.venezuelaincontext.org";
+        break;
     case "staging":
         baseURL = "https://vic-2016-gsamuel.c9users.io";
         break;
     default:
-        baseURL = "http://localhost:3000";
+        baseURL = "http://localhost:3000";  
 }
 
 module.exports = {

@@ -192,6 +192,8 @@ table.nav-years {
       font-size: 4em; }
     #next-video-popup .next-video-popup-inner ul {
       margin-top: 35px; }
+      #next-video-popup .next-video-popup-inner ul li.button {
+        border: none; }
 
 .video-buttons {
   display: none;
@@ -515,6 +517,9 @@ html {
 
 p.lead {
   color: orange; }
+
+.text-center {
+  text-align: center; }
 
 .embed-container {
   position: relative;

@@ -103,6 +103,9 @@ require("./server/comments-io")(io);
 var comments = require("./server/comments");
 app.use('/comments', comments);
 
+app.get('/contribute', function(req,res) {
+    res.render('contribute.hjs', { user: req.user });
+});
 
 // Serve home page and static content
 app.get('/', function(req, res) {

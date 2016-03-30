@@ -75,6 +75,13 @@ router.get('/login', function(req, res) {
 });
 
 /**
+ * GET Code of Conduct / Terms & Conditions
+ */
+router.get('/terms', function(req,res) {
+    res.render('users/tc.hjs', { user: req.user });
+});
+
+/**
  * POST login with e-mail and password
  */
 router.post('/login', passport.authenticate('local', {

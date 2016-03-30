@@ -1,0 +1,29 @@
+<div id="page">
+    <div id="main" class="container">
+        <section>
+            <header>
+                <h2>Code of Conduct</h2>
+                <span class="byline">Constructive discussions in the El Contexto community</span>
+            </header>
+
+            <div class="row">
+                <div class="8u">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse volutpat sapien eget nisi sagittis porttitor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum consectetur nibh sapien, et viverra lacus dictum eget. Mauris sollicitudin feugiat ultricies. Nulla et porttitor quam, sed lobortis eros. Aenean eu tortor massa. Morbi lacinia nec urna sollicitudin congue. Maecenas nisi mi, tempor et hendrerit a, rutrum nec metus. Duis aliquet efficitur venenatis. Maecenas luctus eu lorem at mollis. Vivamus lobortis ex eu mi ullamcorper vehicula. Proin erat turpis, vulputate non tortor eget, feugiat dignissim orci.</p>
+                    <p>Suspendisse justo urna, aliquet eget justo in, finibus auctor nisl. Quisque mollis felis sed eros laoreet cursus. Nulla dictum congue lectus, eget convallis orci molestie non. Sed eleifend nibh metus, sed pulvinar ligula accumsan quis. Sed sapien mauris, dictum lobortis tortor vel, commodo porttitor dolor. Etiam vel ante laoreet, faucibus orci ut, volutpat eros. Aliquam mollis et ligula scelerisque molestie. Aliquam ligula diam, suscipit quis maximus vitae, mattis et lectus. Fusce lobortis mollis nunc, rutrum egestas urna convallis ut.</p>
+
+                    {{^user}}
+                        <p>Please <a href="login">log in</a> to participate in the discussion</p>
+                        <p>Don't have an account? <a href="signup">Sign up!</a></p>
+                    {{/user}}
+                </div>
+            </div>
+        </section>
+
+        {{#user}}
+            <section>
+                <p><a href="logout">Log out</a></p>
+                <p><a href="/video/1" class="button">To the Videos</a></p>
+            </section>
+        {{/user}}
+    </div>
+</div>

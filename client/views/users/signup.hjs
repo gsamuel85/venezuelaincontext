@@ -13,7 +13,7 @@
             </header>
             
             <div class="row">
-                <div class="6u">
+                <div class="6u text-center">
                     {{> social}}
                 </div>
 
@@ -49,6 +49,7 @@
         
         <section>
             <p>Already have an account? <a href="login">Log in</a></p>
+            <p>By participating in the El Contexto community, you agree to follow our <a href="/terms">Code of Conduct</a>.</p>
         </section>
     </div>
 </div>
