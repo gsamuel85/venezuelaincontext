@@ -88,6 +88,16 @@ table.nav-years {
   background: rgba(0,0,0, 0.75);
   color: #fff;
 
+  .button {
+    background: none;
+    border: none;
+    font-size: 1.3em;
+
+    &:hover {
+      background: none;
+    }
+  }
+
   .next-video-popup-close {
     float: right;
     cursor: pointer;
@@ -106,10 +116,6 @@ table.nav-years {
     }
     ul {
       margin-top: 35px;
-
-      li.button {
-        border: none;
-      }
     }
   }
 
