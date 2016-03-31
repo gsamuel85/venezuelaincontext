@@ -564,3 +564,10 @@ p.lead {
 */
 .flash.error {
   color: #fcac45; }
+
+/**
+* OTHERS
+*/
+ol.improve-list {
+  list-style-type: decimal;
+  margin-left: 44px; }

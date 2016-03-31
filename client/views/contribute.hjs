@@ -2,14 +2,18 @@
     <div id="main" class="container">
         <section>
             <header>
-                <h2>Contribute</h2>
-                <span class="byline">Help improve Venezuela in Context</span>
+                <h2>Help us improve</h2>
+                <span class="byline">Contribute to Venezuela in Context</span>
             </header>
 
             <div class="row">
                 <div class="8u">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse volutpat sapien eget nisi sagittis porttitor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum consectetur nibh sapien, et viverra lacus dictum eget. Mauris sollicitudin feugiat ultricies. Nulla et porttitor quam, sed lobortis eros. Aenean eu tortor massa. Morbi lacinia nec urna sollicitudin congue. Maecenas nisi mi, tempor et hendrerit a, rutrum nec metus. Duis aliquet efficitur venenatis. Maecenas luctus eu lorem at mollis. Vivamus lobortis ex eu mi ullamcorper vehicula. Proin erat turpis, vulputate non tortor eget, feugiat dignissim orci.</p>
-                    <p>Suspendisse justo urna, aliquet eget justo in, finibus auctor nisl. Quisque mollis felis sed eros laoreet cursus. Nulla dictum congue lectus, eget convallis orci molestie non. Sed eleifend nibh metus, sed pulvinar ligula accumsan quis. Sed sapien mauris, dictum lobortis tortor vel, commodo porttitor dolor. Etiam vel ante laoreet, faucibus orci ut, volutpat eros. Aliquam mollis et ligula scelerisque molestie. Aliquam ligula diam, suscipit quis maximus vitae, mattis et lectus. Fusce lobortis mollis nunc, rutrum egestas urna convallis ut.</p>
+                    <p>Venezuela in Context» is produced in the spirit of open debate and critical enquiry. In this spirit, we encourage you to improve upon our work – particularly in two ways:</p>
+                    <ol class="improve-list">
+                        <li>Comment. Let us know where we don’t mention things you find important, or where you have reason to believe that we’re wrong. Keep in mind our code of conduct on comments: We love polite, relevant and substantiated criticism, but we hate impolite, irrelevant, or unsubstantiated rants. Express your criticism politely and back it up, and you’ll be fine.</li>
+                        <li>Make videos. We positively encourage you to pirate our videos, make them better, use them to illustrate a point, and links to your videos as comments. The code of conduct here is the same as for comments: we’re looking for polite, relevant and substantiated work.
+                            If you would like additional production material, like 3D scenes we used, or sound files, don’t hesitate to contact Marc, at <a href="mailto:mchehab@elcontexto.org">mchehab@elcontexto.org</a>.</li>
+                    </ol>
 
                     {{^user}}
                         <p>Please <a href="login">log in</a> to participate in the discussion</p>
