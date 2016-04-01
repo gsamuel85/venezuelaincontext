@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="comment-now-btn animated fadeIn" ng-click="addCommentNow()">Comment Now</button>
+                    <button class="comment-now-btn animated fadeIn" ng-click="addCommentNow()"><i class="fa fa-commenting-o"></i></button>
                 </div>
 
 
