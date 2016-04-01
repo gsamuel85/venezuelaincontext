@@ -164,6 +164,16 @@ table.nav-years {
     border-right: 1px solid #333;
     padding-right: 3px; }
 
+.nav-row1 .nav-item, .nav-row2 .nav-item, .nav-row3 .nav-item {
+  position: relative;
+  width: 100%;
+  height: 100%; }
+
+.nav-row1 .nav-img, .nav-row2 .nav-img, .nav-row3 .nav-img {
+  position: absolute;
+  max-width: 100%;
+  max-height: 100%; }
+
 /**
 * VIDEO
 */

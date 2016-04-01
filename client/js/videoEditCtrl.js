@@ -1,7 +1,7 @@
 'use strict';
 /* global app */
 
-app.controller('VideoEditCtrl', ['$scope', '$http', function videoCtrl($scope, $http) {
+app.controller('VideoEditCtrl', ['$scope', '$http', function videoEditCtrl($scope, $http) {
 
     /**
      * Populate scope.video with embedded data received from server

@@ -63,6 +63,20 @@ router.get('/:id/edit', access.isLoggedIn, function editVideo(req, res) {
 });
 
 
+/**
+ * GET summary JSON data for all videos (for top navigation bar)
+ */
+router.get('/all.json', function getAllVideosData(req,res) {
+    Video.find({}, '_id title', function(err,videos) {
+        if (err) { return res.send("Error: " + err); }
+
+        if (!videos) { res.send('Videos not found'); }
+        else {
+            res.send(videos);
+        }
+    });
+});
+
 
 /**
  * GET JSON data for individual video
