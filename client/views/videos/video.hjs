@@ -63,7 +63,7 @@
                         <h2>Comments at <a class="timeline-comment-time"
                                            ng-bind="comment.timeline.time | secondsToTime | date: 'm:ss'"
                                            ng-click="videoSeekTo(comment.timeline.time)"></a></h2>
-                        {{> comment}}
+                        {{> comment this }}
                     </div>
                 </div>
             </div>

@@ -74,7 +74,7 @@ router.get('/:id.json', function getVideoData(req,res) {
         if (!video) { res.send('Video not found'); }
         else {
             res.send(video);
-        }
+         }
     });
 });
 

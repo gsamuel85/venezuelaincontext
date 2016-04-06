@@ -31,6 +31,7 @@
 
             </li>
         </ul>
+        {{#user}}
         {{^user.blocked}}
         <a ng-click="replyVisible = (replyVisible == comment ? null : comment)">Reply</a>
         <div class="comment-reply-form" ng-show="replyVisible === comment">
@@ -40,6 +41,7 @@
             </form>
         </div>
         {{/user.blocked}}
+        {{/user}}
 
         {{#user._doc.admin}}
              |
