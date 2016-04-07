@@ -8,7 +8,7 @@ var baseURL = "http://localhost:3000";
 
 switch (process.env.ENV) {
     case "production":
-        baseURL = "http://www.venezuelaincontext.org";
+        baseURL = "https://www.venezuelaincontext.org";
         break;
     case "staging":
         baseURL = "https://vic-2016-gsamuel.c9users.io";
