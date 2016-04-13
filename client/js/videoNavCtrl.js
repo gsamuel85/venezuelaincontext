@@ -4,6 +4,7 @@
 app.controller('VideoNavCtrl', ['$scope', '$http', function videoNavCtrl($scope, $http) {
 
     $scope.videos = [];
+    $scope.hoverNav = [];       // Which video is being hovered over?
 
     /**
      * Populate scope.video with video data received from server
@@ -12,22 +13,13 @@ app.controller('VideoNavCtrl', ['$scope', '$http', function videoNavCtrl($scope,
         $http.get('/video/all.json').then(
             function success(response) {
                 $scope.videos = response.data;
-                addImageUrls();
+                $scope.hoverNav = Array.apply(null, new Array($scope.videos.length + 1)).map(function() { return false;} );
             },
             function error(err) {
                 console.error(err);
             }
         );
     };
-    
-    
-    var addImageUrls = function addImageUrls(video) {
-        $scope.videos.forEach(function addImageUrl(video) {
-            video.imageUrl = "/images/nav/" + video._id + ".jpg";
-        });
-    };
-
-
 
     // Load initial video data from server
     loadVideoData();
@@ -35,20 +27,20 @@ app.controller('VideoNavCtrl', ['$scope', '$http', function videoNavCtrl($scope,
 
 
 
-app.directive('vicNavItem', function() {
-    var itemTemplate = 
-        "<div class='nav-item' " +
-            "ng-click='goToVideo({{videoId}})' " +
-            "ng-mouseenter='hoverNav[{{videoId}}] = true' " +
-            "ng-mouseleave='hoverNav[{{videoId}}] = false' >" +
-            "{{videoId}}" +
-            "<img src='../images/nav/{{videoId}}.jpg' class='nav-img'>" +
-        "</div>";
-    
+app.directive('vicNavItem', function($compile) {
+    var getTemplate = function getTemplate(id) {
+        return "<div class='nav-item' " +
+            "ng-click='goToVideo(" + id + ")' " +
+            "ng-mouseenter='hoverNav[" + id + "] = true' " +
+            "ng-mouseleave='hoverNav[" + id + "] = false' >" +
+            "<img src='../images/nav/" + id + ".jpg' ng-show='hoverNav[" + id + "]' class='nav-img'>" +
+            "</div>";
+    };
+
     return {
-        scope: {
-            videoId: '=video'
-        },
-        template: itemTemplate
+        restrict: 'AE',
+        template: function(element, attrs) {
+            return getTemplate(attrs.video);
+        }
     };
 });

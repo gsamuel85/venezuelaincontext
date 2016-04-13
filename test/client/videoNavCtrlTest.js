@@ -34,6 +34,7 @@ describe('VideoNavCtrl', function() {
         $httpBackend.expectGET('/video/all.json');
         $httpBackend.flush();
         expect(scope.videos.length).toEqual(testVideos.length);
+        expect(scope.hoverNav.length).toEqual(scope.videos.length + 1);
     });
 
 });
@@ -55,7 +56,6 @@ describe('Nav Item Directive', function() {
 
     it('should create a nav item div', function() {
         expect(element.html()).toContain('<div class="nav-item');
-        expect(element.html()).toContain('>1<');
     });
 
     it('should have an image URL for each video', function() {

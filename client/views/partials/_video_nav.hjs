@@ -6,18 +6,18 @@
                 <td class="theme">Polarisation</td>
                 <td><div vic-nav-item video="1"></div></td>
                 <td><div vic-nav-item video="2"></div></td>
-                <td ng-click="goToVideo(3)"></td>
-                <td ng-click="goToVideo(4)"></td>
-                <td ng-click="goToVideo(5)"></td>
-                <td ng-click="goToVideo(6)"></td>
+                <td><div vic-nav-item video="3"></div></td>
+                <td><div vic-nav-item video="4"></div></td>
+                <td><div vic-nav-item video="5"></div></td>
+                <td><div vic-nav-item video="6"></div></td>
             </tr>
             <tr class="nav-row2">
                 <td class="theme">&nbsp;Economy</td>
-                <td ng-click="goToVideo(7)"></td>
-                <td ng-click="goToVideo(8)"></td>
-                <td ng-click="goToVideo(9)"></td>
-                <td ng-click="goToVideo(10)"></td>
-                <td ng-click="goToVideo(11)"></td>
+                <td><div vic-nav-item video="7"></div></td>
+                <td><div vic-nav-item video="8"></div></td>
+                <td><div vic-nav-item video="9"></div></td>
+                <td><div vic-nav-item video="10"></div></td>
+                <td><div vic-nav-item video="11"></div></td>
                 <td ng-click="goToVideo(12)"></td>
             </tr>
             <tr class="nav-row3">

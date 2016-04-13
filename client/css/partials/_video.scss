@@ -26,6 +26,7 @@ $timeline-trigger-border: rgba(255,85,85,$opacity);
   }
 
   td {
+    position: relative;
     width: 14%;
     height: $video-nav-height / 3;
     vertical-align: middle;
@@ -45,6 +46,19 @@ $timeline-trigger-border: rgba(255,85,85,$opacity);
       border: 1px inset transparent;
     }
 
+    .nav-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .nav-img {
+      max-width: 100%;
+      margin-top: -20%;
+    }
   }
 
   .nav-row1 {
@@ -67,19 +81,6 @@ table.nav-years {
     width: 14%;
     border-right: 1px solid #333;
     padding-right: 3px;
-  }
-}
-
-.nav-row1, .nav-row2, .nav-row3 {
-  .nav-item {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-  .nav-img {
-    position: absolute;
-    max-width: 100%;
-    max-height: 100%;
   }
 }
 
