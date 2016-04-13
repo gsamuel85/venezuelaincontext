@@ -17,7 +17,11 @@ describe('VideoNavCtrl', function() {
         $httpBackend = $injector.get('$httpBackend');
         $httpBackend.when('GET', "/video/all.json").respond(testVideos);
 
-        scope = {};
+        scope = {
+            video: {
+                _id: 1
+            }
+        };
         controller = $controller('VideoNavCtrl', {
             $scope: scope
         });
