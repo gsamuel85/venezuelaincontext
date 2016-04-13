@@ -56,8 +56,9 @@
                     {{/user}}
                     {{^user}}
                     <li><a href="/login">Log in</a></li>
-                    <li class="active"><a href="/signup">Sign up!</a></li>
+                    <li><a href="/signup">Sign up!</a></li>
                     {{/user}}
+                    <li class="active"><a href="/video/1">Videos</a></li>
                 </ul>
             </nav>
 
@@ -106,6 +107,14 @@
                     </section>
                 </div>
                 <div class="3u">
+                    <section>
+                        <h2>Topics</h2>
+                        <ul>
+                            <li><a href="video/1">Polarisation</a></li>
+                            <li><a href="video/7">Economy</a></li>
+                            <li><a href="#">Insecurity</a></li>
+                        </ul>
+                    </section>
                     <section>
                         <h2>Objective</h2>
                         <p>Our hope is to contribute to a constructive and fact-based dialogue about the turmoil in Venezuela.</p>

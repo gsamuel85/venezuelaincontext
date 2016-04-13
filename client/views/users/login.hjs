@@ -29,7 +29,7 @@
                                 <input type="password" class="input-field" name="password" required />
                             </label>
                             
-                            <button type="submit" class="button">Log in</button>
+                            <input type="submit" class="button" value="Log in" />
                         </form>
                     </div>
                 </div>

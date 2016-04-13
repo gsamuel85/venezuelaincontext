@@ -85,7 +85,7 @@
 .form-style-2 input[type=button] {
   border: none;
   padding: 8px 15px 8px 15px;
-  background: #FF8500;
+  background: #e95d3c;
   color: #fff;
   box-shadow: 1px 1px 4px #DADADA;
   -moz-box-shadow: 1px 1px 4px #DADADA;
@@ -96,7 +96,7 @@
 
 .form-style-2 input[type=submit]:hover,
 .form-style-2 input[type=button]:hover {
-  background: #EA7B00;
+  background: #e95d3c;
   color: #fff; }
 
 .animated {
@@ -570,8 +570,16 @@ p.lead {
     position: absolute;
     bottom: 60px; }
 
+.divider {
+  border: 1px solid #999;
+  margin: 40px; }
+
 #marketing img {
   max-width: 100%; }
+
+#footer a {
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none; }
 
 /**
 * USER

@@ -39,7 +39,7 @@
                             </label>
                             <span ng-show="form.password.$error.password">Password is too short!</span>
                             <br />
-                            <button type="submit" class="button">Sign up</button>
+                            <input type="submit" class="button" value="Sign up" />
                         </form>
                     
                     </div>

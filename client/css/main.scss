@@ -62,10 +62,20 @@ p.lead {
     }
 }
 
+.divider {
+    border: 1px solid #999;
+    margin: 40px;
+}
+
 #marketing {
     img {
         max-width: 100%;
     }
+}
+
+#footer a {
+    color: rgba(255,255,255,.4);
+    text-decoration: none;
 }
 
 /**

@@ -54,69 +54,39 @@
                     </header>
                     <ul class="style2">
                         <li>
-                            <a href="#"><img src="images/pics07.jpg" alt=""></a>
-                            <p>What were the underlying causes of polarisation before Chávez?</p>
+                            <a href="/video/1   "><img src="images/pics07.jpg" alt=""></a>
+                            <h3>Polarisation</h3>
+                            <p>Why is Venezuelan politics marked by being so distrustful, paranoiac and unproductive?</p>
+                            <div class="more-button">
+                                <a href="/video/1" class="button">More &gt;</a>
+                            </div>
                         </li>
                         <li>
-                            <a href="#"><img src="images/pics08.jpg" alt=""></a>
-                            <p>Did Venezuela's oil wealth contribute to its problems?</p>
+                            <a href="/video/7"><img src="images/pics08.jpg" alt=""></a>
+                            <h3>Economy</h3>
+                            <p>In 2015 consumer prices in Venezuela rose by roughly 270 percent. How come there is so much inflation?</p>
+                            <div class="more-button">
+                                <a href="/video/7" class="button">More &gt;</a>
+                            </div>
                         </li>
                         <li>
                             <a href="#"><img src="images/pics09.jpg" alt=""></a>
-                            <p>What is the "Caracazo" and what role did it play?</p>
+                            <h3>Insecurity</h3>
+                            <p>Still in the 1980s, Caracas used to be a comparatively safe Latin American city –now it’s the second most dangerous city in the world. Why?</p>
+                            <div class="more-button">
+                                <a href="#" class="button">More &gt;</a>
+                            </div>
                         </li>
                     </ul>
                 </section>
             </div>
         </div>
 
-        <div class="row">
-            <!-- Featured -->
-            <div id="featured">
-                <div class="container">
-                    <div class="row">
-                        <section class="4u">
-                            <div class="box">
-                                <a href="#" class="image left"><img src="images/pics04.jpg" alt=""></a>
-                                <h3>Polarisation</h3>
-                                <p>Why is Venezuelan politics marked by being so distrustful, paranoiac and unproductive?</p>
-                                <br />
-                                <div class="more-button">
-                                    <a href="/video/1" class="button">More &gt;</a>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="4u">
-                            <div class="box">
-                                <a href="#" class="image left"><img src="images/pics05.jpg" alt=""></a>
-                                <h3>Economics</h3>
-                                <p>In 2015 consumer prices in Venezuela rose by roughly 270 percent. How come there is so much inflation?</p>
-                                <br />
-                                <div class="more-button">
-                                    <a href="/video/7" class="button">More &gt;</a>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="4u">
-                            <div class="box">
-                                <a href="#" class="image left"><img src="images/pics06.jpg" alt=""></a>
-                                <h3>Insecurity</h3>
-                                <p>Still in the 1980s, Caracas used to be a comparatively safe Latin American city –now it’s the second most dangerous city in the world. Why?</p>
-                                <br />
-                                <div class="more-button">
-                                    <a href="#" class="button">More &gt;</a>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-            </div>
-            <!-- /Featured -->
-
-        </div>
     </div>
 
     <!-- Main -->
+
+    <div class="divider"></div>
     
     <!-- Extra -->
     <div id="marketing" class="container">
