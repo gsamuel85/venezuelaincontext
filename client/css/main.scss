@@ -63,7 +63,7 @@ p.lead {
 }
 
 .divider {
-    border: 1px solid #999;
+    border-top: 1px solid #999;
     margin: 40px;
 }
 
@@ -93,4 +93,8 @@ p.lead {
 ol.improve-list {
     list-style-type: decimal;
     margin-left: 44px;
+}
+
+.button {
+    border: none;
 }

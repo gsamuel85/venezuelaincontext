@@ -571,7 +571,7 @@ p.lead {
     bottom: 60px; }
 
 .divider {
-  border: 1px solid #999;
+  border-top: 1px solid #999;
   margin: 40px; }
 
 #marketing img {
@@ -593,3 +593,6 @@ p.lead {
 ol.improve-list {
   list-style-type: decimal;
   margin-left: 44px; }
+
+.button {
+  border: none; }

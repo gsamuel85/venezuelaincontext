@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     
-                    <a class="button" href="/video/1">Enter!</a>
+                    <a class="button" href="/video/1">Enter</a>
                     
                 </section>
             </div>
@@ -56,37 +56,29 @@
                         <li>
                             <a href="/video/1   "><img src="images/pics07.jpg" alt=""></a>
                             <h3>Polarisation</h3>
-                            <p>Why is Venezuelan politics marked by being so distrustful, paranoiac and unproductive?</p>
-                            <div class="more-button">
-                                <a href="/video/1" class="button">More &gt;</a>
-                            </div>
+                            <p>Why is Venezuelan politics marked by being so distrustful, paranoiac and unproductive? <a href="/video/1">More</a></p>
                         </li>
                         <li>
                             <a href="/video/7"><img src="images/pics08.jpg" alt=""></a>
                             <h3>Economy</h3>
-                            <p>In 2015 consumer prices in Venezuela rose by roughly 270 percent. How come there is so much inflation?</p>
-                            <div class="more-button">
-                                <a href="/video/7" class="button">More &gt;</a>
-                            </div>
+                            <p>In 2015 consumer prices in Venezuela rose by roughly 270 percent. How come there is so much inflation? <a href="/video/7">More</a></p>
                         </li>
                         <li>
                             <a href="#"><img src="images/pics09.jpg" alt=""></a>
                             <h3>Insecurity</h3>
-                            <p>Still in the 1980s, Caracas used to be a comparatively safe Latin American city –now it’s the second most dangerous city in the world. Why?</p>
-                            <div class="more-button">
-                                <a href="#" class="button">More &gt;</a>
-                            </div>
+                            <p>Still in the 1980s, Caracas used to be a comparatively safe Latin American city –now it’s the second most dangerous city in the world. Why? <a href="#">More</a></p>
                         </li>
                     </ul>
                 </section>
             </div>
         </div>
+        <div class="divider"></div>
 
     </div>
 
     <!-- Main -->
 
-    <div class="divider"></div>
+
     
     <!-- Extra -->
     <div id="marketing" class="container">
