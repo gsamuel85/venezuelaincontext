@@ -558,6 +558,13 @@ p.lead {
 #main {
   margin-bottom: 60px; }
 
+.topic-img {
+  max-width: 120px; }
+  .topic-img.unavailable {
+    -webkit-filter: grayscale(100%);
+    /* Chrome, Safari, Opera */
+    filter: grayscale(100%); }
+
 #more-details {
   display: none;
   width: 100%; }

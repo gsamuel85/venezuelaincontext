@@ -54,17 +54,17 @@
                     </header>
                     <ul class="style2">
                         <li>
-                            <a href="/video/1   "><img src="images/pics07.jpg" alt=""></a>
+                            <a href="/video/1"><img class="topic-img" src="images/polarisation_300.jpg" alt=""></a>
                             <h3>Polarisation</h3>
                             <p>Why is Venezuelan politics marked by being so distrustful, paranoiac and unproductive? <a href="/video/1">More</a></p>
                         </li>
                         <li>
-                            <a href="/video/7"><img src="images/pics08.jpg" alt=""></a>
+                            <a href="/video/7"><img class="topic-img" src="images/economy_300.jpg" alt=""></a>
                             <h3>Economy</h3>
                             <p>In 2015 consumer prices in Venezuela rose by roughly 270 percent. How come there is so much inflation? <a href="/video/7">More</a></p>
                         </li>
                         <li>
-                            <a href="#"><img src="images/pics09.jpg" alt=""></a>
+                            <a href="#"><img class="topic-img unavailable" src="images/violencia_300.jpg" alt=""></a>
                             <h3>Insecurity</h3>
                             <p>Still in the 1980s, Caracas used to be a comparatively safe Latin American city –now it’s the second most dangerous city in the world. Why? <a href="#">More</a></p>
                         </li>

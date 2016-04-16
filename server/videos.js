@@ -42,7 +42,7 @@ router.post('/update', access.isLoggedIn, function updateVideo(req, res) {
 router.get('/new', access.isLoggedIn, function(req, res) {
     if (!access.isAdmin(req.user)) { return res.status(403).send("You must be an admin to add a video"); }
     
-    res.render('videos/edit', { user: req.user });
+    res.render('videos/edit.hjs', { user: req.user });
 });    
     
 /**
