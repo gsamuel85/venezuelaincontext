@@ -18,7 +18,7 @@
                 <td><div vic-nav-item video="9"></div></td>
                 <td><div vic-nav-item video="10"></div></td>
                 <td><div vic-nav-item video="11"></div></td>
-                <td ng-click="goToVideo(12)"></td>
+                <td><div vic-nav-item video="12"></div></td>
             </tr>
             <tr class="nav-row3">
                 <td class="theme">&nbsp;&nbsp;Insecurity</td>
