@@ -4,9 +4,9 @@
             <h2>Video Details</h2>
         </header>
 
-        <div class="row">
-            <div class="8u">
-                <div class="form-style-2" ng-controller="VideoEditCtrl">
+        <div class="row" ng-controller="VideoEditCtrl">
+            <div class="7u">
+                <div class="form-style-2">
                     <form ng-submit="submitVideo">
                         <label for="id">
                             <span>ID: </span>
@@ -34,6 +34,21 @@
                     </form>
                     <span class="info" ng-bind="msg"></span>
                 </div>
+            </div>
+
+            <!-- Preview -->
+            <div class="5u">
+                <div class="embed-container">
+                    <iframe ng-src="{{video.video_url}}"></iframe>
+                </div>
+
+                <section>
+                    <header>
+                        <span class="byline" ng-bind="video.subtitle"></span>
+                        <h2 ng-bind="video.title"></h2>
+                    </header>
+                    <p ng-bind-html="video.description"></p>
+                </section>
             </div>
         </div>
     </div>

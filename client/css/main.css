@@ -145,6 +145,10 @@
     #banner.video-nav td.theme, #banner.video-nav td.unavailable {
       text-shadow: 1px 1px #333;
       cursor: auto; }
+    #banner.video-nav td.unavailable:hover {
+      background-image: url("../images/nav/unavailable.png");
+      background-repeat: no-repeat;
+      background-position: center; }
     #banner.video-nav td.theme:hover, #banner.video-nav td.unavailable:hover {
       border: 1px inset transparent; }
     #banner.video-nav td .nav-item {

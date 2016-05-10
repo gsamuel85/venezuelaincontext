@@ -39,8 +39,10 @@ $timeline-trigger-border: rgba(255,85,85,$opacity);
       text-shadow: 1px 1px $dark-gray;
       cursor: auto;
     }
-    &:hover {
-      //border: 1px solid red;
+    &.unavailable:hover {
+      background-image: url('../images/nav/unavailable.png');
+      background-repeat: no-repeat;
+      background-position: center;
     }
     &.theme:hover, &.unavailable:hover {
       border: 1px inset transparent;

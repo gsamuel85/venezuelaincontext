@@ -66,7 +66,9 @@ app.controller("VideoCtrl", ["$scope", "$http", "$window", "$location", "$anchor
      * @param id _id of the video to navigate to
      */
     $scope.goToVideo = function(id) {
-        window.location.assign("/video/" + id);
+        if (id !== 'unavailable') {
+            window.location.assign("/video/" + id);
+        }
     };
     $scope.goToNext = function() { $scope.goToVideo(window.nextVideoId); };
     $scope.goToPrev = function() { $scope.goToVideo(window.prevVideoId); };

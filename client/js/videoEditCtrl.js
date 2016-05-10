@@ -31,6 +31,14 @@ app.controller('VideoEditCtrl', ['$scope', '$http', function videoEditCtrl($scop
             }
         );
     };
+
+    /**
+     * Get video URL for preview window
+     * @returns {string|*|string}
+     */
+    $scope.videoUrl = function() {
+        return $scope.video.video_url;
+    }
     
     // Load initial video data embedded by server
     $scope.loadInitVideo();
