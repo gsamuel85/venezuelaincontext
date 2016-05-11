@@ -130,7 +130,8 @@ app.controller("VideoCtrl", ["$scope", "$http", "$window", "$location", "$anchor
      * @returns style object
      */
     $scope.triggerPositionStyle = function(time) {
-        var pc = (((time) / $scope.duration) * 100) + "%";
+        // adjust to make sure trigger is aligned with YouTube timeline
+        var pc = (((time) / ($scope.duration * 1.01)) * 100) + "%";
         return {
             left: pc
         };
