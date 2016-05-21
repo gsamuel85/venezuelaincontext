@@ -17,6 +17,9 @@ require('./video/videoCtrl')(window.vicApp);
 require('./video/videoNavCtrl')(window.vicApp);
 require('./video/commentCtrl')(window.vicApp);
 
+require('textangular/dist/textAngular-sanitize.min');
+require('textangular');
+
 /**
  * Dynamically bootstrap Angular app when document is loaded
  */
