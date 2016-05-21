@@ -108,6 +108,13 @@ module.exports = function(grunt) {
                 src: ['data/**/*.json']
             }
         },
+        uglify: {
+            bundle: {
+                files: {
+                    '<%= app.distdir %>/js/bundle.min.js': '<%= app.distdir %>/js/bundle.js'
+                }
+            }
+        },
 
 
 
@@ -228,6 +235,7 @@ module.exports = function(grunt) {
     
     
     grunt.registerTask('css', ['sass', 'cssmin']);
+    grunt.registerTask('clientjs', ['jshint:client', 'browserify', 'uglify']);
 
     grunt.registerTask('default', ['htmlhint', 'jshint', 'jasmine', 'mochaTest', 'jsonlint', 'css']);
 

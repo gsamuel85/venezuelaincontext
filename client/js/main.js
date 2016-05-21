@@ -7,7 +7,6 @@
 window.angular = require("angular");
 window.gravatar = require("gravatar");
 window.vicApp = require("./video/vicApp");
-window.userApp = require("./userApp");
 
 /**
  * Load controllers
@@ -16,6 +15,8 @@ require('./video/videoEditCtrl')(window.vicApp);
 require('./video/videoCtrl')(window.vicApp);
 require('./video/videoNavCtrl')(window.vicApp);
 require('./video/commentCtrl')(window.vicApp);
+
+
 
 require('textangular/dist/textAngular-sanitize.min');
 require('textangular');

@@ -55,7 +55,6 @@
 
 
 
-{{#yield-scripts}}
-    <script type="text/javascript" src="/js/bundle.js"></script>
+<!--{{#yield-scripts}}-->
     <script type="text/javascript" src="/js/userApp.js"></script>
-{{/yield-scripts}}
+<!--{{/yield-scripts}}-->

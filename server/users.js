@@ -49,7 +49,12 @@ router.post('/signup', function(req, res) {
         }), req.body.password, 
         function(err, user) {
             if (err) {
-                res.render('users/signup.hjs', {flash: {msg: "Sorry, that e-mail address is already registered"}});
+                res.render('users/signup.hjs', {
+                    flash: {msg: "Sorry, that e-mail address is already registered"},
+                    partials: {
+                        social: 'partials/_social'
+                    },
+                });
                 return;
             }
             
