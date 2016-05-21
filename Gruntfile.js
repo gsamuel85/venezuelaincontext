@@ -58,6 +58,7 @@ module.exports = function(grunt) {
         jshint: {
             options: {
                 "browser": true,
+                "node": true,
                 "curly": true,
                 "eqnull": true,
                 "eqeqeq": true,
@@ -93,9 +94,13 @@ module.exports = function(grunt) {
             }
         },
         browserify: {
-            commonjs: {
-                src: ['<%= app.commondir %>/**/*.js'],
-                dest: '<%= app.distdir %>/js/bundle.js'
+            options: {
+                transform: [['babelify', {presets: ['es2015']}]]
+            },
+            client: {
+                files: {
+                    '<%= app.distdir %>/js/bundle.js': '<%= app.srcdir %>/js/main.js'
+                }
             }
         },
         jsonlint: {

@@ -56,14 +56,5 @@
 
 
 {{#yield-scripts}}
-    <script type="text/javascript" src="/js/bundle.js"></script>
-
-    <script src='/js/textAngular-sanitize.js'></script>
-    <script src='/js/textAngular-rangy.min.js'></script>
-    <script src='/js/textAngular.js'></script>
-    <script src='/js/textAngularSetup.js'></script>
-
-    <script type="text/javascript" src="/js/app.js"></script>
-    <script type="text/javascript" src="/js/videoEditCtrl.js" defer></script>
     <script type="text/javascript">{{{videoData}}}</script>
 {{/yield-scripts}}

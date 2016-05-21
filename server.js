@@ -1,18 +1,19 @@
 'use strict';
 
+// New Relic monitoring - on production server only
 if (process.env.ENV === "production") {
-    // Activate only on production server
     require("newrelic");
 }
+
+var path = require("path");
 
 // App modules
 var express = require("express");
 var cookieParser = require("cookie-parser");
 var flash = require("connect-flash");
 var bodyParser= require("body-parser");
-var helmet = require("helmet");
-var path = require("path");
-var morgan =  require("morgan");
+var helmet = require("helmet");         // Helmet security
+var morgan =  require("morgan");        // Logging
 
 
 // DB + User modules
@@ -32,7 +33,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
 if (process.env.ENV !== "production") {
-    // Log all requests
+    // Debugging - Log all requests
     app.use(morgan('dev'));
 }
 
@@ -75,7 +76,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
 
-
+// Connect authentication data to socket.io
 var passportSocketIo = require("passport.socketio");
 io.use(passportSocketIo.authorize({
     cookieParser: cookieParser,

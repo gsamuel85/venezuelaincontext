@@ -1,8 +1,10 @@
 'use strict';
 
-var angular = require("angular");
 var gravatar = require("gravatar");
+window.gravatar = gravatar;
+
+
+import { angular } from 'angular';
 
 // Expose angular variable to client browser
 window.angular = angular;
-window.gravatar = gravatar;
