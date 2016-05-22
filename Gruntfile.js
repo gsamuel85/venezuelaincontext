@@ -162,13 +162,13 @@ module.exports = function(grunt) {
                 options: {
                     specs: "test/client/*.js",
                     vendor: [
-                        'node_modules/angular/angular.js',
-                        //'node_modules/angular-sanitize/angular-sanitize.js',
-                        'node_modules/textangular/dist/textAngular-sanitize.js',
-                        'node_modules/textangular/dist/textAngular-rangy.min.js',
-                        'node_modules/textangular/dist/textAngular.js',
-                        'node_modules/textangular/dist/textAngularSetup.js',
-
+                        // 'node_modules/angular/angular.js',
+                        // //'node_modules/angular-sanitize/angular-sanitize.js',
+                        // 'node_modules/textangular/dist/textAngular-sanitize.js',
+                        // 'node_modules/textangular/dist/textAngular-rangy.min.js',
+                        // 'node_modules/textangular/dist/textAngular.js',
+                        // 'node_modules/textangular/dist/textAngularSetup.js',
+                        'public/js/bundle.js',
                         'node_modules/angular-mocks/angular-mocks.js',
                         'public/js/popcorn-complete.min.js'
                         // Add vendor code if necessary
@@ -185,6 +185,21 @@ module.exports = function(grunt) {
             },
             server: {
                 src: ['test/<%= app.serverdir%>/**/*.js']
+            }
+        },
+
+
+        /***************
+         * IMAGE TASKS *
+         ***************/
+        imagemin: {
+            build: {
+                files: [{
+                    expand: true,
+                    cwd: 'client',
+                    src: 'images/**/*.{png,jpg}',
+                    dest: 'public'
+                }]
             }
         },
 

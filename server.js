@@ -9,6 +9,7 @@ var path = require("path");
 
 // App modules
 var express = require("express");
+var compression = require("compression");
 var cookieParser = require("cookie-parser");
 var flash = require("connect-flash");
 var bodyParser= require("body-parser");
@@ -38,6 +39,7 @@ if (process.env.ENV !== "production") {
 }
 
 app.use(helmet());              // Security by Helmet
+app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(cookieParser());        // Cookies for user sessions
@@ -115,7 +117,7 @@ app.get('/', function(req, res) {
     });
 });
 app.use(express.static(path.join(__dirname + '/public')));
-app.use(express.static(path.join(__dirname + '/client')));
+// app.use(express.static(path.join(__dirname + '/client')));
 
 
 
