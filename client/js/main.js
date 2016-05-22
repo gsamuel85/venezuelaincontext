@@ -14,6 +14,7 @@ window.vicApp = require("./video/vicApp");
 require('./video/videoEditCtrl')(window.vicApp);
 require('./video/videoCtrl')(window.vicApp);
 require('./video/videoNavCtrl')(window.vicApp);
+require('./video/videoNavDir')(window.vicApp);
 require('./video/commentCtrl')(window.vicApp);
 
 
