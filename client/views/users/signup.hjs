@@ -1,4 +1,4 @@
-<div id="page" ng-app="userApp">
+<div id="page">
     <div id="main" class="container">
         <section>
             <header>
@@ -37,7 +37,7 @@
                                 <span>Password </span>
                                 <input type="password" class="input-field" name="password" ng-model="password" ng-model-options="{ debounce: 400 }" password  required />
                             </label>
-                            <span ng-show="form.password.$error.password">Password is too short!</span>
+                            <!-- <span ng-show="form.password.$error.password">Password is too short!</span> -->
                             <br />
                             <input type="submit" class="button" value="Sign up" />
                         </form>
@@ -55,6 +55,6 @@
 
 
 
-<!--{{#yield-scripts}}-->
-    <script type="text/javascript" src="/js/userApp.js"></script>
-<!--{{/yield-scripts}}-->
+{{#yield-scripts}}
+    <!--<script type="text/javascript" src="/js/userApp.js"></script>-->
+{{/yield-scripts}}
