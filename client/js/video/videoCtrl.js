@@ -15,7 +15,7 @@ module.exports = function(app){
         var countdownTimer, paused;
 
         // Store Popcorn controller
-        var YT_SETTINGS = "?controls=2&autohide=1&modestbranding=0&theme=dark&autoplay=0";
+        var YT_SETTINGS = "?controls=2&autohide=1&modestbranding=0&theme=dark&autoplay=1";
 
         $anchorScroll.yOffset = 80;     // Offset when scrolling to comment form / video
 
