@@ -17,8 +17,8 @@
 	<script src="/js/skel-panels.min.js"></script>
 	<script src="/js/init.js"></script>
 	
-	<link rel="stylesheet" href="/css/style.css" />
-	<link rel="stylesheet" href="/css/style-desktop.css" />
+	<link rel="stylesheet" href="/css/style.min.css" />
+	<link rel="stylesheet" href="/css/style-desktop.min.css" />
 	<noscript>
 		<link rel="stylesheet" href="/css/skel-noscript.css" />
 	</noscript>
