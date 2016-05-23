@@ -151,7 +151,9 @@ module.exports = function(grunt) {
             template: {
                 files: {
                     '<%= app.distdir %>/css/style.min.css': '<%= app.distdir %>/css/style.css',
-                    '<%= app.distdir %>/css/style-desktop.min.css': '<%= app.distdir %>/css/style-desktop.css'
+                    '<%= app.distdir %>/css/style.min-desktop.css': '<%= app.distdir %>/css/style-desktop.css',
+                    '<%= app.distdir %>/css/style.min-1000px.css': '<%= app.distdir %>/css/style-1000px.css',
+                    '<%= app.distdir %>/css/style.min-mobile.css': '<%= app.distdir %>/css/style-mobile.css'
                 }
             }
         },
