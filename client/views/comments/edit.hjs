@@ -1,0 +1,38 @@
+<div id="page">
+    <div id="main" class="container">
+        <header>
+            <h2>Edit Comment</h2>
+        </header>
+
+        <div class="row" ng-controller="CommentEditCtrl">
+            <div class="7u">
+                <div class="form-style-2">
+                    <form ng-submit="submitComment">
+                        <label for="timeline-time">
+                            <span>Time (seconds): </span>
+                            <input class="input-field" type="text" name="timeline-time" ng-model="comment.timeline.time" />
+                        </label>
+                        <label for="comment-text">
+                            <span>Text: </span>
+                            <textarea class="textarea-field" name="comment-text" ng-model="comment.text"></textarea>
+                        </label>
+
+                        <button type="button" ng-click="loadInitComment()">Reset</button>
+                        <button type="submit" ng-click="submitComment()">Save</button>
+                    </form>
+                    <span class="info" ng-bind="msg"></span>
+                </div>
+            </div>
+
+            <!-- Preview -->
+            <div class="5u">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{#yield-scripts}}
+    <script type="text/javascript">{{{commentData}}}</script>
+{{/yield-scripts}}

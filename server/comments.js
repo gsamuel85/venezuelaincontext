@@ -2,10 +2,56 @@
 
 var router = require("express").Router();
 var VideoComment = require("../models/videocomment");
-var gravatar = require("gravatar");
 var async = require("async");
 
 var access = require('../config/access');
+
+
+/**
+ * Load edit comment page
+ */
+router.get('/:comment_id/edit', access.isLoggedIn, function(req, res) {
+    if (!access.isAdmin(req.user)) { return res.status(403).send("You must be an admin to edit a comment"); }
+
+    VideoComment.find({'_id': req.params.comment_id}).
+        lean().
+        exec(function(err, comment) {
+
+        if (err) { return new Error(err); }
+        if (!comment) { res.send("Comment not found"); }
+
+        var commentData = "var commentData = `" + JSON.stringify(comment[0]) + "`;";
+        res.render('comments/edit.hjs', {   commentData: commentData });
+    });
+});
+
+/**
+ * Update an existing comment
+ */
+router.post('/update', access.isLoggedIn, function updateComment(req, res) {
+    if (!access.isAdmin(req.user)) { return res.status(403).send("You must be an admin to edit a comment"); }
+
+    var comment = req.body;
+
+    async.waterfall([
+            function findComment(cb) {
+                VideoComment.findOne({ _id: comment._id}, cb);
+            },
+            function createOrUpdate(foundComment, cb) {
+                if (!foundComment) {
+                    // Comment doesn't exist in database
+                    cb(new Error('Comment not found'));
+                } else {
+                    // Update existing comment
+                    VideoComment.findByIdAndUpdate(comment._id, {$set: comment}, cb);
+                }
+            }
+        ], function callback(err, savedComment) {
+            if (err) { return res.send("Error: " + err); }
+            res.status(200).send("OK");
+        }
+    );
+});
 
 /**
  * Get JSON of all comments for a specified video

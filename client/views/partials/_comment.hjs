@@ -24,7 +24,7 @@
                 <div class="comment-text">
                     <span ng-bind-html="reply.text"></span>
                     {{#user._doc.admin}}
-                    | <a ng-click="deleteComment(reply)">Delete</a> | <a ng-click="viewAuthor(reply.author.email)">Block</a>
+                    | <a ng-click="editComment(reply)">Edit</a> | <a ng-click="deleteComment(reply)">Delete</a> | <a ng-click="viewAuthor(reply.author.email)">Block</a>
                     {{/user._doc.admin}}
                 </div>
 
@@ -44,7 +44,7 @@
         {{/user}}
 
         {{#user._doc.admin}}
-             |
+            | <a ng-click="editComment(comment)">Edit</a> |
             <a ng-click="deleteComment(comment)">Delete</a> | <a ng-click="viewAuthor(reply.author.email)">Block</a>
         {{/user._doc.admin}}
     </div>

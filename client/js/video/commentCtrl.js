@@ -96,6 +96,17 @@ module.exports = function(app) {
         };
 
 
+
+        /**
+         * Admin edits a comment
+         * @param comment
+         */
+        $scope.editComment = function editComment(comment) {
+            window.location.assign("/comments/" + comment._id + "/edit");
+        };
+
+
+
         /**
          * Admin deletes a comment
          * @param comment

@@ -17,6 +17,8 @@ require('./video/videoNavCtrl')(window.vicApp);
 require('./video/videoNavDir')(window.vicApp);
 require('./video/commentCtrl')(window.vicApp);
 
+require('./video/commentEditCtrl')(window.vicApp);
+
 require('textangular/dist/textAngular-sanitize.min');
 require('textangular');
 
