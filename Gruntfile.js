@@ -69,6 +69,18 @@ module.exports = function(grunt) {
                 "devel": true
             },
             client: {
+                options: {
+                    "browser": true,
+                    "node": true,
+                    "curly": true,
+                    "eqnull": true,
+                    "eqeqeq": true,
+                    "globalstrict": true,
+                    "strict": false,
+                    "latedef": true,
+                    "undef": true,
+                    "devel": true
+                },
                 src: ["<%= app.srcdir %>/**/*.js"]
             },
             common: {
