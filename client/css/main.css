@@ -298,6 +298,10 @@ table.nav-years {
 .comment-form textarea, .comment-reply-form textarea {
   min-width: 80%; }
 
+#comment-edit-text {
+  min-width: 500px;
+  min-height: 350px; }
+
 .ta-hidden-input {
   width: 1px;
   height: 1px;

@@ -1,6 +1,3 @@
-/**
- * Created by Guy on 18/6.
- */
 'use strict';
 
 module.exports = function(vicApp) {

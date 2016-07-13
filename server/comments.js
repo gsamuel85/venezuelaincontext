@@ -20,8 +20,11 @@ router.get('/:comment_id/edit', access.isLoggedIn, function(req, res) {
         if (err) { return new Error(err); }
         if (!comment) { res.send("Comment not found"); }
 
-        var commentData = "var commentData = `" + JSON.stringify(comment[0]) + "`;";
-        res.render('comments/edit.hjs', {   commentData: commentData });
+        // Replace all \" with ' so that Angular parser can correctly read the comment text
+        var sanitizedComment = JSON.stringify(comment[0]).replace(/\\"/g, "'");
+
+        var commentData = "var commentData = `" + sanitizedComment + "`;";
+        res.render('comments/edit.hjs', { commentData: commentData, user: req.user });
     });
 });
 
